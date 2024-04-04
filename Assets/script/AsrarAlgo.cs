@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+
 [System.Serializable]
 public class Node
 {
     public bool isWall;
     public Node ParentNode;
     
-    public int x, y;
+    public int x, y;// 위치
     public int G, H;
     public int F { get { return G + H; } }
     public Node(bool _isWall, int _x, int _y) 
@@ -20,48 +21,81 @@ public class Node
 
 public class AsrarAlgo : MonoBehaviour
 {
+    [Header("Node정보")]
     public Vector2Int startPos;
     public Vector2Int targetPos;
-
+    [SerializeField] Vector2Int size;
     public List<Node> FinalNodeList;
     //public bool allowDiagonal, dontCrossCorner;
-
     Node[,] NodeArray;// 이동할 구역 크기
     Node StartNode, TargetNode, CurNode;
     List<Node> OpenList;
     List<Node> CloseList;
 
-    [SerializeField]Tilemap tile;
-    [SerializeField] TilemapCollider2D walltile;
-    Grid grid;
-   
+    [Header("벽관련")]
+    int[,] wallPos;//사용자 벽 정보
+    [SerializeField]bool wallmakemode;
+    [SerializeField]TileBase walltile;
 
+
+    Grid grid;
     private void Start()
     {
-        BoundsInt bounds = tile.cellBounds;
-        TileBase[] allTiles = tile.GetTilesBlock(bounds);
-        for (int x = 0; x < bounds.size.x; x++)
+      
+    }
+    private void Update()
+    {
+        MakeWall();
+    }
+
+    void Wallcheck()//몬스터 배치하기전 벽체크
+    {
+        NodeArray = new Node[size.x, size.y];
+
+        for (int x = 0; x < size.x; x++)
         {
-            for (int y = 0; y < bounds.size.y; y++)
+            for (int y = 0; y < size.y; y++)
             {
-                TileBase tile = allTiles[x + y * bounds.size.x];
-                if (tile != null)
+                NodeArray[x, y] = new Node(false, x, -y);
+                if (transform.CompareTag("Wall") ==Physics2D.Raycast(new Vector2(x, -y), Vector2.up, 0.2f))
                 {
-                    Debug.Log("x:" + x + " y:" + y + " tile:" + tile.name);
-                }
-                else
-                {
-                    Debug.Log("x:" + x + " y:" + y + " tile: (null)");
+                    NodeArray[x, y].isWall = true;
                 }
             }
         }
-        //Debug.Log(tile.GetTilesBlock(new BoundsInt ));
-        //NodeArray[tile.size.x, tile.size.y];
     }
+
+    void MakeWall()
+    {
+        if (wallmakemode == false) return;
+        //타일 넣는곳
+        //  ruletile
+        //  walltile
+        if (Input.GetMouseButton(0))
+        {
+            Vector2 mosPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            RaycastHit2D ray = Physics2D.Raycast(mosPos, Vector3.forward, 20);
+            if(ray.transform.CompareTag("Ground"))
+            {
+                //walltile.
+
+
+                //if()
+                //{
+
+                //}
+            }
+        }
+    }
+    void DeletWall()
+    {
+
+    }
+    
+
     public void PathFinding()
     {
-        //StartNode = NodeArray[,];
-       
+
         OpenList = new List<Node>() { StartNode};
         CloseList = new List<Node>();
         FinalNodeList = new List<Node>();
