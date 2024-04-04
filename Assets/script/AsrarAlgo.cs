@@ -9,8 +9,9 @@ public class Node
 {
     public bool isWall;
     public Node ParentNode;
-    
+
     public int x, y;// 위치
+    public Vector2 nodePosition{ get { return new Vector2(x, -y); } }
     public int G, H;
     public int F { get { return G + H; } }
     public Node(bool _isWall, int _x, int _y) 
@@ -33,25 +34,27 @@ public class AsrarAlgo : MonoBehaviour
     List<Node> CloseList;
 
     [Header("벽관련")]
-    int[,] wallPos;//사용자 벽 정보
+    bool[,] wallPos;//사용자 벽 정보
     [SerializeField]bool wallmakemode;
-    [SerializeField]TileBase walltile;
-
+    [SerializeField]Tilemap walltile;
+    [SerializeField]TileBase tilebase;
+    TileBase emptytile;
+    [SerializeField] bool wallmakedeletswitch = true;
 
     Grid grid;
+    [SerializeField] bool dwd = false;
     private void Start()
     {
-      
+        NodeArray = new Node[size.x, size.y];
     }
     private void Update()
     {
-        MakeWall();
+        wallmode();
+        raycheck();
     }
 
     void Wallcheck()//몬스터 배치하기전 벽체크
     {
-        NodeArray = new Node[size.x, size.y];
-
         for (int x = 0; x < size.x; x++)
         {
             for (int y = 0; y < size.y; y++)
@@ -65,33 +68,63 @@ public class AsrarAlgo : MonoBehaviour
         }
     }
 
-    void MakeWall()
+    void wallmode()
     {
         if (wallmakemode == false) return;
-        //타일 넣는곳
-        //  ruletile
-        //  walltile
+        
+        switch(wallmakedeletswitch)
+        {
+            case true :
+                MakeWall();
+                break;
+            case false :
+                DeletWall();
+                break;
+        }
+
+    }
+
+    void raycheck()
+    {
+        if(dwd== false) return;
+
+        Vector2 mosPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        RaycastHit2D ray = Physics2D.Raycast(mosPos, Vector3.forward, 20);
+        Debug.Log(ray.transform.name);
+
+    }
+
+    void MakeWall()
+    {
         if (Input.GetMouseButton(0))
         {
             Vector2 mosPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D ray = Physics2D.Raycast(mosPos, Vector3.forward, 20);
             if(ray.transform.CompareTag("Ground"))
             {
-                //walltile.
-
-
-                //if()
-                //{
-
-                //}
+                Vector3Int mousPostile = walltile.WorldToCell(mosPos);
+                walltile.SetTile(mousPostile,tilebase);
             }
         }
     }
     void DeletWall()
     {
 
+        if (Input.GetMouseButton(0))
+        {
+            Vector2 mosPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            RaycastHit2D ray = Physics2D.Raycast(mosPos, Vector3.forward, 20, LayerMask.GetMask("Wall"));
+            if (ray && ray.transform.CompareTag("Wall"))
+            {
+                Vector3Int mousPostile = walltile.WorldToCell(mosPos);
+                walltile.SetTile(mousPostile, null);
+            }
+        }
     }
-    
+    void FinishWallmake()// wall모드가 끝날때 체크
+    {
+        Wallcheck();
+    }
 
     public void PathFinding()
     {
