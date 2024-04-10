@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wall
   m_EditorClassIdentifier: 
   m_DefaultSprite: {fileID: 9175820068487298826, guid: 4d58bc12262e76040a130c79a34f82b5, type: 3}
-  m_DefaultGameObject: {fileID: 0}
+  m_DefaultGameObject: {fileID: 4434518254472852355, guid: 69da30e14e2819344a8c63d5f7cf02d7, type: 3}
   m_DefaultColliderType: 1
   m_TilingRules:
   - m_Id: 0
