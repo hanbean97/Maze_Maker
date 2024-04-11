@@ -33,7 +33,7 @@ public class WallmakeSc : MonoBehaviour
     }
     void wallmakemodeOnOff()
     {
-        if (walltile.transform.Find("MissingWall") != null)
+        if (walltile.transform.Find("MissingWall(Clone)") != null)
         {
             Debug.Log("미완성벽 있음");
             return;
@@ -53,7 +53,6 @@ public class WallmakeSc : MonoBehaviour
 
     void WallmakeModeOff()
     {
-        //anim.Rewind();
         anim.Play("wallbuttontoggle");
         anistate.speed = -1;
         anistate.time = anistate.length;
