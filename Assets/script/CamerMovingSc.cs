@@ -11,6 +11,7 @@ public class CamerMovingSc : MonoBehaviour
     Vector2 nowPos;
     Vector2 nowCam;
     [SerializeField]float speed = 1.0f;
+    [SerializeField] float wheelspeed = 1.0f;
     void Start()
     {
         cam = Camera.main;
@@ -36,8 +37,10 @@ public class CamerMovingSc : MonoBehaviour
                 nowCam = beforeCamPos + nowPos;
                 cam.transform.position = new Vector3(nowCam.x, nowCam.y, cam.transform.position.z);
             }
-            // if(∏∂øÏΩ∫ »Ÿ) ¡‹¿Œ æ∆øÙ
-            //   cam.transform.position += 
+            if(Input.GetAxis("Mouse ScrollWheel") != 0) 
+            {
+               cam.orthographicSize -= Input.GetAxis("Mouse ScrollWheel")* wheelspeed;
+            }
         }
     }
 }

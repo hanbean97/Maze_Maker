@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
@@ -10,16 +11,17 @@ public class WallmakeSc : MonoBehaviour
     [SerializeField] bool wallmakemode;
     [SerializeField] Tilemap walltile;
     [SerializeField] TileBase tilebase;
-    [SerializeField] bool wallmakedeletswitch = true;
+    bool wallmakedeletswitch = true;
     [SerializeField] Button wallButton;
     [SerializeField] Button wallModeButton;
     [SerializeField] TMP_Text wallModeText;
     Animation anim;
     AnimationState anistate; // Áß¿ä
     Color backgroundbasicColor;
+    [SerializeField] Color backgroundchangeColor;
     void Start()
     {
-        wallButton.onClick.AddListener(wallmakemodeOn);
+        wallButton.onClick.AddListener(wallmakemodeOnOff);
         wallModeButton.onClick.AddListener(Changewallmode);
         anim = wallModeButton.GetComponent<Animation>();
         anistate = anim["wallbuttontoggle"];
@@ -29,7 +31,7 @@ public class WallmakeSc : MonoBehaviour
     {
         wallmode();
     }
-    void wallmakemodeOn()
+    void wallmakemodeOnOff()
     {
         if (walltile.transform.Find("MissingWall") != null)
         {
@@ -38,22 +40,24 @@ public class WallmakeSc : MonoBehaviour
         }
 
         wallmakemode=!wallmakemode ;
-        if (wallmakemode== true)
-        {
-            wallmakedeletswitch = true;
-            wallModeText.text = "Make";
-            anim.Play("wallbuttontoggle");
-            anistate.speed = 1;
-            Camera.main.backgroundColor = Color.blue;
-        }
-        else
-        {
-            //anim.Rewind();
-            anim.Play("wallbuttontoggle");
-            anistate.speed = -1;
-            anistate.time = anistate.length;
-            Camera.main.backgroundColor = backgroundbasicColor;
-        }
+        NowWall(wallmakemode);
+    }
+    void WallMakeModeOn()
+    {
+        wallmakedeletswitch = true;
+        wallModeText.text = "Make";
+        anim.Play("wallbuttontoggle");
+        anistate.speed = 1;
+        Camera.main.backgroundColor = backgroundchangeColor;
+    }
+
+    void WallmakeModeOff()
+    {
+        //anim.Rewind();
+        anim.Play("wallbuttontoggle");
+        anistate.speed = -1;
+        anistate.time = anistate.length;
+        Camera.main.backgroundColor = backgroundbasicColor;
     }
     void Changewallmode()
     {
@@ -110,6 +114,17 @@ public class WallmakeSc : MonoBehaviour
             }
         }
     }
-    
+    public void NowWall(bool _answer)
+    {
+        wallmakemode = _answer;
+        if (wallmakemode == false)
+        {
+            WallmakeModeOff();
+        }
+        else
+        {
+            WallMakeModeOn();
+        }
+    }
 
 }

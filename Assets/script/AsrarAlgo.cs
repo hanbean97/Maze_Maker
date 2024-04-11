@@ -23,7 +23,7 @@ public class Node
 
 public class AsrarAlgo : MonoBehaviour
 {
-    [Header("Node정보 도착점이2개 일시 왼쪽지점만 입력")]
+    [Header("Node정보 ")]
     public Vector2Int startPos;
     public Vector2Int targetPos;
     [SerializeField] Vector2Int size;
@@ -103,6 +103,11 @@ public class AsrarAlgo : MonoBehaviour
             OpenListAdd(CurNode.x, CurNode.y - 1);
             OpenListAdd(CurNode.x - 1, CurNode.y);
         }
+        if (FinalNodeList.Count == 0)
+        {
+            Debug.Log("길찾기 실패");
+        }
+
     }
     void OpenListAdd(int checkX, int checkY)
     {
@@ -110,7 +115,7 @@ public class AsrarAlgo : MonoBehaviour
         {
             Node NeighborNode = NodeArray[checkX,checkY];   
             int MoveCost = CurNode.G + (CurNode.x - checkX == 0 || CurNode.y - checkY == 0 ? 10 : 14);
-            if(MoveCost<NeighborNode.G || !OpenList.Contains(NeighborNode))
+            if(MoveCost<NeighborNode.G || !OpenList.Contains(NeighborNode))//이부분 질문
             {
                 NeighborNode.G = CurNode.G;
                 NeighborNode.H = (Mathf.Abs(NeighborNode.x - TargetNode.x) + Mathf.Abs(NeighborNode.y - TargetNode.y)) * 10;//이웃노드의 가는길 계산
