@@ -10,9 +10,8 @@ public class CamerMovingSc : MonoBehaviour
     Vector2 beforeCamPos;
     Vector2 nowPos;
     Vector2 nowCam;
-    Vector2 CamMinMax;
-
-    [SerializeField]float Camspeed = 1.0f;
+    float distancewoldcam;
+    float ratioWidth;
     [SerializeField] float wheelspeed = 1.0f;
     void Start()
     {
@@ -32,12 +31,13 @@ public class CamerMovingSc : MonoBehaviour
             {
                 beforemosPos = Input.mousePosition;
                 beforeCamPos = cam.transform.position;
-               // CamMinMax = new Vector2(cam,);
+                distancewoldcam = Mathf.Abs((cam.ViewportToWorldPoint(new Vector3(0,0,0))- cam.ViewportToWorldPoint(new Vector3(1, 0, 0))).x);//캠기준 좌우 끝점 길이
+                ratioWidth = distancewoldcam / cam.pixelWidth;//비율
             }
             if (Input.GetMouseButton(0))
             {
                 nowPos = beforemosPos - Input.mousePosition; 
-                nowCam = beforeCamPos + (nowPos* Camspeed);
+                nowCam = beforeCamPos + (nowPos* ratioWidth);
                 Vector3 curcamPos = cam.transform.position;
                 curcamPos.x = nowCam.x;
                 curcamPos.y = nowCam.y;
