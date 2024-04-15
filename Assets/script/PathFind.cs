@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class PathFind : MonoBehaviour
 {
-    AsrarAlgo Astar = AsrarAlgo.instance;
-    List<Node> FinalNodeList;
+    protected List<Node> FinalNodeList;
     Node StartNode, TargetNode, CurNode;
     List<Node> OpenList;
     List<Node> CloseList;
-   
-    public void PathFinding(int targetx, int targety,int nowx,int nowy)
+    public bool PathFinding(Vector2Int nowPos,Vector2Int targetPos)
     {
-        StartNode =Astar.NodeArray[nowx, nowy];
-        TargetNode = Astar.NodeArray[targetx, targety];
+        StartNode =AsrarAlgo.instance.NodeArray[nowPos.x, nowPos.y];
+        TargetNode = AsrarAlgo.instance.NodeArray[targetPos.x, targetPos.y];
         OpenList = new List<Node>() { StartNode };
         CloseList = new List<Node>();
         FinalNodeList = new List<Node>();
@@ -39,24 +37,21 @@ public class PathFind : MonoBehaviour
                 }
                 FinalNodeList.Add(StartNode);
                 FinalNodeList.Reverse();
-                return;
+                return true;
             }
             OpenListAdd(CurNode.x, CurNode.y + 1);
             OpenListAdd(CurNode.x + 1, CurNode.y);
             OpenListAdd(CurNode.x, CurNode.y - 1);
             OpenListAdd(CurNode.x - 1, CurNode.y);
         }
-        if (FinalNodeList.Count == 0)
-        {
-            Debug.Log("길찾기 실패");
-        }
+       return false;
 
     }
     private void OpenListAdd(int checkX, int checkY)
     {
-        if (checkX >= 0 && checkX <Astar.size.x && checkY >= 0 && checkY < Astar.size.y && Astar.NodeArray[checkX, checkY].isWall && !CloseList.Contains(Astar.NodeArray[checkX, checkY]))
+        if (checkX >= 0 && checkX <AsrarAlgo.instance.size.x && checkY >= 0 && checkY < AsrarAlgo.instance.size.y && AsrarAlgo.instance.NodeArray[checkX, checkY].isWall && !CloseList.Contains(AsrarAlgo.instance.NodeArray[checkX, checkY]))
         {
-            Node NeighborNode = Astar.NodeArray[checkX, checkY];
+            Node NeighborNode = AsrarAlgo.instance.NodeArray[checkX, checkY];
             int MoveCost = CurNode.G + (CurNode.x - checkX == 0 || CurNode.y - checkY == 0 ? 10 : 14);
             if (MoveCost < NeighborNode.G || !OpenList.Contains(NeighborNode))//이부분 질문
             {

@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NoWayCheck : PathFind
+public class Monster : PathFind
 {
-    // Start is called before the first frame update
+    [SerializeField] Vector2 size;
+    [SerializeField] int Hp;
+    [SerializeField]MonsterType type;
     void Start()
     {
         
     }
-
-    // Update is called once per frame
     void Update()
     {
         
     }
+    
 }
