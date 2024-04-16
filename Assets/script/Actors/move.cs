@@ -9,14 +9,7 @@ public class move : PathFind
     [SerializeField] float speed;
     [SerializeField]bool ismoveway;
     bool findenemy;
-    private void OnEnable()
-    {
-        this.PathFinding(AsrarAlgo.instance.startPos, AsrarAlgo.instance.targetPos);
-    }
-    void Update()
-    {
-        Moving();
-    }
+    
     protected void Moving()
     {
         if (ismoveway)
@@ -24,7 +17,7 @@ public class move : PathFind
             nowPosaround = this.FinalNodeList[nextPoscount].nodePosition - transform.position;
             transform.position += nowPosaround.normalized * speed * Time.deltaTime;
             
-            if (Vector2.Distance(this.transform.position, (Vector2Int)FinalNodeList[nextPoscount].nodePosition) < 0.1f)
+            if (Vector2.Distance(this.transform.position, (Vector2Int)FinalNodeList[nextPoscount].nodePosition) < 0.2f)
             {
                 if(nextPoscount < FinalNodeList.Count-1)
                 {
