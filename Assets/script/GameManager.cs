@@ -67,10 +67,10 @@ public  class GameManager : MonoBehaviour
                 Patterninstruct(0,0,0,0);
                 break;
            case (0,1):
-                Patterninstruct(0, 0, 1, 1);
+               // Patterninstruct(0, 0, 1, 1);
                 break;
            case (0,2):
-                Patterninstruct(1, 1, 1, 1);
+                //Patterninstruct(1, 1, 1, 1);
                 break;
            case (1,0):
                 break;

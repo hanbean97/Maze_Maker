@@ -5,11 +5,8 @@ using UnityEngine;
 public class Enemy : move
 {
     [SerializeField] int Hp;
-
-    private void Start()
-    {
-        
-    }
+   
+   
     private void OnEnable()
     {
         this.PathFinding(AsrarAlgo.instance.startPos, AsrarAlgo.instance.targetPos);

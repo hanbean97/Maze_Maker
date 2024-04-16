@@ -9,21 +9,39 @@ public class move : PathFind
     [SerializeField] float speed;
     [SerializeField]bool ismoveway;
     bool findenemy;
-    
+    [SerializeField] Animator anim;
+    private void Start()
+    {
+        anim = GetComponentInChildren<Animator>();
+    }
     protected void Moving()
     {
         if (ismoveway)
         {
+            anim.SetBool("Run",true);
             nowPosaround = this.FinalNodeList[nextPoscount].nodePosition - transform.position;
             transform.position += nowPosaround.normalized * speed * Time.deltaTime;
-            
-            if (Vector2.Distance(this.transform.position, (Vector2Int)FinalNodeList[nextPoscount].nodePosition) < 0.2f)
+            if(nowPosaround.normalized.x >0)
+            {
+                transform.rotation = Quaternion.Euler(0,0,0) ;
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+
+
+            if (Vector2.Distance(this.transform.position, (Vector2Int)FinalNodeList[nextPoscount].nodePosition) < 0.1f)
             {
                 if(nextPoscount < FinalNodeList.Count-1)
                 {
                     nextPoscount++;
                 }
             }
+        }
+        else
+        {
+            anim.SetBool("Run", false);
         }
     }
     protected void AroundSetPos()
