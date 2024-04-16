@@ -11,6 +11,8 @@ public  class GameManager : MonoBehaviour
     bool isgamestart = false;
     int waveLevel = 0;
     int randompattern = 0;
+    [SerializeField]float spawnTimer;
+    float timer;
     [Header("소환위치")]
     [SerializeField] Transform spawnposition;
 
@@ -36,15 +38,14 @@ public  class GameManager : MonoBehaviour
     void GoGameStart()
     {
        if(isgamestart == false) { return; }
-       
-
     }
-    void EnemyPattern()
+    void EnemyPatternSetting()
     {
         switch(waveLevel)//레벨에 따른 패턴
         {
             case 0:
                 randompattern = Random.Range(0, 3);
+              
                 break;
             case 1:
                 randompattern = Random.Range(0, 2);
@@ -52,16 +53,26 @@ public  class GameManager : MonoBehaviour
             case 2:
                 randompattern = Random.Range(0,1);
                 break;
-
         }
-
-
+      
     }
+    void SpawnPattern()
+    {
+        timer += Time.deltaTime;
+        if (timer > spawnTimer)
+        {
+            timer = 0;
+        }
+    }
+
+
     void SpawnEnmys(int enemyIndex)
     {
         GameObject enemyGo = Instantiate(EnemyList[enemyIndex], spawnposition.position,Quaternion.identity);
+    }
+    void SpawnTimer( )
+    {
 
     }
-
 
 }
