@@ -3,17 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public  class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
-    static GameManager instance;
+    public static GameManager instance;
     [Header("적유닛 리스트")]
-    public List<GameObject> EnemyList = new List<GameObject>();
-    private List<Transform> nowenemytrs = new List<Transform>();
+    [SerializeField] List<GameObject> EnemyList = new List<GameObject>();
+    [Header("맵상에 적 유닛 리스트")]
+    List<Transform> nowenemytrs = new List<Transform>();
+    public List<Transform> Nowenemytrs { get { return nowenemytrs; } }
+    [Header("아군 유닛 전체 리스트")]
+    [SerializeField] List<GameObject> MonsterList = new List<GameObject>();
+    [Header("맵상에 아군 유닛 리스트")]
+    List<Transform> nowMonstertrs = new List<Transform>();// 저장데이터
+    public List<Transform> NowMonstertrs { get { return nowMonstertrs; } }
     [SerializeField]bool isgamestart = false;
     bool isSpawn = false;
     int waveLevel = 0;
     int randompattern = 0;
-    [SerializeField]float spawnTimer;
+    [SerializeField,Header("적유닛소환공백")]float spawnTimer;
     float timer;
     int nextspawnEnemy =0;
     int[] spawnarrEnemy;
@@ -67,10 +74,10 @@ public  class GameManager : MonoBehaviour
                 Patterninstruct(0,0,0,0);
                 break;
            case (0,1):
-               // Patterninstruct(0, 0, 1, 1);
+                 Patterninstruct(0, 0, 1, 1);
                 break;
            case (0,2):
-                //Patterninstruct(1, 1, 1, 1);
+                Patterninstruct(1, 1, 1, 1);
                 break;
            case (1,0):
                 break;
@@ -101,20 +108,29 @@ public  class GameManager : MonoBehaviour
                 if (nextspawnEnemy == spawnarrEnemy.Length)
                 {
                     nextspawnEnemy = 0;
-                    isSpawn = false;
+                    spawnarrEnemy = null;
+                   isSpawn = false;
                 }
             }
         }
     }
 
-
     void SpawnEnmys(int enemyIndex)
     {
         GameObject enemyGo = Instantiate(EnemyList[enemyIndex], spawnposition.position,Quaternion.identity);
+        nowenemytrs.Add(enemyGo.transform);
     }
-    void SpawnTimer( )
+    public void DeathEnemy(Transform _transform)
     {
-
+      nowenemytrs.Remove(_transform);
     }
-
+   
+    public void WaveStartCommand()
+    {
+        int count = nowMonstertrs.Count;
+        for(int i=0; i < count; i++)
+        {
+            //nowMonstertrs[i].GetComponent<>();
+        }
+    }
 }

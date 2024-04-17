@@ -49,7 +49,7 @@ public class PathFind : MonoBehaviour
     }
     private void OpenListAdd(int checkX, int checkY)
     {
-        if (checkX >= 0 && checkX <AsrarAlgo.instance.size.x && checkY >= 0 && checkY < AsrarAlgo.instance.size.y && AsrarAlgo.instance.NodeArray[checkX, checkY].isWall && !CloseList.Contains(AsrarAlgo.instance.NodeArray[checkX, checkY]))
+        if (checkX >= 0 && checkX <AsrarAlgo.instance.Size.x && checkY >= 0 && checkY < AsrarAlgo.instance.Size.y && AsrarAlgo.instance.NodeArray[checkX, checkY].isWall && !CloseList.Contains(AsrarAlgo.instance.NodeArray[checkX, checkY]))
         {
             Node NeighborNode = AsrarAlgo.instance.NodeArray[checkX, checkY];
             int MoveCost = CurNode.G + (CurNode.x - checkX == 0 || CurNode.y - checkY == 0 ? 10 : 14);

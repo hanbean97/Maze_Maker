@@ -43,11 +43,11 @@ public class CamerMovingSc : MonoBehaviour
                 curcamPos.y = nowCam.y;
                 cam.transform.position = curcamPos; 
             }                                        
+        }
             if(Input.GetAxis("Mouse ScrollWheel") != 0) 
             {
                cam.orthographicSize -= Input.GetAxis("Mouse ScrollWheel")* wheelspeed;
             }
-        }
     }
     private (int, int) ratioCounter(int x, int y)//È­¸éºñ
     {

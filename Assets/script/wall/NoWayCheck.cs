@@ -16,7 +16,7 @@ public class NoWayCheck : PathFind
     public void check()
     {
         AsrarAlgo.instance.Wallcheck();
-        if(PathFinding(AsrarAlgo.instance.startPos, AsrarAlgo.instance.targetPos) == false)
+        if(PathFinding(AsrarAlgo.instance.StartPos, AsrarAlgo.instance.TargetPos) == false)
         {
             Debug.Log("모든길이 막혀있음");
         }

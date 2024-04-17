@@ -20,9 +20,6 @@ public class InventroySc : MonoBehaviour
         nowInvenPossible = _answer;
     }
 
-
-
-
 }
 
 struct itemData

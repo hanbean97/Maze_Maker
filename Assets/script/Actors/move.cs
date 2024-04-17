@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class move : PathFind
-{ 
+{
     int nextPoscount;
     Vector3 nowPosaround;
     [SerializeField] float speed;
-    [SerializeField]bool ismoveway;
-    bool findenemy;
-    [SerializeField] Animator anim;
+    [SerializeField] bool ismoveway;
+    Animator anim;
+    [SerializeField] Myteam myteam;
     private void Start()
     {
         anim = GetComponentInChildren<Animator>();
@@ -18,12 +18,12 @@ public class move : PathFind
     {
         if (ismoveway)
         {
-            anim.SetBool("Run",true);
+            anim.SetBool("Run", true);
             nowPosaround = this.FinalNodeList[nextPoscount].nodePosition - transform.position;
             transform.position += nowPosaround.normalized * speed * Time.deltaTime;
-            if(nowPosaround.normalized.x >0)
+            if (nowPosaround.normalized.x > 0)
             {
-                transform.rotation = Quaternion.Euler(0,0,0) ;
+                transform.rotation = Quaternion.Euler(0, 0, 0);
             }
             else
             {
@@ -33,7 +33,7 @@ public class move : PathFind
 
             if (Vector2.Distance(this.transform.position, (Vector2Int)FinalNodeList[nextPoscount].nodePosition) < 0.1f)
             {
-                if(nextPoscount < FinalNodeList.Count-1)
+                if (nextPoscount < FinalNodeList.Count - 1)
                 {
                     nextPoscount++;
                 }
@@ -44,14 +44,11 @@ public class move : PathFind
             anim.SetBool("Run", false);
         }
     }
-    protected void AroundSetPos()
+    protected void AroundSetPos(Vector2Int target)
     {
         nextPoscount = 0;
-        Vector2Int nowPosition = new Vector2Int(Mathf.RoundToInt(transform.position.x),-Mathf.RoundToInt(transform.position.y));
-        this.PathFinding(nowPosition, AsrarAlgo.instance.targetPos);
-    }
-    protected void SearchEnemy(int range,string enemyLayername)
-    {
-        Physics2D.OverlapCircle(transform.position,range,LayerMask.GetMask(enemyLayername));
+        Vector2Int nowPosition = new Vector2Int(Mathf.RoundToInt(transform.position.x), -Mathf.RoundToInt(transform.position.y));
+        this.PathFinding(nowPosition, target);
     }
 }
+

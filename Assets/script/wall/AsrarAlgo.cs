@@ -24,11 +24,15 @@ public class AsrarAlgo : MonoBehaviour
     public static AsrarAlgo instance;
 
     [Header("Node정보 ")]
-    public Vector2Int startPos;
-    public Vector2Int targetPos;
-    public Vector2Int size;
+    Vector2Int startPos;
+    public Vector2Int StartPos { get { return startPos; } }
+    Vector2Int targetPos;
+    public Vector2Int TargetPos { get { return targetPos; } }
+    Vector2Int size;
+    public Vector2Int Size { get { return size; } }
     //public bool allowDiagonal, dontCrossCorner;
-    public Node[,] NodeArray;// 이동할 구역 크기
+    Node[,] nodeArray;// 이동할 구역 크기
+    public Node[,] NodeArray { get { return nodeArray; } }
     bool[,] wallPos;//사용자 벽 정보
     private void Awake()
     {
@@ -40,7 +44,7 @@ public class AsrarAlgo : MonoBehaviour
         {
             Destroy(instance);
         }
-        NodeArray = new Node[size.x, size.y];
+        nodeArray = new Node[size.x, size.y];
         wallPos = new bool[size.x, size.y];
     }
     private void Start()
@@ -58,10 +62,10 @@ public class AsrarAlgo : MonoBehaviour
             for (int y = 0; y < size.y; y++)
             {
                 wallPos[x, y] = false;
-                NodeArray[x, y] = new Node(false, x, y);
+                nodeArray[x, y] = new Node(false, x, y);
                 if (transform.CompareTag("Wall") ==Physics2D.Raycast(new Vector2(x, -y), Vector2.up, 0.2f,LayerMask.GetMask("Wall")))
                 {
-                    NodeArray[x, y].isWall = true;
+                    nodeArray[x, y].isWall = true;
                     wallPos[x, y] = true;
                 }
             }
