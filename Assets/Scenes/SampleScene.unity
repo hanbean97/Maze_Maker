@@ -3124,8 +3124,8 @@ GameObject:
   m_Component:
   - component: {fileID: 895035876}
   - component: {fileID: 895035875}
-  - component: {fileID: 895035874}
   - component: {fileID: 895035878}
+  - component: {fileID: 895035874}
   - component: {fileID: 895035877}
   m_Layer: 0
   m_Name: Monster
@@ -3269,9 +3269,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45ba23b089a54c44cad738684ea8891f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: {x: 0, y: 0}
-  Hp: 0
-  type: 0
+  speed: 2
+  ismoveway: 0
+  myteam: 1
+  size: {x: 2, y: 2}
+  Hp: 11
+  Searchrange: 3
+  attakrange: 1
+  monstertype: 0
 --- !u!1 &1020002929
 GameObject:
   m_ObjectHideFlags: 0
@@ -4734,7 +4739,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1840066946}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.9999958
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5079,7 +5084,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00037143112}
+  m_AnchoredPosition: {x: 0, y: -0.00004385486}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1695496186
@@ -5271,6 +5276,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 789c11acd682c404ead5a86687e82c17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startPos: {x: 7, y: 0}
+  targetPos: {x: 7, y: 11}
+  size: {x: 16, y: 12}
 --- !u!4 &1790459763
 Transform:
   m_ObjectHideFlags: 0

@@ -24,11 +24,11 @@ public class AsrarAlgo : MonoBehaviour
     public static AsrarAlgo instance;
 
     [Header("Node정보 ")]
-    Vector2Int startPos;
+    [SerializeField]Vector2Int startPos;
     public Vector2Int StartPos { get { return startPos; } }
-    Vector2Int targetPos;
+    [SerializeField]Vector2Int targetPos;
     public Vector2Int TargetPos { get { return targetPos; } }
-    Vector2Int size;
+    [SerializeField]Vector2Int size;
     public Vector2Int Size { get { return size; } }
     //public bool allowDiagonal, dontCrossCorner;
     Node[,] nodeArray;// 이동할 구역 크기

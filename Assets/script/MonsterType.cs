@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-enum MonsterType
+public enum MonsterType
 { 
+    defalt,
     None,
 }
 
