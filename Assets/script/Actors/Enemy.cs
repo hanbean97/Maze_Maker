@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : move
 {
-    [SerializeField] float Hp;
+
     [SerializeField] float Sreachrange;
     Transform targetEnemy;
     int targetEnemyCount;
@@ -25,7 +25,7 @@ public class Enemy : move
             GameManager.instance.DeathEnemy(transform);
         }
     }
-   
+
     void FindTarget()
     {
         targetEnemyCount = GameManager.instance.NowMonstertrs.Count;

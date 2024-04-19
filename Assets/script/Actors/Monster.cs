@@ -5,21 +5,23 @@ using UnityEngine;
 public class Monster : move
 {
     [SerializeField] Vector2 size;
-    [SerializeField] int Hp;
     [SerializeField] float Searchrange;
     [SerializeField] float attakrange;
     [SerializeField]MonsterType monstertype;
     int count =0;
     int nullcheckcount = 0;
-    bool attakgo;
+    bool attackgo;
     Vector3 dir;
     Transform targetEnemy;
+    [SerializeField] Collider2D attackbox;
+
     void Start()
     {
         
     }
     void Update()
     {
+        DefaltMovePattern();
         SearchEnemy();
         FindingEnemy();
     }
@@ -31,6 +33,7 @@ public class Monster : move
             switch (monstertype)
             {
                 case MonsterType.defalt:
+                    
                     break;
                 case MonsterType.None:
                     break;
@@ -48,8 +51,8 @@ public class Monster : move
                 nullcheckcount = 0;
             }
             dir = transform.position - GameManager.instance.Nowenemytrs[i].position;
-            RaycastHit2D rays = Physics2D.Raycast(transform.position,dir.normalized, Searchrange);
-            if(rays && rays.transform.CompareTag("Enemy"))
+            RaycastHit2D rays = Physics2D.Raycast(transform.position, dir.normalized, Searchrange, ~LayerMask.GetMask("Ground","Monster","AttackBox"));
+            if(rays&& rays.transform.CompareTag("Enemy"))
             {
                 targetEnemy = rays.transform;
             }
@@ -67,22 +70,30 @@ public class Monster : move
     {
         if( targetEnemy != null &&Vector3.Distance(transform.position,targetEnemy.position) <attakrange)
         {
-            attakgo = true;
+            attackgo = true;
         }
         else
         {
-            attakgo= false;
+            attackgo= false;
         }
 
-        if(targetEnemy != null && attakgo == false )
+        if(targetEnemy != null && attackgo == false )
         {
+            anim.SetBool("Attack", false);
             AroundSetPos(new Vector2Int (Mathf.RoundToInt(targetEnemy.position.x),Mathf.RoundToInt(targetEnemy.position.y)));
             Moving();
         }
-        else if(attakgo == true)
+        else if(attackgo == true)
         {
-            // 공격모션
+            anim.SetBool("Attack",true);
         }
     }
-    
+    protected void AttackOn()
+    {
+        attackbox.gameObject.SetActive(true);
+    }
+    protected void AttackOff()
+    {
+        attackbox.gameObject.SetActive(false);
+    }
 }

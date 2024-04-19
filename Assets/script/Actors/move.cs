@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class move : PathFind
 {
+    [SerializeField]protected float Hp;
     int nextPoscount;
     Vector3 nowPosaround;
     [SerializeField] float speed;
     [SerializeField] bool ismoveway;
-    Animator anim;
+    protected Animator anim;
     [SerializeField] Myteam myteam;
+   
+
     private void Start()
     {
         anim = GetComponentInChildren<Animator>();
@@ -36,6 +39,7 @@ public class move : PathFind
                 if (nextPoscount < FinalNodeList.Count - 1)
                 {
                     nextPoscount++;
+
                 }
             }
         }
@@ -50,5 +54,15 @@ public class move : PathFind
         Vector2Int nowPosition = new Vector2Int(Mathf.RoundToInt(transform.position.x), -Mathf.RoundToInt(transform.position.y));
         this.PathFinding(nowPosition, target);
     }
+   
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("AttackBox"))
+        {
+            Hp -= collision.GetComponent<HitDamageSc>().GetDamage; ;
+        }
+    }
+
 }
 

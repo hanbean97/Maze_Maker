@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ButtonLinqManager : MonoBehaviour
 {
     WallmakeSc wallsc;
-    InventroySc invensc;
+    InventorySc invensc;
     CamerMovingSc cammovesc;
     [SerializeField] Button wallBt;
     [SerializeField] Button invenscBt;
@@ -15,7 +15,7 @@ public class ButtonLinqManager : MonoBehaviour
     private void Awake()
     {
         wallsc = GetComponent<WallmakeSc>();
-        invensc = GetComponent<InventroySc>();
+        invensc = GetComponent<InventorySc>();
         cammovesc = GetComponent<CamerMovingSc>();
         //wallBt.onClick.AddListener();
         //invenscBt.onClick.AddListener(invenOn);

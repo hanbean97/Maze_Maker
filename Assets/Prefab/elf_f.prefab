@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 6383328222686799179}
   m_Layer: 0
   m_Name: elf_f
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -153,9 +153,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e397162e81e80d541ae9c0d9ead379d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Hp: 1
   speed: 1
   ismoveway: 1
-  Hp: 1
+  myteam: 0
+  Sreachrange: 0
 --- !u!61 &1906827011173677909
 BoxCollider2D:
   m_ObjectHideFlags: 0
