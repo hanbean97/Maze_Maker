@@ -123,7 +123,10 @@ public class GameManager : MonoBehaviour
     {
       nowenemytrs.Remove(_transform);
     }
-   
+    public void DeathMonster(Transform _transform)
+    {
+        nowMonstertrs.Remove(_transform);
+    }
     public void WaveStartCommand()
     {
         int count = nowMonstertrs.Count;

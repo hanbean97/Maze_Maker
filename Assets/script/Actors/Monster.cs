@@ -10,26 +10,26 @@ public class Monster : move
     [SerializeField]MonsterType monstertype;
     int count =0;
     int nullcheckcount = 0;
-    bool attackgo;
     Vector3 dir;
     Transform targetEnemy;
     [SerializeField] Collider2D attackbox;
+    Vector2Int targetPos;
 
-    void Start()
-    {
-        
-    }
     void Update()
     {
         DefaltMovePattern();
         SearchEnemy();
         FindingEnemy();
+        if(targetEnemy != null)
+        {
+           targetPos = new Vector2Int(Mathf.RoundToInt(targetEnemy.position.x), -Mathf.RoundToInt(targetEnemy.position.y));
+            Moving(targetPos);
+        }
     }
     void DefaltMovePattern()
     {
         if (targetEnemy == null)
         {
-            monstertype = MonsterType.defalt;
             switch (monstertype)
             {
                 case MonsterType.defalt:
@@ -50,11 +50,21 @@ public class Monster : move
             {
                 nullcheckcount = 0;
             }
-            dir = transform.position - GameManager.instance.Nowenemytrs[i].position;
-            RaycastHit2D rays = Physics2D.Raycast(transform.position, dir.normalized, Searchrange, ~LayerMask.GetMask("Ground","Monster","AttackBox"));
-            if(rays&& rays.transform.CompareTag("Enemy"))
+            dir = GameManager.instance.Nowenemytrs[i].position- transform.position;
+            RaycastHit2D rays = Physics2D.Raycast(transform.position, dir.normalized, Searchrange, ~LayerMask.GetMask("Ground","Monster","OutLine"));
+             if(rays&& rays.transform.CompareTag("Enemy"))
             {
-                targetEnemy = rays.transform;
+                if (targetEnemy != null)
+                {
+                    if (Vector2.Distance(transform.position,targetEnemy.position) > Vector2.Distance(transform.position, rays.transform.position))
+                    {
+                    targetEnemy = rays.transform;
+                    }
+                }
+                else if(targetEnemy == null)
+                {
+                    targetEnemy = rays.transform;
+                }
             }
             else if(!rays)
             {
@@ -70,30 +80,46 @@ public class Monster : move
     {
         if( targetEnemy != null &&Vector3.Distance(transform.position,targetEnemy.position) <attakrange)
         {
-            attackgo = true;
+            // anim.SetBool("Attack", true); 상위클래스에서 실행
+            attackGo();
+            ismoveway = false;
         }
         else
         {
-            attackgo= false;
+            //  anim.SetBool("Attack",false);
+            attackStop();
+            ismoveway = true;
         }
+    }
 
-        if(targetEnemy != null && attackgo == false )
+    protected virtual void attackGo()
+    {
+
+    }
+    protected virtual void attackStop()
+    {
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("AttackBox") && LayerMask.Equals(collision, transform) == false)
         {
-            anim.SetBool("Attack", false);
-            AroundSetPos(new Vector2Int (Mathf.RoundToInt(targetEnemy.position.x),Mathf.RoundToInt(targetEnemy.position.y)));
-            Moving();
-        }
-        else if(attackgo == true)
-        {
-            anim.SetBool("Attack",true);
+            Hp -= collision.transform.GetComponent<HitDamageSc>().GetDamage;
+            if( collision.transform.GetComponent<projectileSc>() != null)
+            {
+                Destroy(collision.gameObject);
+            }
+            Death();
         }
     }
-    protected void AttackOn()
+    void Death()
     {
-        attackbox.gameObject.SetActive(true);
-    }
-    protected void AttackOff()
-    {
-        attackbox.gameObject.SetActive(false);
+        if (Hp > 0 && isdeth == false)
+        {
+            isdeth = true;
+            GameManager.instance.DeathMonster(transform);
+            Destroy(transform);
+        }
     }
 }

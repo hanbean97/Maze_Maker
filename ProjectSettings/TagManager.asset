@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Monster
   - AttackBox
+  - Weapon
   layers:
   - Default
   - TransparentFX
@@ -19,8 +20,8 @@ TagManager:
   - Wall
   - Enemy
   - Monster
-  - 
-  - 
+  - Ground
+  - OutLine
   - 
   - 
   - 

@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-enum Myteam
+
+enum MonsterType
 {
-    Enemy,
-    Monster
+    defalt,
+    None
 }
