@@ -14,7 +14,11 @@ public class Monster : move
     Transform targetEnemy;
     [SerializeField] Collider2D attackbox;
     Vector2Int targetPos;
-
+    Vector2Int mysponPos;
+    private void OnEnable()
+    {
+        mysponPos = new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y));
+    }
     void Update()
     {
         DefaltMovePattern();
@@ -101,12 +105,12 @@ public class Monster : move
 
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("AttackBox") && LayerMask.Equals(collision, transform) == false)
+        if (collision.CompareTag("AttackBox") && LayerMask.Equals(collision, transform) == false)
         {
-            Hp -= collision.transform.GetComponent<HitDamageSc>().GetDamage;
-            if( collision.transform.GetComponent<projectileSc>() != null)
+            Hp -= collision.GetComponent<HitDamageSc>().GetDamage;
+            if (collision.GetComponent<projectileSc>() != null)
             {
                 Destroy(collision.gameObject);
             }
@@ -115,11 +119,11 @@ public class Monster : move
     }
     void Death()
     {
-        if (Hp > 0 && isdeth == false)
+        if (Hp <= 0 && isdeth == false)
         {
             isdeth = true;
             GameManager.instance.DeathMonster(transform);
-            Destroy(transform);
+            Destroy(gameObject);
         }
     }
 }

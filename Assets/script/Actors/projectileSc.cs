@@ -18,5 +18,5 @@ public class projectileSc : MonoBehaviour
             Destroy(gameObject);
         }
     }
-   
+  
 }

@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] List<GameObject> MonsterList = new List<GameObject>();
     [Header("맵상에 아군 유닛 리스트")]
     List<Transform> nowMonstertrs = new List<Transform>();// 저장데이터
+    Dictionary<string, Vector2Int> SaveMonsterData = new Dictionary<string, Vector2Int>();//<저장몬스터,배치위치>
+
     public List<Transform> NowMonstertrs { get { return nowMonstertrs; } }
     [SerializeField]bool isgamestart = false;
     bool isSpawn = false;
@@ -25,6 +27,7 @@ public class GameManager : MonoBehaviour
     int[] spawnarrEnemy;
     [Header("소환위치")]
     [SerializeField] Transform spawnposition;
+    [SerializeField] Transform endposition;
    
     private void Awake()
     {
@@ -113,7 +116,6 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-
     void SpawnEnmys(int enemyIndex)
     {
         GameObject enemyGo = Instantiate(EnemyList[enemyIndex], spawnposition.position,Quaternion.identity);

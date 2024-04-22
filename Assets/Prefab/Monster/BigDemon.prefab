@@ -168,10 +168,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45ba23b089a54c44cad738684ea8891f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 0
+  Hp: 40
   speed: 2
   size: {x: 2, y: 2}
-  Searchrange: 5
+  Searchrange: 4
   attakrange: 1
   monstertype: 0
   attackbox: {fileID: 8415337409689395278}
@@ -299,7 +299,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.05134034, y: -0.27136803}

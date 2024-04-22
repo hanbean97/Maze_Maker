@@ -10,13 +10,15 @@ public class elfSc : Enemy
     float timer=0;
     [SerializeField, Header("공격속도")] float attackspeed;
     [SerializeField,Header("차지모션공격속도보다 낮게설정해주세요")]float chargeMotiontime;
+    [Header("활 이미지+ 화살")]
     [SerializeField] GameObject arrow;
     [SerializeField] Sprite bowChargeSprite;
     [SerializeField] Sprite bowDefaltSprite;
+    [SerializeField] GameObject fakeArrow;
     float angle;
-    private void Update()
+    protected override void Update()
     {
-        base.Update();//문제?질문
+        base.Update();
         Charge();
     }
     protected override void attackGo()
@@ -35,6 +37,7 @@ public class elfSc : Enemy
             timer += Time.deltaTime;
             if(timer> attackspeed)
             {
+                fakeArrow.SetActive(true);
                 timer = 0;
                 Shoot();
             }
@@ -56,5 +59,6 @@ public class elfSc : Enemy
         bow.sprite = bowDefaltSprite;
         angle = Quaternion.FromToRotation(Vector2.up,targetEnemy.position-transform.position).eulerAngles.z;
         Instantiate(arrow, bow.transform.position, Quaternion.Euler(new Vector3(0, 0, angle)) ,transform);
+        fakeArrow.SetActive(false);
     }
 }

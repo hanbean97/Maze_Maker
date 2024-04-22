@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Enemy : move
 {
 
@@ -12,57 +13,50 @@ public class Enemy : move
     int count;
     int nullcheckcount;
     Vector3 dir;
-    bool startTileOn=false;
-    bool endTileOn =false;
+    bool startTileOn = false;
+    bool endTileOn = false;
     private void OnEnable()
     {
         this.PathFinding(AsrarAlgo.instance.StartPos, AsrarAlgo.instance.TargetPos);
-        
+
     }
-    protected void Update()
-    { 
-        switch(endTileOn)
+    protected virtual void Update()
+    {
+        if (endTileOn == false)//마지막타일안에 들어가기전까지
         {
-            case false:
-                if((transform.position.x>AsrarAlgo.instance.TargetPos.x && transform.position.x < AsrarAlgo.instance.TargetPos.x+1) &&
-                    (-transform.position.y > AsrarAlgo.instance.TargetPos.y&& -transform.position.y< AsrarAlgo.instance.TargetPos.y+1)
-                    )
+            if ((transform.position.x > AsrarAlgo.instance.TargetPos.x - 1 && transform.position.x < AsrarAlgo.instance.TargetPos.x + 1) &&
+                               (-transform.position.y > AsrarAlgo.instance.TargetPos.y - 1 && -transform.position.y < AsrarAlgo.instance.TargetPos.y + 1))
+            {
+                endTileOn = true;
+            }
+            if (startTileOn == true && targetEnemy == null)
+            {
+                Moving(AsrarAlgo.instance.TargetPos);
+            }
+            else if (startTileOn == true && targetEnemy != null)
+            {
+                targetPos = new Vector2Int(Mathf.RoundToInt(targetEnemy.position.x), -Mathf.RoundToInt(targetEnemy.position.y));//의미없어보임
+                Moving(targetPos);
+            }
+            else if (startTileOn == false)
+            {
+                Moving();
+                if (-Mathf.RoundToInt(transform.position.y) > 0)
                 {
-                    endTileOn = true; 
-                    break;
+                    startTileOn = true;
                 }
-
-                if (startTileOn == true && targetEnemy == null)
-                {
-                    Moving(AsrarAlgo.instance.TargetPos);
-                }
-                else if (startTileOn == true && targetEnemy != null)
-                {
-                    targetPos = new Vector2Int(Mathf.RoundToInt(targetEnemy.position.x), -Mathf.RoundToInt(targetEnemy.position.y));//의미없어보임
-                    Moving(targetPos);
-                }
-                else if (startTileOn == false)
-                {
-                    Moving();
-                    if (-Mathf.RoundToInt(transform.position.y) > 0)
-                    {
-                        startTileOn = true;
-                    }
-                }
-                SearchEnemy();
-                FindingEnemy();
-                break;
-             case true:
-                EndAction();
-                break;
+            }
+            SearchEnemy();
+            FindingEnemy();
         }
-      
+        else if (endTileOn == true)
+        {
+            EndAction();//마지막타일에 도착했을때 실행
+        }
     }
-
     void SearchEnemy()
     {
-        if (startTileOn==false) return;
-
+        if (startTileOn == false) return;
         count = GameManager.instance.Nowenemytrs.Count;
         for (int i = 0; i < count; i++)
         {
@@ -111,9 +105,8 @@ public class Enemy : move
             ismoveway = true;
         }
     }
-   // protected interface move
-  
-     protected virtual void attackGo()
+
+    protected virtual void attackGo()
     {
 
     }
@@ -121,26 +114,35 @@ public class Enemy : move
     {
 
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    void EndAction()
     {
-        if (collision.gameObject.CompareTag("AttackBox") && LayerMask.Equals(collision, transform) == false)
+        
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("AttackBox") && LayerMask.Equals(collision, transform) == false)
         {
-            Hp -= collision.transform.GetComponent<HitDamageSc>().GetDamage; 
+            Hp -= collision.GetComponent<HitDamageSc>().GetDamage;
+            if(collision.GetComponent<projectileSc>() !=null)
+            {
+                Destroy(collision.gameObject);
+            }
+            HitMotion();
             Death();
         }
     }
     void Death()
     {
-        if (Hp <= 0 && isdeth ==false)
+        if (Hp <= 0 && isdeth == false)
         {
             isdeth = true;
             GameManager.instance.DeathEnemy(transform);
             Destroy(gameObject);
         }
     }
-    void EndAction()
+    void HitMotion()//공격받는 애니메이션+넉백
     {
-
+        anim.SetTrigger("Hit");
     }
 }
 
