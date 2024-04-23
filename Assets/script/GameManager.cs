@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] List<GameObject> MonsterList = new List<GameObject>();
     [Header("맵상에 아군 유닛 리스트")]
     List<Transform> nowMonstertrs = new List<Transform>();// 저장데이터
-    Dictionary<string, Vector2Int> SaveMonsterData = new Dictionary<string, Vector2Int>();//<저장몬스터,배치위치>
+    Dictionary<string ,(string, Vector3Int)> SaveMonsterData = new Dictionary<string, (string,Vector3Int)>();//<키값,(저장몬스터이름,배치위치)>
 
     public List<Transform> NowMonstertrs { get { return nowMonstertrs; } }
     [SerializeField]bool isgamestart = false;
@@ -28,7 +28,11 @@ public class GameManager : MonoBehaviour
     [Header("소환위치")]
     [SerializeField] Transform spawnposition;
     [SerializeField] Transform endposition;
-   
+   void TestMonsterinf()
+    {
+        SaveMonsterData.Add("0",("BigDemon",new Vector3Int(5,-5,0)));
+
+    }
     private void Awake()
     {
         if (instance == null)
@@ -39,10 +43,12 @@ public class GameManager : MonoBehaviour
         {
             Destroy(instance);
         }
+       
     }
     void Start()
     {
-        
+        TestMonsterinf();// 테스트 나중에 지우기
+        SetLoadMonster();
     }
     void Update()
     {
@@ -135,6 +141,23 @@ public class GameManager : MonoBehaviour
         for(int i=0; i < count; i++)
         {
             //nowMonstertrs[i].GetComponent<>();
+        }
+    }
+    void SetLoadMonster()
+    {
+        int count = SaveMonsterData.Count;
+        int count2 = MonsterList.Count;
+        for(int i=0;i< count; i++)//n*n =n^2 계산식 나중에 한번 2n으로 바꿔보기 가능하면
+        {
+            (string, Vector3Int) Data = (SaveMonsterData[ $"{i}" ].Item1, SaveMonsterData[$"{i}"].Item2);
+            for(int j=0;j<count2; j++)
+            {
+                if (MonsterList[j].gameObject.name == Data.Item1)
+                {
+                    GameObject gam = Instantiate(MonsterList[j].gameObject ,Data.Item2 ,Quaternion.identity);
+                    nowMonstertrs.Add(gam.transform);//몬스터의 데이터를 넣고 + 소환된몬스터는 받은 위치정보를 기존위치로 설정
+                }
+            }
         }
     }
 }

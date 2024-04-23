@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1299116481031183852}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.45, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -129,7 +129,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7645216486059476518}
-  - component: {fileID: 8524087007481992326}
+  - component: {fileID: 7581988954462165983}
   - component: {fileID: 2547587484267070250}
   - component: {fileID: 4691081022223482102}
   m_Layer: 8
@@ -148,7 +148,7 @@ Transform:
   m_GameObject: {fileID: 4876546578012998620}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.9, y: -5.6, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -156,7 +156,7 @@ Transform:
   - {fileID: 4606667539579583875}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8524087007481992326
+--- !u!114 &7581988954462165983
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -165,13 +165,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4876546578012998620}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45ba23b089a54c44cad738684ea8891f, type: 3}
+  m_Script: {fileID: 11500000, guid: c720016407b072747b81bb743f1604a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 40
-  speed: 2
+  Hp: 100
+  speed: 1
   size: {x: 2, y: 2}
-  Searchrange: 4
+  Searchrange: 3
   attakrange: 1
   monstertype: 0
   attackbox: {fileID: 8415337409689395278}
@@ -207,8 +207,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.026287079, y: -0.28915906}
-  m_Size: {x: 1.1834679, y: 1.5783181}
+  m_Offset: {x: -0.0046248436, y: -0.67925024}
+  m_Size: {x: 1.0941668, y: 1.9088211}
   m_Direction: 0
 --- !u!50 &4691081022223482102
 Rigidbody2D:
@@ -225,7 +225,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -302,9 +302,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.05134034, y: -0.27136803}
+  m_Offset: {x: 0.024712563, y: -0.67078424}
   serializedVersion: 2
-  m_Radius: 0.92539024
+  m_Radius: 1.0319014
 --- !u!114 &7452029319633915620
 MonoBehaviour:
   m_ObjectHideFlags: 0

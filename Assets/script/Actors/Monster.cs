@@ -15,9 +15,17 @@ public class Monster : move
     [SerializeField] Collider2D attackbox;
     Vector2Int targetPos;
     Vector2Int mysponPos;
+    SpriteRenderer spriteRenderer;
+    protected bool ishit;
+    [SerializeField] float hitmotionTime;
+    [SerializeField] Color hitcolor;
+    Color baseColors;
+    float hitTimer=0;
     private void OnEnable()
     {
         mysponPos = new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y));
+        spriteRenderer =GetComponentInChildren<SpriteRenderer>();
+        baseColors = spriteRenderer.color;
     }
     void Update()
     {
@@ -29,6 +37,7 @@ public class Monster : move
            targetPos = new Vector2Int(Mathf.RoundToInt(targetEnemy.position.x), -Mathf.RoundToInt(targetEnemy.position.y));
             Moving(targetPos);
         }
+        hitMotion();
     }
     void DefaltMovePattern()
     {
@@ -114,6 +123,7 @@ public class Monster : move
             {
                 Destroy(collision.gameObject);
             }
+            ishit = true;
             Death();
         }
     }
@@ -124,6 +134,22 @@ public class Monster : move
             isdeth = true;
             GameManager.instance.DeathMonster(transform);
             Destroy(gameObject);
+        }
+    }
+    protected virtual void hitMotion()
+    {
+        if(ishit ==true)
+        {
+            hitTimer += Time.deltaTime;
+
+            spriteRenderer.color = hitcolor ;
+
+            if(hitTimer > hitmotionTime)
+            {
+                spriteRenderer.color = baseColors;
+                ishit = false;
+                hitTimer = 0;
+            }
         }
     }
 }
