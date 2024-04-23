@@ -6,7 +6,7 @@ public class move : PathFind
 {
     [SerializeField]protected float Hp;
     int nextPoscount;
-    Vector3 nowPosaround;
+    protected Vector3 nextdir;
     [SerializeField] float speed;
     protected bool ismoveway;
     protected Animator anim;
@@ -17,14 +17,14 @@ public class move : PathFind
         anim = GetComponentInChildren<Animator>();
         ismoveway= true;
     }
-    protected void Moving()//동적으로 타겟의 현재 위치를 받고 1노드씩 새로운 루트를 찾아 다가가는 방식
+    protected void Moving()//기본 움직이는 함수
     {
         if (ismoveway)
         {
             anim.SetBool("Run", true);
-            nowPosaround = this.FinalNodeList[nextPoscount].nodePosition - transform.position;
-            transform.position += nowPosaround.normalized * speed * Time.deltaTime;
-            if (nowPosaround.normalized.x > 0)
+            nextdir = this.FinalNodeList[nextPoscount].nodePosition - transform.position;
+            transform.position += nextdir.normalized * speed * Time.deltaTime;
+            if (nextdir.normalized.x > 0)
             {
                 transform.rotation = Quaternion.Euler(0, 0, 0);
             }
@@ -45,7 +45,7 @@ public class move : PathFind
             anim.SetBool("Run", false);
         }
     }
-    protected void Moving(Vector2Int target)
+    protected void Moving(Vector2Int target)//동적으로 움직이는 함수
     {
         if (ismoveway)
         {
@@ -53,17 +53,13 @@ public class move : PathFind
             {
                 return;
             }
+            AroundSetPos(target);
 
-
-            if ((nextPoscount == 0 ||Vector2.Distance(this.transform.position, (Vector2Int)FinalNodeList[nextPoscount].nodePosition) < 0.1f))
-            {
-                AroundSetPos(target);
-                nextPoscount++;
-            }
+           
             anim.SetBool("Run", true);
-            nowPosaround = this.FinalNodeList[nextPoscount].nodePosition - transform.position;
-            transform.position += nowPosaround.normalized * speed * Time.deltaTime;
-            if (nowPosaround.normalized.x > 0)
+            nextdir = this.FinalNodeList[1].nodePosition - transform.position;
+            transform.position += nextdir.normalized * speed * Time.deltaTime;
+            if (nextdir.normalized.x > 0)
             {
                 transform.rotation = Quaternion.Euler(0, 0, 0);
             }
@@ -71,7 +67,6 @@ public class move : PathFind
             {
                 transform.rotation = Quaternion.Euler(0, 180, 0);
             }
-
         }
         else
         {

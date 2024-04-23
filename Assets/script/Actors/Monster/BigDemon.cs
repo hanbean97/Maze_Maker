@@ -12,12 +12,5 @@ public class BigDemon : Monster
     {
         anim.SetBool("Attack", false);
     }
-    protected override void hitMotion()
-    {
-        base.hitMotion();
-        if(ishit)
-        {
-            anim.SetTrigger("Hit");       
-        }
-    }
+    
 }

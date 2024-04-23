@@ -116,7 +116,7 @@ public class Monster : move
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("AttackBox") && LayerMask.Equals(collision, transform) == false)
+        if (collision.CompareTag("AttackBox") && collision.gameObject.layer != gameObject.layer)
         {
             Hp -= collision.GetComponent<HitDamageSc>().GetDamage;
             if (collision.GetComponent<projectileSc>() != null)

@@ -5,7 +5,7 @@ using UnityEngine;
 public class CamerMovingSc : MonoBehaviour
 {
     Camera cam;
-    public bool CamermoveMode;
+     bool CamermoveMode = true;
     Vector3 beforemosPos;
     Vector2 beforeCamPos;
     Vector2 nowPos;
@@ -66,7 +66,8 @@ public class CamerMovingSc : MonoBehaviour
         Yratio = b/r;
         return (a,b);
     }
-
-
-
+    public void IsCamerMove()
+    {
+        CamermoveMode =!CamermoveMode;
+    }
 }

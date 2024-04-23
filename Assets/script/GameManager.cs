@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,12 +15,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] List<GameObject> MonsterList = new List<GameObject>();
     [Header("맵상에 아군 유닛 리스트")]
     List<Transform> nowMonstertrs = new List<Transform>();// 저장데이터
-    Dictionary<string ,(string, Vector3Int)> SaveMonsterData = new Dictionary<string, (string,Vector3Int)>();//<키값,(저장몬스터이름,배치위치)>
+    Dictionary<string, (string, Vector3Int)> SaveMonsterData = new Dictionary<string, (string, Vector3Int)>();//<키값,(저장몬스터이름,배치위치)>
 
     public List<Transform> NowMonstertrs { get { return nowMonstertrs; } }
-    [SerializeField]bool isgamestart = false;
+    [SerializeField] bool isgamestart = false;
+    bool isWaveClear = false;
+    bool isWaveFail = false;
     bool isSpawn = false;
-    int waveLevel = 0;
+    [Range(0,2)] int waveLevel = 0;//구현은 3레벨까지만
     int randompattern = 0;
     [SerializeField,Header("적유닛소환공백")]float spawnTimer;
     float timer;
@@ -28,10 +31,14 @@ public class GameManager : MonoBehaviour
     [Header("소환위치")]
     [SerializeField] Transform spawnposition;
     [SerializeField] Transform endposition;
+    public Transform EndPos { get { return endposition; } }
+    [SerializeField] Button GameStartBT;
+    [SerializeField] WallmakeSc wall;
    void TestMonsterinf()
     {
-        SaveMonsterData.Add("0",("BigDemon",new Vector3Int(5,-5,0)));
-
+        SaveMonsterData.Add("0", ("BigDemon", new Vector3Int(10, -7, 0)));
+        SaveMonsterData.Add("1", ("BigDemon", new Vector3Int(5, -5, 0)));
+        SaveMonsterData.Add("2", ("BigDemon", new Vector3Int(3, -3, 0)));
     }
     private void Awake()
     {
@@ -43,22 +50,20 @@ public class GameManager : MonoBehaviour
         {
             Destroy(instance);
         }
-       
     }
     void Start()
     {
         TestMonsterinf();// 테스트 나중에 지우기
         SetLoadMonster();
+        GameStartBT.onClick.AddListener(Gamestart);
     }
     void Update()
     {
         EnemyPatternSetting();
         SpawnStart();
+        WaveClear();
     }
-    void GoGameStart()
-    {
-       
-    }
+    
     void EnemyPatternSetting()
     {
         if(isgamestart == false) return;
@@ -79,30 +84,30 @@ public class GameManager : MonoBehaviour
         switch (waveLevel, randompattern)
         {
            case (0,0):
-                Patterninstruct(0,0,0,0);
+                Patterninstruct(1,1,0,0);
                 break;
            case (0,1):
-                 Patterninstruct(0, 0, 1, 1);
+                 Patterninstruct(1, 1, 1, 1);
                 break;
            case (0,2):
                 Patterninstruct(1, 1, 1, 1);
                 break;
            case (1,0):
+                Patterninstruct(0, 0, 1, 1,1,1,1);
                 break;
            case (1,1):
                 break;
            case (2,0):
                 break;
         }
+
         isgamestart = false;
     }
-
     void Patterninstruct(params int[] enemynumber)
     {
         isSpawn = true;
         spawnarrEnemy = enemynumber;
     }
-   
     void SpawnStart()
     {
         if (isSpawn == true)
@@ -117,7 +122,8 @@ public class GameManager : MonoBehaviour
                 {
                     nextspawnEnemy = 0;
                     spawnarrEnemy = null;
-                   isSpawn = false;
+                    isSpawn = false;
+                    isWaveClear = true;
                 }
             }
         }
@@ -127,21 +133,21 @@ public class GameManager : MonoBehaviour
         GameObject enemyGo = Instantiate(EnemyList[enemyIndex], spawnposition.position,Quaternion.identity);
         nowenemytrs.Add(enemyGo.transform);
     }
+    /// <summary>
+    /// 적이 죽을때 관리 리스트의 죽은 오브젝트정보를 삭제
+    /// </summary>
+    /// <param name="_transform"></param>
     public void DeathEnemy(Transform _transform)
     {
       nowenemytrs.Remove(_transform);
     }
+    /// <summary>
+    /// 몬스터가 죽을때 관리리스트의 죽은 오브젝트 정보를 삭제
+    /// </summary>
+    /// <param name="_transform"></param>
     public void DeathMonster(Transform _transform)
     {
         nowMonstertrs.Remove(_transform);
-    }
-    public void WaveStartCommand()
-    {
-        int count = nowMonstertrs.Count;
-        for(int i=0; i < count; i++)
-        {
-            //nowMonstertrs[i].GetComponent<>();
-        }
     }
     void SetLoadMonster()
     {
@@ -156,8 +162,51 @@ public class GameManager : MonoBehaviour
                 {
                     GameObject gam = Instantiate(MonsterList[j].gameObject ,Data.Item2 ,Quaternion.identity);
                     nowMonstertrs.Add(gam.transform);//몬스터의 데이터를 넣고 + 소환된몬스터는 받은 위치정보를 기존위치로 설정
+                    SaveMonsterData.Remove($"{i}");
                 }
             }
         }
     }
+    void Gamestart()
+    {
+       isgamestart = true;
+    }
+    /// <summary>
+    /// 소환된몬스터가 전부 죽을때 나오는 함수
+    /// </summary>
+    void WaveClear()
+    {
+         if(isWaveClear ==true && isWaveFail == false && nowenemytrs.Count==0)
+         {
+            if(waveLevel < 2)
+            {
+                waveLevel++;
+                switch(waveLevel)
+                {
+                    case 1:
+                        wall.GiveWallcountUp(5);
+                        break;
+                    case 2:
+                        wall.GiveWallcountUp(10);
+                        break;
+
+                }
+            }
+            isWaveClear = false;
+         }
+         else if (isWaveFail == true)
+        {
+            isWaveClear = false;
+        }
+    }
+    /// <summary>
+    /// 적이 끝지점에 도착했을때 실행
+    /// </summary>
+    /// <param name="_transform"></param>
+    public void EnemyFinshDungeon(Transform _transform)
+    {
+        nowenemytrs.Remove(_transform);
+        isWaveFail = true;
+    }
+  
 }

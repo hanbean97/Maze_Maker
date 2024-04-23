@@ -325,8 +325,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Hp: 7
   speed: 1
-  Searchrange: 5
-  attakrange: 3
+  Searchrange: 6
+  attakrange: 5
   bow: {fileID: 7195581512973178168}
   attackspeed: 2
   chargeMotiontime: 1

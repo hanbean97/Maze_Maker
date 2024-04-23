@@ -18,17 +18,26 @@ public class WallmakeSc : MonoBehaviour
     AnimationState anistate; // 중요
     Color backgroundbasicColor;
     [SerializeField] Color backgroundchangeColor;
+    NoWayCheck waycheck;
+    CamerMovingSc cammoves;
+    [SerializeField] TMP_Text wallcCounString;
+
+    [SerializeField, Header("처음에주는 벽 수")] int wallposiblecount; 
     void Start()
     {
+
         wallButton.onClick.AddListener(wallmakemodeOnOff);
         wallModeButton.onClick.AddListener(Changewallmode);
         anim = wallModeButton.GetComponent<Animation>();
         anistate = anim["wallbuttontoggle"];
         backgroundbasicColor = Camera.main.backgroundColor;
+        waycheck = GetComponent<NoWayCheck>();
+        cammoves = GetComponent<CamerMovingSc>();
     }
     void Update()
     {
         wallmode();
+        OnWallcountString();
     }
     void wallmakemodeOnOff()
     {
@@ -37,12 +46,18 @@ public class WallmakeSc : MonoBehaviour
             Debug.Log("미완성벽 있음");
             return;
         }
-
-        wallmakemode=!wallmakemode ;
+        if(waycheck.check() == false)
+        {
+            Debug.Log("벽이 막혀있음");
+            return;
+        }
+        wallcCounString.gameObject.SetActive(!wallcCounString.gameObject.activeSelf);
+        wallmakemode =!wallmakemode ;
         NowWall(wallmakemode);
     }
     void WallMakeModeOn()
     {
+        cammoves.IsCamerMove();
         wallmakedeletswitch = true;
         wallModeText.text = "Make";
         anim.Play("wallbuttontoggle");
@@ -52,6 +67,7 @@ public class WallmakeSc : MonoBehaviour
 
     void WallmakeModeOff()
     {
+        cammoves.IsCamerMove();
         anim.Play("wallbuttontoggle");
         anistate.speed = -1;
         anistate.time = anistate.length;
@@ -92,10 +108,11 @@ public class WallmakeSc : MonoBehaviour
         {
             Vector2 mosPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D ray = Physics2D.Raycast(mosPos, Vector3.forward, 20);
-            if (ray && ray.transform.CompareTag("Ground"))
+            if (ray && ray.transform.CompareTag("Ground") && wallposiblecount >0)
             {
                 Vector3Int mousPostile = walltile.WorldToCell(mosPos);
                 walltile.SetTile(mousPostile, tilebase);
+                wallposiblecount--;
             }
         }
     }
@@ -109,6 +126,7 @@ public class WallmakeSc : MonoBehaviour
             {
                 Vector3Int mousPostile = walltile.WorldToCell(mosPos);
                 walltile.SetTile(mousPostile, null);
+                wallposiblecount++;
             }
         }
     }
@@ -124,5 +142,12 @@ public class WallmakeSc : MonoBehaviour
             WallMakeModeOn();
         }
     }
-
+    public void GiveWallcountUp(int _givewall)
+    {
+        wallposiblecount += _givewall;
+    }
+    void OnWallcountString()
+    {
+        wallcCounString.text = $"Wall : {wallposiblecount}";
+    }
 }

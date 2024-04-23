@@ -5,21 +5,15 @@ using UnityEngine.UI;
 
 public class NoWayCheck : PathFind
 {
-    [SerializeField]Button Bt;
-    private void Start()
-    {
-        Bt.onClick.AddListener(check);
-    }
-    private void Update()
-    {
-    }
-    public void check()
+    public bool check()
     {
         AsrarAlgo.instance.Wallcheck();
         if(PathFinding(AsrarAlgo.instance.StartPos, AsrarAlgo.instance.TargetPos) == false)
         {
             Debug.Log("모든길이 막혀있음");
+            return false;
         }
+        return true;
     }
     private void OnDrawGizmos()
     {
