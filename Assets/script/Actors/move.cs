@@ -5,6 +5,7 @@ using UnityEngine;
 public class move : PathFind
 {
     [SerializeField]protected float Hp;
+    [SerializeField] float maxhp;
     int nextPoscount;
     protected Vector3 nextdir;
     [SerializeField] float speed;
@@ -79,6 +80,9 @@ public class move : PathFind
         Vector2Int nowPosition = new Vector2Int(Mathf.RoundToInt(transform.position.x), -Mathf.RoundToInt(transform.position.y));
         this.PathFinding(nowPosition, target);
     }
-   
+    public void Heal()//몬스터 체력회복
+    {
+
+    }
 }
 
