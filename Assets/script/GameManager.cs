@@ -197,6 +197,7 @@ public class GameManager : MonoBehaviour
          else if (isWaveFail == true)
         {
             isWaveClear = false;
+            isWaveFail = false;
         }
     }
     /// <summary>
