@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     Dictionary<string, (string, Vector3Int)> DungeonInMonster = new Dictionary<string, (string, Vector3Int)>();//소환되어있는 몬스터 <키값,(저장몬스터이름,배치위치)>
     public List<Transform> NowMonstertrs { get { return nowMonstertrs; } }
     Dictionary<string, string> InvenInMonster = new Dictionary<string, string>();//인벤토리안 몬스터
+    public Dictionary<string, string> InventoryMon { get { return InvenInMonster; } }
+    [SerializeField, Header("던전내 몬스터 최대소환개수")] int maxMonster;
     [SerializeField, Header("인벤토리 최대공간")] int maxinvetory;
     bool isgamestart = false;
     bool isWaveClear = false;
@@ -59,7 +61,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        inventorySpaceMake();
+        NewGameStart();
         TestMonsterinf();// 테스트 나중에 지우기
         SetLoadMonster();
         GameStartBT.onClick.AddListener( EnemyPatternSetting);
@@ -221,20 +223,14 @@ public class GameManager : MonoBehaviour
         nowenemytrs.Remove(_transform);
         isWaveFail = true;
     }
-    void inventorySpaceMake()//처음에 시작 인벤토리의 빈공간 만들기
-    {
-        for(int i = 0; i < maxinvetory; i++) 
-        {
-            InvenInMonster.Add($"{i}","None");
-        }
-    }
+    
     public void GiftItem(int monsterNumber)//인벤토리안에 선택된 몬스터를 넣어준다.
     {
         for(int i = 0; i < InvenInMonster.Count; i++)
         {
             if (InvenInMonster[$"{i}"] == "None")
             {
-                InvenInMonster.Add($"{i}", MonsterList[monsterNumber].name);
+                InvenInMonster[$"{i}"] = MonsterList[monsterNumber].name;
             }
         }
     }
@@ -246,33 +242,47 @@ public class GameManager : MonoBehaviour
 
         }
     }
-    public void InventorySelectMonster()
+    public void ChangeInvenPosMonster(string _Monster)
     {
 
     }
-    public void InvenOutDungeonMonster(int _Monster , Vector2 _vec)
+
+    public void InvenOutDungeonMonster(string _Monster , Vector2Int _vec)// 몬스터를 소환하고 저장사전에 저장
     {
-        GameObject monsterspawn = Instantiate(MonsterList[_Monster],_vec,Quaternion.identity);
-
-        List<string> listkey = InvenInMonster.Keys.ToList();
-
-        for (int i = 0;i < MonsterList.Count;i++)
+        int count = MonsterList.Count;
+        int MonsterNum = 0;
+        for (int i = 0; i < count; i++)//소환해야할 몬스터 넘버링찾기
         {
-            if (InvenInMonster.Count == 0 || InvenInMonster[$"{i}"] == "None")
+            if(_Monster == MonsterList[i].name)
             {
-               // DungeonInMonster.Add($"{i}", MonsterList[_Monster], _vec);
-                
+                MonsterNum = i;
             }
         }
-
+        GameObject monsterspawn = Instantiate(MonsterList[MonsterNum],new Vector3( _vec.x,_vec.y,0),Quaternion.identity);
+        //List<string> listkey = InvenInMonster.Keys.ToList(); 사전형식을 리스트 형식으로 바꿈
+        count = DungeonInMonster.Count;
+        for (int i = 0;i < count;i++)//사전에서 빈공간을 찾고 넣기
+        {
+            if (DungeonInMonster.Count == 0 || DungeonInMonster[$"{i}"].Item1 == "None")
+            {
+               DungeonInMonster[$"{i}"] =( MonsterList[MonsterNum].name, new Vector3Int( _vec.x,_vec.y,0));
+            }
+        }
     }
    
-    void NewGameStart()
+    void NewGameStart()//인벤토리 공간과 기타 시작정보 정의
     {
         if(isNewGame == true)
         {
+            for (int i = 0; i < maxMonster; i++)
+            {
+                DungeonInMonster.Add($"{i}", ("None", Vector3Int.zero));
+            }
+            for (int i = 0; i < maxinvetory; i++)
+            {
+                InvenInMonster.Add($"{i}", "None");
+            }
 
         }
-
     }
 }
