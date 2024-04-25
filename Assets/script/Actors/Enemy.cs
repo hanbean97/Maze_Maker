@@ -36,7 +36,7 @@ public class Enemy : move
             }
             else if (startTileOn == true && targetEnemy != null)
             {
-                targetPos = new Vector2Int(Mathf.RoundToInt(targetEnemy.position.x), -Mathf.RoundToInt(targetEnemy.position.y));//의미없어보임
+                targetPos = new Vector2Int(Mathf.RoundToInt(targetEnemy.position.x),Mathf.RoundToInt(-targetEnemy.position.y));//의미없어보임
                 Moving(targetPos);
             }
             else if (startTileOn == false)

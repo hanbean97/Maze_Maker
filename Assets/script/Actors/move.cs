@@ -77,7 +77,7 @@ public class move : PathFind
     protected void AroundSetPos(Vector2Int target)
     {
         nextPoscount = 0;
-        Vector2Int nowPosition = new Vector2Int(Mathf.RoundToInt(transform.position.x), -Mathf.RoundToInt(transform.position.y));
+        Vector2Int nowPosition = new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(-transform.position.y));
         this.PathFinding(nowPosition, target);
     }
     public void Heal()//몬스터 체력회복
