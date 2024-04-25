@@ -323,10 +323,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d6507ef92f12dc43b2108d3fb7517a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 7
+  maxhp: 7
   speed: 1
-  Searchrange: 6
-  attakrange: 5
+  Searchrange: 4
+  attakrange: 4
   bow: {fileID: 7195581512973178168}
   attackspeed: 2
   chargeMotiontime: 1

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,6 +24,7 @@ public class GameManager : MonoBehaviour
     [SerializeField, Header("인벤토리 최대공간")] int maxinvetory;
     bool isgamestart = false;
     bool isWaveClear = false;
+    bool WaveEnd = false;
     bool isSpawn = false;
     bool spawntiming =false;
     [Range(0,2)] int waveLevel = 0;//구현은 3레벨까지만
@@ -131,7 +131,7 @@ public class GameManager : MonoBehaviour
         if (isSpawn == true )
         {
             timer += Time.deltaTime;
-            if (timer > spawnTimer)
+            if (timer > spawnTimer)//소환도중에 죽어서 trs의 몬스터가 사라짐 =>인덱스 오류가일어남
             {
                 nowenemytrs[nextspawnEnemy].gameObject.SetActive(true);
                 nextspawnEnemy++;
@@ -156,9 +156,26 @@ public class GameManager : MonoBehaviour
     /// 적이 죽을때 관리 리스트의 죽은 오브젝트정보를 삭제
     /// </summary>
     /// <param name="_transform"></param>
-    public void DeathEnemy(Transform _transform)
+    public void DeathEnemy(Transform _transform)// 소환도중에 죽으면 인덱스 정보가 변환해서 액티브를 꺼주는 방향으로
     {
-      nowenemytrs.Remove(_transform);
+        int count = nowenemytrs.Count;
+        int allEnemyactive = 0;
+        for (int i = 0; i < count; i++)
+        {
+            if (nowenemytrs[i].gameObject.activeSelf == false)
+            {
+                allEnemyactive++;
+            }
+        }
+        if(allEnemyactive == count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                Destroy(nowenemytrs[i].gameObject);
+            }
+            nowenemytrs.Clear();
+           WaveEnd = true;
+        }
     }
     /// <summary>
     /// 몬스터가 죽을때 관리리스트의 죽은 오브젝트 정보를 삭제
@@ -191,35 +208,37 @@ public class GameManager : MonoBehaviour
     /// </summary>
     void WaveClear()
     {
-         if(isgamestart == true && isWaveClear ==true  && nowenemytrs.Count==0)//디펜스 성공시
-         {
-            if(waveLevel < 2)
+        if(WaveEnd == true)
+        {
+            if (isgamestart == true && isWaveClear == true )//디펜스 성공시
             {
-                waveLevel++;
-                switch(waveLevel)//레벨에 따른 보상
+                if (waveLevel < 2)
                 {
-                    case 1:
-                        wall.GiveWallcountUp(5);
-                    
-                        break;
-                    case 2:
-                        wall.GiveWallcountUp(10);
-                        break;
+                    waveLevel++;
+                    switch (waveLevel)//레벨에 따른 보상
+                    {
+                        case 1:
+                            wall.GiveWallcountUp(5);
 
+                            break;
+                        case 2:
+                            wall.GiveWallcountUp(10);
+                            break;
+                    }
                 }
             }
+            else if (isgamestart == true && isWaveClear == false )//디펜스 실패시 
+            {
+              
+            }
+            AllMonsterHeal();
             OpenSeletWindow.SetActive(true);
             MonsterGift.SetImage();
             isWaveClear = false;
             isgamestart = false;
-         }
-         else if (isgamestart==true && isWaveClear == false && nowenemytrs.Count == 0)//디펜스 실패시 
-        {
-            OpenSeletWindow.SetActive(true);
-            MonsterGift.SetImage();
-            isWaveClear = false;
-            isgamestart = false;
+            WaveEnd = false;
         }
+        
     }
     /// <summary>
     /// 적이 끝지점에 도착했을때 실행
@@ -227,7 +246,7 @@ public class GameManager : MonoBehaviour
     /// <param name="_transform"></param>
     public void EnemyFinshDungeon(Transform _transform)
     {
-        nowenemytrs.Remove(_transform);
+        DeathEnemy(_transform);
         isWaveClear = false;
     }
     
@@ -262,7 +281,7 @@ public class GameManager : MonoBehaviour
         int count = nowenemytrs.Count;
         for (int i = 0;i < count; i++)
         {
-
+           nowenemytrs[i].GetComponent<Monster>().Heal();
         }
     }
     public void ChangeInvenPosMonster(string _Monster)

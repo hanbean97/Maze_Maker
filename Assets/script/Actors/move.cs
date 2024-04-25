@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class move : PathFind
 {
-    [SerializeField]protected float Hp;
+    protected float Hp;
     [SerializeField] float maxhp;
     int nextPoscount;
     protected Vector3 nextdir;
@@ -12,7 +12,10 @@ public class move : PathFind
     protected bool ismoveway;
     protected Animator anim;
     protected bool isdeth=false;
-    
+    private void Awake()
+    {
+        Hp = maxhp;
+    }
     private void Start()
     {
         anim = GetComponentInChildren<Animator>();
@@ -80,9 +83,17 @@ public class move : PathFind
         Vector2Int nowPosition = new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(-transform.position.y));
         this.PathFinding(nowPosition, target);
     }
+    public void Heal(float _healvalue)//몬스터 체력회복
+    {
+        Hp += _healvalue;
+        if(Hp>maxhp)
+        {
+            Hp = maxhp;
+        }
+    }
     public void Heal()//몬스터 체력회복
     {
-
+          Hp = maxhp;
     }
 }
 

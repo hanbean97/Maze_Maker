@@ -122,8 +122,8 @@ public class Enemy : move
         transform.position += nextdir.normalized *  Time.deltaTime;
         if(Vector3.Distance(transform.position,GameManager.instance.EndPos.position) < 0.2f ) 
         {
+            gameObject.SetActive(false);
             GameManager.instance.EnemyFinshDungeon(transform);
-            Destroy(gameObject);
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -144,8 +144,8 @@ public class Enemy : move
         if (Hp <= 0 && isdeth == false)
         {
             isdeth = true;
+            gameObject.SetActive(false);
             GameManager.instance.DeathEnemy(transform);
-            Destroy(gameObject);
         }
     }
     void HitMotion()//공격받는 애니메이션+넉백
