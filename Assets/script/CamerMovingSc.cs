@@ -5,7 +5,7 @@ using UnityEngine;
 public class CamerMovingSc : MonoBehaviour
 {
     Camera cam;
-     bool CamermoveMode = true;
+    [SerializeField]bool CamermoveMode = true;
     Vector3 beforemosPos;
     Vector2 beforeCamPos;
     Vector2 nowPos;
