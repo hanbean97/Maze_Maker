@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class ButtonLinqSc : MonoBehaviour
 {
-    bool gamestrat = false;
+    bool gamestart = false;
     bool isinvenBt = false;
     bool iswallmode =false;
     [SerializeField] GameObject startBt;
-    [SerializeField] GameObject wallBt;
+    [SerializeField] Button wallBt;
     [SerializeField] GameObject wallModeBt;
     [SerializeField] Animation invneanim;
     AnimationState anistate;
@@ -30,16 +30,18 @@ public class ButtonLinqSc : MonoBehaviour
     }
     void OpenInventory()
     {
-            if(isinvenBt ==false && wallch.wallModeOn == false && gamestrat == false)
+            if(isinvenBt ==false && wallch.wallModeOn == false && gamestart == false)
             {
-                isinvenBt = true;
+                wallBt.enabled = false; 
+               isinvenBt = true;
                 startBt.SetActive(false);
                 invneanim.Play("inventoryanim");
                 anistate.speed = 1;
             }
-            else if(isinvenBt == true && wallch.wallModeOn == false && gamestrat == false)
+            else if(isinvenBt == true && wallch.wallModeOn == false && gamestart == false)
             {
-                isinvenBt = false;
+            wallBt.enabled = true;
+            isinvenBt = false;
                 startBt.SetActive(true);
                 invneanim.Play("inventoryanim");
                 anistate.speed = -1;
@@ -48,10 +50,10 @@ public class ButtonLinqSc : MonoBehaviour
     }
     void GameStartCh()
     {
-        if ( gamestrat == false && GameManager.instance.IsGamStart == true)//한번만 실행시키기위해
+        if ( gamestart == false && GameManager.instance.IsGamStart == true)//한번만 실행시키기위해
         {
-            gamestrat = true;
-            wallBt.SetActive(false);
+            gamestart = true;
+            wallBt.gameObject.SetActive(false);
             startBt.SetActive(false);
             wallModeBt.SetActive(false);
             if (isinvenBt == true)
@@ -59,11 +61,11 @@ public class ButtonLinqSc : MonoBehaviour
                 OpenInventory();
             }
         }
-        else if (gamestrat == true && GameManager.instance.IsGamStart == false)
+        else if (gamestart == true && GameManager.instance.IsGamStart == false)
         {
-            gamestrat = false;
+            gamestart = false;
             startBt.SetActive(true);
-            wallBt.SetActive(true);
+            wallBt.gameObject.SetActive(true);
             wallModeBt.SetActive(true);
         }
     }

@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,7 +31,7 @@ public class GameManager : MonoBehaviour
     bool WaveEnd = false;
     bool isSpawn = false;
     bool spawntiming = false;
-    [Range(0, 2)] int waveLevel = 0;//구현은 3레벨까지만
+    [Range(-1, 2)] int waveLevel = 0;//구현은 3레벨까지만
     int randompattern = 0;
     [SerializeField, Header("적유닛소환공백")] float spawnTimer;
     float timer;
@@ -47,14 +49,15 @@ public class GameManager : MonoBehaviour
     public bool ItemCatching {get{ return isitemcatching; } set { isitemcatching = value; } }
     bool isNewGame = true;//바꿔야함 임시 true
     [SerializeField] InventorySc inventory;
-    void Test()
-    {
-        InvenInMonster[$"{1}"] = "BigDemon";
-        InvenInMonster[$"{2}"] = "BigDemon";
-        InvenInMonster[$"{5}"] = "BigDemon";
-        InvenInMonster[$"{8}"] = "BigDemon";
-
-    }
+    float score;
+    public float Score { get { return score; } }
+    [SerializeField] TMP_Text ScoreText;
+    bool loadscene = false;
+    float loadTimer;
+    [SerializeField] Image fade;
+    bool firstgame = true;
+    public bool Firstgame { get { return firstgame; } set { firstgame = value; } }
+    
     private void Awake()
     {
         if (instance == null)
@@ -66,20 +69,45 @@ public class GameManager : MonoBehaviour
             Destroy(instance);
         }
         NewGameStart();
-        Test();
     }
     void Start()
     {
-        
+      
+        ScoreText.text = $"Score : {(int)score}";
         SetLoadMonster();
         GameStartBT.onClick.AddListener( EnemyPatternSetting);
         MonsterGift = OpenSeletWindow.GetComponent<GiftChoice>();
     }
+    void LoadSceneNow()
+    {
+        if(loadscene == false)
+        {
+            loadTimer += Time.deltaTime;
+           
+            fade.color = new Color(fade.color.r, fade.color.g, fade.color.b, Mathf.Lerp(0, 1,2-loadTimer));
+            if(loadTimer>2)
+            {
+                fade.gameObject.SetActive(false);
+                loadscene = true;
+            }
+        }
+
+    }
     void Update()
     {
+        LoadSceneNow();
+        GetScore();
         SpawnStart();
         WaveClear();
     }
+    void GetScore()
+    {
+        if(isgamestart == true)
+        {
+            score += Time.deltaTime;
+            ScoreText.text = $"Score : {(int)score}";
+        }
+    } 
     
     void EnemyPatternSetting()
     {
@@ -88,6 +116,10 @@ public class GameManager : MonoBehaviour
 
         switch (waveLevel)//레벨에 따른 패턴
         {
+            case -1:
+                randompattern = 0;//튜토리얼 레벨 
+            break;
+
             case 0:
                 randompattern = Random.Range(0, 3);
               
@@ -101,6 +133,10 @@ public class GameManager : MonoBehaviour
         }
         switch (waveLevel, randompattern)
         {
+            case (-1,0):
+                Patterninstruct(0);
+                break;
+
            case (0,0):
                 Patterninstruct(0,0,0,0);
                 break;
@@ -141,7 +177,7 @@ public class GameManager : MonoBehaviour
         if (isSpawn == true )
         {
             timer += Time.deltaTime;
-            if (timer > spawnTimer)//소환도중에 죽어서 trs의 몬스터가 사라짐 =>인덱스 오류가일어남
+            if (timer > spawnTimer)
             {
                 nowenemytrs[nextspawnEnemy].gameObject.SetActive(true);
                 nextspawnEnemy++;
@@ -245,11 +281,12 @@ public class GameManager : MonoBehaviour
                     switch (waveLevel)//레벨에 따른 보상
                     {
                         case 1:
-                            wall.GiveWallcountUp(5);
-
+                            wall.GiveWallcountUp(10);
+                            score += 100;
                             break;
                         case 2:
-                            wall.GiveWallcountUp(10);
+                            wall.GiveWallcountUp(20);
+                            score += 200;
                             break;
                     }
                 }
@@ -317,7 +354,12 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-   
+    void LoadData()//로드형식
+    {
+       
+
+    }
+     
     void NewGameStart()//인벤토리 공간과 기타 시작정보 정의
     {
         if(isNewGame == true)
@@ -330,6 +372,11 @@ public class GameManager : MonoBehaviour
             {
                 InvenInMonster.Add($"{i}", "None");
             }
+
+            InvenInMonster[$"{1}"] = "BigDemon"; // 시작 몬스터
+            InvenInMonster[$"{2}"] = "BigDemon";
+            InvenInMonster[$"{5}"] = "BigDemon";
+            InvenInMonster[$"{8}"] = "BigDemon";
 
         }
     }
