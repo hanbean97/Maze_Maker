@@ -21,7 +21,7 @@ public class WallmakeSc : MonoBehaviour
     NoWayCheck waycheck;
     CamerMovingSc cammoves;
     [SerializeField] TMP_Text wallcCounString;
-
+    public bool wallModeOn { get { return wallmakemode; } }
     [SerializeField, Header("처음에주는 벽 수")] int wallposiblecount; 
     void Start()
     {

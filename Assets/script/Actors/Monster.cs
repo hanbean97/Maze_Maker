@@ -35,7 +35,7 @@ public class Monster : move
         if(targetEnemy != null)
         {
            targetPos = new Vector2Int(Mathf.RoundToInt(targetEnemy.position.x), -Mathf.RoundToInt(targetEnemy.position.y));
-            Moving(targetPos);
+           Moving(targetPos);
         }
         hitMotion();
     }

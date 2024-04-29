@@ -13,14 +13,17 @@ public class CamerMovingSc : MonoBehaviour
     float distancewoldcam;
     float ratioWidth;
     [SerializeField] float wheelspeed = 1.0f;
+    [SerializeField] WallmakeSc wallmode;
     void Start()
     {
         cam = Camera.main;
+        wallmode= GetComponent<WallmakeSc>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        itemcatch();
         CamMove();
     }
     private void CamMove()//카메라무브 기능
@@ -48,6 +51,17 @@ public class CamerMovingSc : MonoBehaviour
             {
                cam.orthographicSize -= Input.GetAxis("Mouse ScrollWheel")* wheelspeed;
             }
+    }
+    void itemcatch()
+    {
+       if(GameManager.instance.ItemCatching == true || wallmode.wallModeOn == true)
+        {
+            CamermoveMode = false;
+        }
+       else
+        {
+            CamermoveMode = true;
+        }
     }
     private (int, int) ratioCounter(int x, int y)//화면비
     {

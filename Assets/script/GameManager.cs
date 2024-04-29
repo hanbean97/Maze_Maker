@@ -18,20 +18,22 @@ public class GameManager : MonoBehaviour
     List<Transform> nowMonstertrs = new List<Transform>();// 저장데이터
     Dictionary<string, (string, Vector3Int)> DungeonInMonster = new Dictionary<string, (string, Vector3Int)>();//소환되어있는 몬스터 <키값,(저장몬스터이름,배치위치)>
     public List<Transform> NowMonstertrs { get { return nowMonstertrs; } }
-    Dictionary<string, string> InvenInMonster = new Dictionary<string, string>();//인벤토리안 몬스터
+    Dictionary<string, string> InvenInMonster = new Dictionary<string, string>();//인벤토리안 몬스터 저장용
     public Dictionary<string, string> InventoryMon { get { return InvenInMonster; } }
     [SerializeField, Header("던전내 몬스터 최대소환개수")] int maxMonster;
     [SerializeField, Header("인벤토리 최대공간")] int maxinvetory;
+    public int MaxInventory { get { return maxinvetory; } }
     bool isgamestart = false;
+    public bool IsGamStart { get { return isgamestart; } }
     bool isWaveClear = false;
     bool WaveEnd = false;
     bool isSpawn = false;
-    bool spawntiming =false;
-    [Range(0,2)] int waveLevel = 0;//구현은 3레벨까지만
+    bool spawntiming = false;
+    [Range(0, 2)] int waveLevel = 0;//구현은 3레벨까지만
     int randompattern = 0;
-    [SerializeField,Header("적유닛소환공백")]float spawnTimer;
+    [SerializeField, Header("적유닛소환공백")] float spawnTimer;
     float timer;
-    int nextspawnEnemy =0;
+    int nextspawnEnemy = 0;
     int[] spawnarrEnemy;
     [Header("소환위치")]
     [SerializeField] Transform spawnposition;
@@ -41,13 +43,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] WallmakeSc wall;
     GiftChoice MonsterGift;
     [SerializeField] GameObject OpenSeletWindow;
+    bool isitemcatching = false;
+    public bool ItemCatching {get{ return isitemcatching; } set { isitemcatching = value; } }
     bool isNewGame = true;//바꿔야함 임시 true
-   void TestMonsterinf()
+    [SerializeField] InventorySc inventory;
+    void Test()
     {
-        DungeonInMonster["0"] = ("BigDemon", new Vector3Int(10, -7, 0));
-        DungeonInMonster["1"] = ("BigDemon", new Vector3Int(5, -5, 0));
-        DungeonInMonster["2"] = ("BigDemon", new Vector3Int(3, -3, 0));
-        DungeonInMonster["3"] = ("None", new Vector3Int(0, 0, 0));
+        InvenInMonster[$"{1}"] = "BigDemon";
+        InvenInMonster[$"{2}"] = "BigDemon";
+        InvenInMonster[$"{5}"] = "BigDemon";
+        InvenInMonster[$"{8}"] = "BigDemon";
+
     }
     private void Awake()
     {
@@ -59,11 +65,12 @@ public class GameManager : MonoBehaviour
         {
             Destroy(instance);
         }
+        NewGameStart();
+        Test();
     }
     void Start()
     {
-        NewGameStart();
-        TestMonsterinf();// 테스트 나중에 지우기
+        
         SetLoadMonster();
         GameStartBT.onClick.AddListener( EnemyPatternSetting);
         MonsterGift = OpenSeletWindow.GetComponent<GiftChoice>();
@@ -76,6 +83,7 @@ public class GameManager : MonoBehaviour
     
     void EnemyPatternSetting()
     {
+        AsrarAlgo.instance.Wallcheck();
         isgamestart = true;
 
         switch (waveLevel)//레벨에 따른 패턴
@@ -106,8 +114,10 @@ public class GameManager : MonoBehaviour
                 Patterninstruct(0, 0, 1, 1,1,1,1);
                 break;
            case (1,1):
+                Patterninstruct(0, 0, 0, 0, 0, 0, 1);
                 break;
            case (2,0):
+                Patterninstruct(0, 0, 0, 0, 0, 1, 1);
                 break;
         }
     }
@@ -150,7 +160,6 @@ public class GameManager : MonoBehaviour
         GameObject enemyGo = Instantiate(EnemyList[enemyIndex], spawnposition.position,Quaternion.identity);
         nowenemytrs.Add(enemyGo.transform);
         enemyGo.SetActive(false);
-
     }
     /// <summary>
     /// 적이 죽을때 관리 리스트의 죽은 오브젝트정보를 삭제
@@ -184,6 +193,24 @@ public class GameManager : MonoBehaviour
     public void DeathMonster(Transform _transform)
     {
         nowMonstertrs.Remove(_transform);
+    }
+    public GameObject[] LoadInInventory()
+    {
+        int count = InvenInMonster.Count;
+        GameObject[] mon = new GameObject[count];
+        for (int i = 0; i < count; i++)
+        {
+            if (InvenInMonster[$"{i}"] != "None")
+            {
+                mon[i] = MonsterList[FindMonsterList(InvenInMonster[$"{i}"])];
+               
+            }
+            else if(InvenInMonster[$"{i}"] == "None")
+            {
+                mon[i] = null;
+            }
+        }
+        return mon;
     }
     void SetLoadMonster()
     {
@@ -234,12 +261,12 @@ public class GameManager : MonoBehaviour
             AllMonsterHeal();
             OpenSeletWindow.SetActive(true);
             MonsterGift.SetImage();
-            isWaveClear = false;
+            isWaveClear = true;
             isgamestart = false;
             WaveEnd = false;
         }
-        
     }
+  
     /// <summary>
     /// 적이 끝지점에 도착했을때 실행
     /// </summary>
@@ -252,15 +279,7 @@ public class GameManager : MonoBehaviour
     
     public void GiftItem(int _monster)//인벤토리안에 선택된 몬스터를 넣어준다.
     {
-
-        for (int i = 0; i < maxinvetory; i++)
-        {
-            if (InvenInMonster[$"{i}"] == "None")
-            {
-                InvenInMonster[$"{i}"] = MonsterList[_monster].name;
-                break;
-            }
-        }
+        inventory.SetInvetory(MonsterList[_monster]);
     }
     int FindMonsterList(string _Monster)
     {
@@ -281,27 +300,20 @@ public class GameManager : MonoBehaviour
         int count = nowenemytrs.Count;
         for (int i = 0;i < count; i++)
         {
-           nowenemytrs[i].GetComponent<Monster>().Heal();
+            nowMonstertrs[i].GetComponent<Monster>().Heal();
         }
     }
-    public void ChangeInvenPosMonster(string _Monster)
+  
+    public void InvenOutDungeonMonster(GameObject _Monster , Vector2Int _vec)// 몬스터를 소환하고 저장사전에 저장
     {
-
-    }
-
-    public void InvenOutDungeonMonster(string _Monster , Vector2Int _vec)// 몬스터를 소환하고 저장사전에 저장
-    {
-        int findnum =FindMonsterList(_Monster);
-
-        GameObject monsterspawn = Instantiate(MonsterList[findnum], new Vector3( _vec.x,_vec.y,0),Quaternion.identity);
-        //List<string> listkey = InvenInMonster.Keys.ToList(); 사전형식을 리스트 형식으로 바꿈
         int count = DungeonInMonster.Count;
         for (int i = 0;i < count;i++)//사전에서 빈공간을 찾고 넣기
         {
             if (DungeonInMonster.Count == 0 || DungeonInMonster[$"{i}"].Item1 == "None")
             {
-               DungeonInMonster[$"{i}"] =( MonsterList[findnum].name, new Vector3Int( _vec.x,_vec.y,0));
-               break;
+               DungeonInMonster[$"{i}"] = (_Monster.name, new Vector3Int( _vec.x,_vec.y,0));
+                nowMonstertrs.Add(_Monster.transform);
+                break;
             }
         }
     }

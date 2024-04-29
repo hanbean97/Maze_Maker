@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 08d87901bf69fa94b9212419536a6d84, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fe23d2b5601bdfa4b918b73ef50a5795, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,7 +96,7 @@ Animator:
   m_GameObject: {fileID: 1299116481031183852}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8c4086dc66618bb4eae3277950a9ab6a, type: 2}
+  m_Controller: {fileID: 9100000, guid: be3243aec6c2d0f44837c1a54ee377cb, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 2547587484267070250}
   - component: {fileID: 4691081022223482102}
   m_Layer: 8
-  m_Name: BigDemon
+  m_Name: BigZombie
   m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -168,10 +168,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c720016407b072747b81bb743f1604a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxhp: 100
-  speed: 2
+  maxhp: 15
+  speed: 1
   size: {x: 2, y: 2}
-  Searchrange: 5
+  Searchrange: 3
   attakrange: 1
   monstertype: 0
   attackbox: {fileID: 8415337409689395278}
@@ -256,7 +256,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4606667539579583875
 Transform:
   m_ObjectHideFlags: 0
@@ -306,7 +306,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0.024712563, y: -0.67078424}
   serializedVersion: 2
-  m_Radius: 1.5
+  m_Radius: 1.0319014
 --- !u!114 &7452029319633915620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -319,4 +319,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 908aae850143ddc48b299c44e28f5c49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 5
+  Damage: 1
