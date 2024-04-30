@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -58,8 +58,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] Image fade;
     bool firstgame = true;
     public bool Firstgame { get { return firstgame; } set { firstgame = value; } }
-    
-    
+
+    [SerializeField] GameObject GameoverPanel;
+    [SerializeField] TMP_Text GameoverText;
+    [SerializeField] Button mainmenuscene;
     private void Awake()
     {
         if (instance == null)
@@ -70,17 +72,27 @@ public class GameManager : MonoBehaviour
         {
             Destroy(instance);
         }
+       
+        if(DonDestinform.Instance.DontNewGame == true)
+        {
+            firstgame = false;
+        }
         NewGameStart();
     }
     void Start()
     {
       
         SetLoadMonster();
+        mainmenuscene.onClick.AddListener(backmainmenu);
         GameStartBT.onClick.AddListener( EnemyPatternSetting);
         MonsterGift = OpenSeletWindow.GetComponent<GiftChoice>();
         ScoreText.text = $"Score : {(int)score}";
 
         LevelText.text = $"Level : {waveLevel}";
+    }
+    void backmainmenu()
+    {
+        SceneManager.LoadSceneAsync(0);
     }
     void LoadSceneNow()
     {
@@ -281,23 +293,28 @@ public class GameManager : MonoBehaviour
             {
                 if (waveLevel < 2)
                 {
-                    waveLevel++;
                     switch (waveLevel)//레벨에 따른 보상
                     {
-                        case 1:
+                        case 0:
+                            waveLevel++;
                             wall.GiveWallcountUp(10);
                             score += 100;
                             break;
-                        case 2:
+                        case 1:
+                            waveLevel++;
                             wall.GiveWallcountUp(20);
                             score += 200;
+                            break;
+                        case 2:
+                            score += 400;
                             break;
                     }
                 }
             }
             else if (isgamestart == true && isWaveClear == false )//디펜스 실패시 
             {
-              
+                GameoverPanel.SetActive(true);
+                GameoverText.text = $"{(int)score}";
             }
             LevelText.text = $"Level : {waveLevel}";
             ScoreText.text = $"Score : {(int)score}";

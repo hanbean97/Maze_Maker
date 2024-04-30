@@ -32,6 +32,7 @@ public class Enemy : move
             }
             if (startTileOn == true && targetEnemy == null)
             {
+                
                 Moving(AsrarAlgo.instance.TargetPos);
             }
             else if (startTileOn == true && targetEnemy != null)
@@ -42,7 +43,7 @@ public class Enemy : move
             else if (startTileOn == false)
             {
                 Moving();
-                if (-Mathf.RoundToInt(transform.position.y) > 0)
+                if (transform.position.y < 0 || (transform.position.x > 9 || transform.position.x< 6 ))
                 {
                     startTileOn = true;
                 }

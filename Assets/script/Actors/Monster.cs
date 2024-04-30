@@ -79,7 +79,7 @@ public class Monster : move
                     targetEnemy = rays.transform;
                 }
             }
-            else if(!rays)
+            else if(!rays || rays.transform.CompareTag("Wall"))
             {
                 nullcheckcount++;
             }
@@ -119,6 +119,17 @@ public class Monster : move
         if (collision.CompareTag("AttackBox") && collision.gameObject.layer != gameObject.layer)
         {
             Hp -= collision.GetComponent<HitDamageSc>().GetDamage;
+            if(targetEnemy == null)
+            {
+                int count = GameManager.instance.Nowenemytrs.Count;
+                for (int i = 0; i < count; i++)
+                {
+                    if (GameManager.instance.Nowenemytrs[i].gameObject.activeSelf == true)
+                    {
+                        targetEnemy = GameManager.instance.Nowenemytrs[i];
+                    }
+                }
+            }
             if (collision.GetComponent<projectileSc>() != null)
             {
                 Destroy(collision.gameObject);

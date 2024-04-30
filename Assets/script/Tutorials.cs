@@ -16,11 +16,11 @@ public class Tutorials : MonoBehaviour
     [SerializeField] Transform missingwallch;
     void Start()
     {
+
         if(GameManager.instance.Firstgame == true)
         {
             wallBt.onClick.AddListener(wallButtonch);
         }
-
 
     }
     void Update()
@@ -129,6 +129,7 @@ public class Tutorials : MonoBehaviour
             GameManager.instance.Firstgame = false;
             maintext.gameObject.SetActive(false);
             timer = 0;
+            DonDestinform.Instance.DontNewGame = true;
         }
     }
 

@@ -11,6 +11,7 @@ public class MenuScene : MonoBehaviour
     bool isstart = false;
     float timmer;
     [SerializeField] float nextscenetime;
+    [SerializeField] GameObject dondest;
     void Start()
     {
         startBt.onClick.AddListener(nextScecnbool);
