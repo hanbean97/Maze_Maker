@@ -81,7 +81,7 @@ public class Enemy : move
                     targetEnemy = rays.transform;
                 }
             }
-            else if (!rays)
+            else if (!rays || rays.transform.CompareTag("Wall"))
             {
                 nullcheckcount++;
             }

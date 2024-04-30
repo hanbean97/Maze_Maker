@@ -53,7 +53,7 @@ public class move : PathFind
     {
         if (ismoveway)
         {
-            if (target.x > AsrarAlgo.instance.Size.x-1 || target.y > AsrarAlgo.instance.Size.y -1|| target.x < 0 ||target.y <0)
+            if (target.x > AsrarAlgo.instance.Size.x-1 || target.y > AsrarAlgo.instance.Size.y -1|| target.x < -1 ||target.y <-1)
             {
                 return;
             }

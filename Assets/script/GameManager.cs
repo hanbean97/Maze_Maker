@@ -52,11 +52,13 @@ public class GameManager : MonoBehaviour
     float score;
     public float Score { get { return score; } }
     [SerializeField] TMP_Text ScoreText;
+    [SerializeField] TMP_Text LevelText;
     bool loadscene = false;
     float loadTimer;
     [SerializeField] Image fade;
     bool firstgame = true;
     public bool Firstgame { get { return firstgame; } set { firstgame = value; } }
+    
     
     private void Awake()
     {
@@ -73,10 +75,12 @@ public class GameManager : MonoBehaviour
     void Start()
     {
       
-        ScoreText.text = $"Score : {(int)score}";
         SetLoadMonster();
         GameStartBT.onClick.AddListener( EnemyPatternSetting);
         MonsterGift = OpenSeletWindow.GetComponent<GiftChoice>();
+        ScoreText.text = $"Score : {(int)score}";
+
+        LevelText.text = $"Level : {waveLevel}";
     }
     void LoadSceneNow()
     {
@@ -153,7 +157,7 @@ public class GameManager : MonoBehaviour
                 Patterninstruct(0, 0, 0, 0, 0, 0, 1);
                 break;
            case (2,0):
-                Patterninstruct(0, 0, 0, 0, 0, 1, 1);
+                Patterninstruct(0, 0, 0, 0, 0, 1, 1,1,1,1,0);
                 break;
         }
     }
@@ -295,12 +299,15 @@ public class GameManager : MonoBehaviour
             {
               
             }
+            LevelText.text = $"Level : {waveLevel}";
+            ScoreText.text = $"Score : {(int)score}";
             AllMonsterHeal();
             OpenSeletWindow.SetActive(true);
             MonsterGift.SetImage();
             isWaveClear = true;
             isgamestart = false;
             WaveEnd = false;
+
         }
     }
   

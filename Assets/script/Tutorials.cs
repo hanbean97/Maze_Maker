@@ -12,10 +12,16 @@ public class Tutorials : MonoBehaviour
     int next =0;
     float timer;
     bool wallbuttonCheck =false;
-    
+    bool ismissingmessage =false;
+    [SerializeField] Transform missingwallch;
     void Start()
     {
-        
+        if(GameManager.instance.Firstgame == true)
+        {
+            wallBt.onClick.AddListener(wallButtonch);
+        }
+
+
     }
     void Update()
     {
@@ -51,13 +57,12 @@ public class Tutorials : MonoBehaviour
     }
     void root0()
     {
-        wallBt.onClick.AddListener(wallButtonch);
         wallBt.enabled = false;
         startBt.enabled = false;
         maintext.gameObject.SetActive(true);
         maintext.text = "MazeMaker은 던전을 만들어 몰려오는 적을 막는 디펜스 게임입니다..";
         timer += Time.deltaTime;
-        if(timer > 7)
+        if(timer > 5)
         {
             next++;
             timer = 0;
@@ -67,7 +72,7 @@ public class Tutorials : MonoBehaviour
     {
         maintext.text = "적이 최대한 많은시간 탐험하게 해야 더 많은 점수를 얻습니다.";
         timer += Time.deltaTime;
-        if (timer > 7)
+        if (timer > 5)
         {
             next++;
             timer = 0;
@@ -75,12 +80,13 @@ public class Tutorials : MonoBehaviour
     }
     void wallButtonch()
     {
-        if(GameObject.Find("MissingWall(Clone)") == false)
+        if(missingwallch.transform.Find("MissingWall(Clone)") == null)
         {
             wallbuttonCheck = !wallbuttonCheck;
         }
         else
         {
+            ismissingmessage = true;
             maintext.text = "미완성벽이 있습니다.";
         }
     }
@@ -95,7 +101,10 @@ public class Tutorials : MonoBehaviour
     }
     void root3()
     {
-        maintext.text = "바닥을 클릭해 벽을 생성하세요. 벽삭제는 make버튼을 눌러 삭제모드로 변환이 가능합니다. \n미완성 벽없이 미로를 완성하셨다면 Wall버튼을 한번더 눌러주세요";
+        if(ismissingmessage ==false)
+        {
+            maintext.text = "바닥을 클릭해 벽을 생성하세요. 벽삭제는 make버튼을 눌러 삭제모드로 변환이 가능합니다. \n미완성 벽없이 미로를 완성하셨다면 Wall버튼을 한번더 눌러주세요";
+        }
         if (wallbuttonCheck == false)
         {
             wallBt.onClick.RemoveListener(wallButtonch);
