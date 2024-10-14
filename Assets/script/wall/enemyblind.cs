@@ -7,7 +7,7 @@ public class enemyblind : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         SpriteRenderer sp = collision.GetComponentInChildren<SpriteRenderer>();
-        if( collision.CompareTag("Enemy")|| collision.CompareTag("Monster") || collision.CompareTag("Weapon") )
+        if( collision.CompareTag("Enemy")|| collision.CompareTag("Monster") )
         {
         sp.sortingOrder = 1;
         }
@@ -16,9 +16,6 @@ public class enemyblind : MonoBehaviour
     {
         SpriteRenderer sp = collision.GetComponentInChildren<SpriteRenderer>();
         sp.sortingOrder = 4;
-        if(collision.CompareTag("Weapon"))
-        {
-            sp.sortingOrder = 5;
-        }
+       
     }
 }
