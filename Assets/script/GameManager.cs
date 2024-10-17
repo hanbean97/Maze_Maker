@@ -8,36 +8,38 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    [Header("적유닛 전체 리스트")]
+    [Header("?????? ???? ??????")]
     [SerializeField] List<GameObject> EnemyList = new List<GameObject>();
-    [Header("맵상에 적 유닛 리스트")]
+    [Header("?????? ?? ???? ??????")]
     List<Transform> nowenemytrs = new List<Transform>();
     public List<Transform> Nowenemytrs { get { return nowenemytrs; } }
-    [Header("아군 유닛 전체 리스트")]
+    [Header("???? ???? ???? ??????")]
     [SerializeField] List<GameObject> MonsterList = new List<GameObject>();
     public List<GameObject> MonsterLists { get { return MonsterList; } }
-    [Header("맵상에 아군 유닛 리스트")]
-    List<Transform> nowMonstertrs = new List<Transform>();// 저장데이터
-    Dictionary<string, (string, Vector3Int)> DungeonInMonster = new Dictionary<string, (string, Vector3Int)>();//소환되어있는 몬스터 <키값,(저장몬스터이름,배치위치)>
+    [Header("?????? ???? ???? ??????")]
+    List<Transform> nowMonstertrs = new List<Transform>();// ??????????
+    Dictionary<string, (string, Vector3Int)> DungeonInMonster = new Dictionary<string, (string, Vector3Int)>();//???????????? ?????? <????,(??????????????,????????)>
     public List<Transform> NowMonstertrs { get { return nowMonstertrs; } }
-    Dictionary<string, string> InvenInMonster = new Dictionary<string, string>();//인벤토리안 몬스터 저장용
+    Dictionary<string, string> InvenInMonster = new Dictionary<string, string>();//?????????? ?????? ??????
     public Dictionary<string, string> InventoryMon { get { return InvenInMonster; } }
-    [SerializeField, Header("던전내 몬스터 최대소환개수")] int maxMonster;
-    [SerializeField, Header("인벤토리 최대공간")] int maxinvetory;
+    [SerializeField, Header("?????? ?????? ????????????")] int maxMonster;
+    [SerializeField, Header("???????? ????????")] int maxinvetory;
     public int MaxInventory { get { return maxinvetory; } }
+    [SerializeField] List<List<byte>> goEnemyList;
+
     bool isgamestart = false;
     public bool IsGamStart { get { return isgamestart; } }
     bool isWaveClear = false;
     bool WaveEnd = false;
     bool isSpawn = false;
     bool spawntiming = false;
-    [Range(-1, 2)] int waveLevel = 0;//구현은 3레벨까지만
+    [Range(-1, 2)] int waveLevel = 0;//?????? 3??????????
     int randompattern = 0;
-    [SerializeField, Header("적유닛소환공백")] float spawnTimer;
+    [SerializeField, Header("??????????????")] float spawnTimer;
     float timer;
     int nextspawnEnemy = 0;
     int[] spawnarrEnemy;
-    [Header("소환위치")]
+    [Header("????????")]
     [SerializeField] Transform spawnposition;
     [SerializeField] Transform endposition;
     public Transform EndPos { get { return endposition; } }
@@ -47,7 +49,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject OpenSeletWindow;
     bool isitemcatching = false;
     public bool ItemCatching {get{ return isitemcatching; } set { isitemcatching = value; } }
-    bool isNewGame = true;//바꿔야함 임시 true
+    bool isNewGame = true;//???????? ???? true
     [SerializeField] InventorySc inventory;
     float score;
     public float Score { get { return score; } }
@@ -130,10 +132,10 @@ public class GameManager : MonoBehaviour
         AsrarAlgo.instance.Wallcheck();
         isgamestart = true;
 
-        switch (waveLevel)//레벨에 따른 패턴
+        switch (waveLevel)//?????? ???? ????
         {
             case -1:
-                randompattern = 0;//튜토리얼 레벨 
+                randompattern = 0;//???????? ???? 
             break;
 
             case 0:
@@ -214,10 +216,10 @@ public class GameManager : MonoBehaviour
         enemyGo.SetActive(false);
     }
     /// <summary>
-    /// 적이 죽을때 관리 리스트의 죽은 오브젝트정보를 삭제
+    /// ???? ?????? ???? ???????? ???? ?????????????? ????
     /// </summary>
     /// <param name="_transform"></param>
-    public void DeathEnemy(Transform _transform)// 소환도중에 죽으면 인덱스 정보가 변환해서 액티브를 꺼주는 방향으로
+    public void DeathEnemy(Transform _transform)// ?????????? ?????? ?????? ?????? ???????? ???????? ?????? ????????
     {
         int count = nowenemytrs.Count;
         int allEnemyactive = 0;
@@ -239,7 +241,7 @@ public class GameManager : MonoBehaviour
         }
     }
     /// <summary>
-    /// 몬스터가 죽을때 관리리스트의 죽은 오브젝트 정보를 삭제
+    /// ???????? ?????? ???????????? ???? ???????? ?????? ????
     /// </summary>
     /// <param name="_transform"></param>
     public void DeathMonster(Transform _transform)
@@ -268,7 +270,7 @@ public class GameManager : MonoBehaviour
     {
         int count = DungeonInMonster.Count;
         int count2 = MonsterList.Count;
-        for(int i=0;i< count; i++)//n*n =n^2 계산식 나중에 한번 2n으로 바꿔보기 가능하면
+        for(int i=0;i< count; i++)//n*n =n^2 ?????? ?????? ???? 2n???? ???????? ????????
         {
             (string, Vector3Int) Data = (DungeonInMonster[ $"{i}" ].Item1, DungeonInMonster[$"{i}"].Item2);
             for(int j=0;j<count2; j++)
@@ -276,24 +278,24 @@ public class GameManager : MonoBehaviour
                 if (MonsterList[j].gameObject.name == Data.Item1)
                 {
                     GameObject gam = Instantiate(MonsterList[j].gameObject ,Data.Item2 ,Quaternion.identity);
-                    nowMonstertrs.Add(gam.transform);//몬스터의 데이터를 넣고 + 소환된몬스터는 받은 위치정보를 기존위치로 설정
+                    nowMonstertrs.Add(gam.transform);//???????? ???????? ???? + ?????????????? ???? ?????????? ?????????? ????
                     DungeonInMonster.Remove($"{i}");
                 }
             }
         }
     }
     /// <summary>
-    /// 소환된몬스터가 전부 죽을때 나오는 함수
+    /// ?????????????? ???? ?????? ?????? ????
     /// </summary>
     void WaveClear()
     {
         if(WaveEnd == true)
         {
-            if (isgamestart == true && isWaveClear == true )//디펜스 성공시
+            if (isgamestart == true && isWaveClear == true )//?????? ??????
             {
                 if (waveLevel < 2)
                 {
-                    switch (waveLevel)//레벨에 따른 보상
+                    switch (waveLevel)//?????? ???? ????
                     {
                         case 0:
                             waveLevel++;
@@ -311,7 +313,7 @@ public class GameManager : MonoBehaviour
                     }
                 }
             }
-            else if (isgamestart == true && isWaveClear == false )//디펜스 실패시 
+            else if (isgamestart == true && isWaveClear == false )//?????? ?????? 
             {
                 GameoverPanel.SetActive(true);
                 GameoverText.text = $"{(int)score}";
@@ -329,7 +331,7 @@ public class GameManager : MonoBehaviour
     }
   
     /// <summary>
-    /// 적이 끝지점에 도착했을때 실행
+    /// ???? ???????? ?????????? ????
     /// </summary>
     /// <param name="_transform"></param>
     public void EnemyFinshDungeon(Transform _transform)
@@ -338,15 +340,15 @@ public class GameManager : MonoBehaviour
         isWaveClear = false;
     }
     
-    public void GiftItem(int _monster)//인벤토리안에 선택된 몬스터를 넣어준다.
+    public void GiftItem(int _monster)//???????????? ?????? ???????? ????????.
     {
         inventory.SetInvetory(MonsterList[_monster]);
     }
     int FindMonsterList(string _Monster)
     {
         int count = MonsterList.Count;
-        int MonsterNum = -1; // -1 이면 찾기 실패
-        for (int i = 0; i < count; i++)//소환해야할 몬스터 넘버링찾기
+        int MonsterNum = -1; // -1 ???? ???? ????
+        for (int i = 0; i < count; i++)//?????????? ?????? ??????????
         {
             if (_Monster == MonsterList[i].name)
             {
@@ -365,10 +367,10 @@ public class GameManager : MonoBehaviour
         }
     }
   
-    public void InvenOutDungeonMonster(GameObject _Monster , Vector2Int _vec)// 몬스터를 소환하고 저장사전에 저장
+    public void InvenOutDungeonMonster(GameObject _Monster , Vector2Int _vec)// ???????? ???????? ?????????? ????
     {
         int count = DungeonInMonster.Count;
-        for (int i = 0;i < count;i++)//사전에서 빈공간을 찾고 넣기
+        for (int i = 0;i < count;i++)//???????? ???????? ???? ????
         {
             if (DungeonInMonster.Count == 0 || DungeonInMonster[$"{i}"].Item1 == "None")
             {
@@ -378,13 +380,13 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-    void LoadData()//로드형식
+    void LoadData()//????????
     {
        
 
     }
      
-    void NewGameStart()//인벤토리 공간과 기타 시작정보 정의
+    void NewGameStart()//???????? ?????? ???? ???????? ????
     {
         if(isNewGame == true)
         {
@@ -397,7 +399,7 @@ public class GameManager : MonoBehaviour
                 InvenInMonster.Add($"{i}", "None");
             }
 
-            InvenInMonster[$"{1}"] = "BigDemon"; // 시작 몬스터
+            InvenInMonster[$"{1}"] = "BigDemon"; // ???? ??????
             InvenInMonster[$"{2}"] = "BigDemon";
             InvenInMonster[$"{5}"] = "BigDemon";
             InvenInMonster[$"{8}"] = "BigDemon";
