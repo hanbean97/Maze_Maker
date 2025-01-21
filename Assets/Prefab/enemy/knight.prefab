@@ -237,7 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxhp: 10
-  speed: 1
+  speed: 3
   Searchrange: 3
   attakrange: 1
   ani: {fileID: 7657758598266382250}

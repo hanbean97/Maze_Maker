@@ -74,8 +74,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(instance);
         }
-       
-        if(DonDestinform.Instance.DontNewGame == true)
+        if(PlayerPrefs.GetInt("NewGame", 0) == 1)
         {
             firstgame = false;
         }

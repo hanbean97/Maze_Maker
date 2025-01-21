@@ -129,7 +129,7 @@ public class Tutorials : MonoBehaviour
             GameManager.instance.Firstgame = false;
             maintext.gameObject.SetActive(false);
             timer = 0;
-            DonDestinform.Instance.DontNewGame = true;
+            PlayerPrefs.SetInt("NewGame",1);
         }
     }
 
