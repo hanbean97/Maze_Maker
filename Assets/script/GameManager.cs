@@ -64,6 +64,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject GameoverPanel;
     [SerializeField] TMP_Text GameoverText;
     [SerializeField] Button mainmenuscene;
+
+    [SerializeField] List<int> spownE;
     private void Awake()
     {
         if (instance == null)

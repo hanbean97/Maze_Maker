@@ -98,13 +98,13 @@ public class Enemy : move
 
         if (targetEnemy != null && Vector3.Distance(transform.position, targetEnemy.position) < attakrange)
         {
-            attackGo();
             ismoveway = false;
+            attackGo();
         }
         else if(targetEnemy == null || Vector3.Distance(transform.position, targetEnemy.position) > attakrange)
         {
-            attackStop();
             ismoveway = true;
+            attackStop();
         }
     }
 

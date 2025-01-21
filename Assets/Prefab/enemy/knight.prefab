@@ -237,10 +237,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxhp: 10
-  speed: 3
+  speed: 2
   Searchrange: 3
   attakrange: 1
   ani: {fileID: 7657758598266382250}
+  AttackBox: {fileID: 7666124395169265824}
 --- !u!61 &3969603534186940974
 BoxCollider2D:
   m_ObjectHideFlags: 0

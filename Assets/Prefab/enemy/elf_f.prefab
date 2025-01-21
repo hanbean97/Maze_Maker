@@ -324,7 +324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxhp: 7
-  speed: 3
+  speed: 2
   Searchrange: 4
   attakrange: 4
   bow: {fileID: 7195581512973178168}

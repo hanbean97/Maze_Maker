@@ -354,6 +354,7 @@ MonoBehaviour:
   GameoverPanel: {fileID: 8543311}
   GameoverText: {fileID: 760595321}
   mainmenuscene: {fileID: 1639717655}
+  spownE: 000000000000000000000000
 --- !u!4 &155761851
 Transform:
   m_ObjectHideFlags: 0
@@ -650,7 +651,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CamermoveMode: 1
   wheelspeed: 2
-  wallmode: {fileID: 0}
 --- !u!114 &349003239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4755,7 +4755,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 818770264}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.06944947
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

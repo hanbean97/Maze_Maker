@@ -13,7 +13,7 @@ public class CamerMovingSc : MonoBehaviour
     float distancewoldcam;
     float ratioWidth;
     [SerializeField] float wheelspeed = 1.0f;
-    [SerializeField] WallmakeSc wallmode;
+     WallmakeSc wallmode;
     void Start()
     {
         cam = Camera.main;
