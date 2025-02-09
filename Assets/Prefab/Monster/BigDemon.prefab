@@ -174,9 +174,9 @@ MonoBehaviour:
   Searchrange: 5
   attakrange: 1
   monstertype: 0
-  attackbox: {fileID: 8415337409689395278}
   hitmotionTime: 0.5
   hitcolor: {r: 1, g: 1, b: 1, a: 0.5019608}
+  AttackBox: {fileID: 5804667639043767675}
 --- !u!70 &2547587484267070250
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

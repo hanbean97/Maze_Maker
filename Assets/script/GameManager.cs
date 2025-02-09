@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject GameoverPanel;
     [SerializeField] TMP_Text GameoverText;
     [SerializeField] Button mainmenuscene;
-
+    [Header("라운드마다 나올 몬스터")]
     [SerializeField] List<int> spownE;
     private void Awake()
     {

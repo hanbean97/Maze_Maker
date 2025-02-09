@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1176636826636390502
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1618508051851300622}
+  m_Layer: 8
+  m_Name: Shootpointer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1618508051851300622
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1176636826636390502}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.097, y: -0.045, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7645216486059476518}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1299116481031183852
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,7 +160,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7645216486059476518}
-  - component: {fileID: 7581988954462165983}
+  - component: {fileID: 8656644666524189377}
   - component: {fileID: 2547587484267070250}
   - component: {fileID: 4691081022223482102}
   m_Layer: 8
@@ -153,9 +184,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 26408463194595433}
+  - {fileID: 1618508051851300622}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7581988954462165983
+--- !u!114 &8656644666524189377
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -164,19 +196,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 4876546578012998620}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c720016407b072747b81bb743f1604a8, type: 3}
+  m_Script: {fileID: 11500000, guid: 26bcd3649bcd44ae6a6d393fae8fccc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxhp: 8
-  speed: 2
-  size: {x: 2, y: 2}
-  Searchrange: 5
-  attakrange: 1
+  maxhp: 5
+  speed: 0
+  size: {x: 1, y: 1}
+  Searchrange: 6
+  attakrange: 6
   monstertype: 0
-  attackbox: {fileID: 0}
   hitmotionTime: 0.5
-  hitcolor: {r: 1, g: 1, b: 1, a: 0.5019608}
-  AttackBox: {fileID: 0}
+  hitcolor: {r: 1, g: 1, b: 1, a: 0.2784314}
+  AttakPreFab: {fileID: 3703783624388386531, guid: f2891feb0b0674239bc7ae529cd910b7, type: 3}
+  ShootPointer: {fileID: 1618508051851300622}
+  ShootTime: 2
 --- !u!70 &2547587484267070250
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

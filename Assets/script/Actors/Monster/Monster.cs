@@ -11,8 +11,7 @@ public class Monster : move
     int count =0;
     int nullcheckcount = 0;
     Vector3 dir;
-    Transform targetEnemy;
-    [SerializeField] Collider2D attackbox;
+    protected Transform targetEnemy;
     Vector2Int targetPos;
     Vector2Int mysponPos;
     SpriteRenderer spriteRenderer;
@@ -93,7 +92,7 @@ public class Monster : move
     {
         if( targetEnemy != null &&Vector3.Distance(transform.position,targetEnemy.position) <attakrange)
         {
-            // anim.SetBool("Attack", true); 상위클래스에서 실행
+            // anim.SetBool("Attack", true); ?????????????? ????
             attackGo();
             ismoveway = false;
         }

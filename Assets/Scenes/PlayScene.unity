@@ -339,6 +339,7 @@ MonoBehaviour:
   - {fileID: 8893631356101193587, guid: b2fe502fa39fa084da6860a1bdcca990, type: 3}
   MonsterList:
   - {fileID: 4876546578012998620, guid: 424374f292e8c7d489efd436f9cd3094, type: 3}
+  - {fileID: 4876546578012998620, guid: 05b684101e3ce4c80aeca286389cf581, type: 3}
   maxMonster: 3
   maxinvetory: 15
   spawnTimer: 2
