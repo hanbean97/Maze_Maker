@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5326931122872393037}
   - component: {fileID: -7756350877673908142}
   m_Layer: 8
-  m_Name: weapon_arrow
+  m_Name: weapon_ball
   m_TagString: AttackBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

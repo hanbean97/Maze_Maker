@@ -64,8 +64,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject GameoverPanel;
     [SerializeField] TMP_Text GameoverText;
     [SerializeField] Button mainmenuscene;
-    [Header("라운드마다 나올 몬스터")]
-    [SerializeField] List<int> spownE;
+    [Header("라운드마다 나올 몬스터 {Element=레벨 ,SpawNumber=소환몬스터인덱스번ㅎ}")]
+    [SerializeField] List<SpawnEnemy> spawnE;
     private void Awake()
     {
         if (instance == null)
@@ -81,6 +81,7 @@ public class GameManager : MonoBehaviour
             firstgame = false;
         }
         NewGameStart();
+
     }
     void Start()
     {
@@ -132,24 +133,22 @@ public class GameManager : MonoBehaviour
     {
         AsrarAlgo.instance.Wallcheck();
         isgamestart = true;
-
-        switch (waveLevel)//?????? ???? ????
+        // -1 은 테스트용
+        if(waveLevel >-1)
         {
-            case -1:
-                randompattern = 0;//???????? ???? 
-            break;
+            randompattern = Random.Range(0, spawnE[waveLevel].SpwanNumber.Length);
+            spawnE[waveLevel].SpwanNumber[randompattern].ToString().ToCharArray();
 
-            case 0:
-                randompattern = Random.Range(0, 3);
-              
-                break;
-            case 1:
-                randompattern = Random.Range(0, 2);
-                break;
-            case 2:
-                randompattern = Random.Range(0,1);
-                break;
+
+            Patterninstruct();
         }
+        else
+        {
+            randompattern = 0;
+            Patterninstruct(0);
+        }
+
+        /*
         switch (waveLevel, randompattern)
         {
             case (-1,0):
@@ -175,6 +174,7 @@ public class GameManager : MonoBehaviour
                 Patterninstruct(0, 0, 0, 0, 0, 1, 1,1,1,1,0);
                 break;
         }
+        */
     }
     void Patterninstruct(params int[] enemynumber)
     {

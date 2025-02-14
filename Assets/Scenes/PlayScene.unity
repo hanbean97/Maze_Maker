@@ -355,7 +355,9 @@ MonoBehaviour:
   GameoverPanel: {fileID: 8543311}
   GameoverText: {fileID: 760595321}
   mainmenuscene: {fileID: 1639717655}
-  spownE: 000000000000000000000000
+  spawnE:
+  - SpwanNumber: 000000000000000000000000
+  - SpwanNumber: 
 --- !u!4 &155761851
 Transform:
   m_ObjectHideFlags: 0
