@@ -137,7 +137,15 @@ public class GameManager : MonoBehaviour
         if(waveLevel >-1)
         {
             randompattern = Random.Range(0, spawnE[waveLevel].SpwanNumber.Length);
-            spawnE[waveLevel].SpwanNumber[randompattern].ToString().ToCharArray();
+            char[] EnemyChar = spawnE[waveLevel].SpwanNumber[randompattern].ToString().ToCharArray();
+            for(int i=0; i< EnemyChar.Length; i++)
+            {
+               if(EnemyChar[i] > EnemyList.Count-1)
+                {
+
+                }
+            }
+
 
 
             Patterninstruct();
