@@ -8,17 +8,17 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    [Header("?????? ???? ??????")]
+    [Header("적유닛 전체 리스트 ")]
     [SerializeField] List<GameObject> EnemyList = new List<GameObject>();
-    [Header("?????? ?? ???? ??????")]
+    [Header("현 맵상에 있는 적")]
     List<Transform> nowenemytrs = new List<Transform>();
     public List<Transform> Nowenemytrs { get { return nowenemytrs; } }
-    [Header("???? ???? ???? ??????")]
+    [Header("아군유닛 전체 리스트 ")]
     [SerializeField] List<GameObject> MonsterList = new List<GameObject>();
     public List<GameObject> MonsterLists { get { return MonsterList; } }
-    [Header("?????? ???? ???? ??????")]
-    List<Transform> nowMonstertrs = new List<Transform>();// ??????????
-    Dictionary<string, (string, Vector3Int)> DungeonInMonster = new Dictionary<string, (string, Vector3Int)>();//???????????? ?????? <????,(??????????????,????????)>
+    [Header("현재 맵상에 있는 아군유닛 ")]
+    List<Transform> nowMonstertrs = new List<Transform>();
+    Dictionary<string, (string, Vector3Int)> DungeonInMonster = new Dictionary<string, (string, Vector3Int)>();//소환된 아군 몬스터리스트 <이름 ,(,????????)>
     public List<Transform> NowMonstertrs { get { return nowMonstertrs; } }
     Dictionary<string, string> InvenInMonster = new Dictionary<string, string>();//?????????? ?????? ??????
     public Dictionary<string, string> InventoryMon { get { return InvenInMonster; } }
@@ -294,17 +294,17 @@ public class GameManager : MonoBehaviour
         }
     }
     /// <summary>
-    /// ?????????????? ???? ?????? ?????? ????
+    /// 스테이지가 끝날
     /// </summary>
     void WaveClear()
     {
         if(WaveEnd == true)
         {
-            if (isgamestart == true && isWaveClear == true )//?????? ??????
+            if (isgamestart == true && isWaveClear == true )
             {
                 if (waveLevel < 2)
                 {
-                    switch (waveLevel)//?????? ???? ????
+                    switch (waveLevel)//스테이지가 끝날때 레벨에 따른 보
                     {
                         case 0:
                             waveLevel++;
@@ -322,7 +322,7 @@ public class GameManager : MonoBehaviour
                     }
                 }
             }
-            else if (isgamestart == true && isWaveClear == false )//?????? ?????? 
+            else if (isgamestart == true && isWaveClear == false )
             {
                 GameoverPanel.SetActive(true);
                 GameoverText.text = $"{(int)score}";
@@ -340,7 +340,7 @@ public class GameManager : MonoBehaviour
     }
   
     /// <summary>
-    /// ???? ???????? ?????????? ????
+    /// 적이 끝에 도착했을
     /// </summary>
     /// <param name="_transform"></param>
     public void EnemyFinshDungeon(Transform _transform)
@@ -349,7 +349,7 @@ public class GameManager : MonoBehaviour
         isWaveClear = false;
     }
     
-    public void GiftItem(int _monster)//???????????? ?????? ???????? ????????.
+    public void GiftItem(int _monster)//보상 몬스
     {
         inventory.SetInvetory(MonsterList[_monster]);
     }
@@ -415,4 +415,15 @@ public class GameManager : MonoBehaviour
 
         }
     }
+
+    enum testing
+    {
+        none
+    }
+
+    void testtt()
+    {
+        int f = ((int)testing.none);
+    }
+
 }
