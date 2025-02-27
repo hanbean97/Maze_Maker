@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> MonsterLists { get { return MonsterList; } }
     [Header("현재 맵상에 있는 아군유닛 ")]
     List<Transform> nowMonstertrs = new List<Transform>();
-    Dictionary<string, (string, Vector3Int)> DungeonInMonster = new Dictionary<string, (string, Vector3Int)>();//소환된 아군 몬스터리스트 <이름 ,(,????????)>
+    Dictionary<string, (string, Vector3Int)> DungeonInMonster = new Dictionary<string, (string, Vector3Int)>();//던전에 소환되어있는 아군 정보 저장
     public List<Transform> NowMonstertrs { get { return nowMonstertrs; } }
     Dictionary<string, string> InvenInMonster = new Dictionary<string, string>();//?????????? ?????? ??????
     public Dictionary<string, string> InventoryMon { get { return InvenInMonster; } }
@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject GameoverPanel;
     [SerializeField] TMP_Text GameoverText;
     [SerializeField] Button mainmenuscene;
-    [Header("라운드마다 나올 몬스터 {Element=레벨 ,SpawNumber=소환몬스터인덱스번ㅎ}")]
+    [Header("레벨마다 나올 몬스터")]
     [SerializeField] List<SpawnEnemy> spawnE;
     private void Awake()
     {
@@ -376,10 +376,10 @@ public class GameManager : MonoBehaviour
         }
     }
   
-    public void InvenOutDungeonMonster(GameObject _Monster , Vector2Int _vec)// ???????? ???????? ?????????? ????
+    public void InvenOutDungeonMonster(GameObject _Monster , Vector2Int _vec)
     {
         int count = DungeonInMonster.Count;
-        for (int i = 0;i < count;i++)//???????? ???????? ???? ????
+        for (int i = 0;i < count;i++)
         {
             if (DungeonInMonster.Count == 0 || DungeonInMonster[$"{i}"].Item1 == "None")
             {
@@ -389,11 +389,7 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-    void LoadData()//????????
-    {
-       
-
-    }
+    
      
     void NewGameStart()//???????? ?????? ???? ???????? ????
     {
@@ -416,14 +412,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    enum testing
-    {
-        none
-    }
-
-    void testtt()
-    {
-        int f = ((int)testing.none);
-    }
+   
 
 }

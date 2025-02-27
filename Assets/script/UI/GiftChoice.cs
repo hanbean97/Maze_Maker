@@ -22,9 +22,7 @@ public class GiftChoice : MonoBehaviour
             MonsterName[i] = slotImage[i].GetComponentInChildren<TMP_Text>();
         }
     }
-    void Update()
-    {
-    }
+  
     public void SetImage()
     {
         choicearry = new int[] { Random.Range(0, GameManager.instance.MonsterLists.Count), Random.Range(0, GameManager.instance.MonsterLists.Count), Random.Range(0, GameManager.instance.MonsterLists.Count) };
