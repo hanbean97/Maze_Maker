@@ -17,13 +17,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] List<GameObject> MonsterList = new List<GameObject>();
     public List<GameObject> MonsterLists { get { return MonsterList; } }
     [Header("현재 맵상에 있는 아군유닛 ")]
-    List<Transform> nowMonstertrs = new List<Transform>();
-    Dictionary<string, (string, Vector3Int)> DungeonInMonster = new Dictionary<string, (string, Vector3Int)>();//던전에 소환되어있는 아군 정보 저장
-    public List<Transform> NowMonstertrs { get { return nowMonstertrs; } }
-    Dictionary<string, string> InvenInMonster = new Dictionary<string, string>();//?????????? ?????? ??????
+    List<(Transform,Monster)> nowMonstertrs = new List<(Transform,Monster)>();
+    Dictionary<string, (string, Vector3Int)> DungeonInMonster = new Dictionary<string, (string, Vector3Int)>();//<검색하기위한 list넘버,(몬스터이름,위치)>던전에 소환되어있는 아군 정보 저장
+    public List<(Transform,Monster)> NowMonstertrs { get { return nowMonstertrs; } }
+    Dictionary<string, string> InvenInMonster = new Dictionary<string, string>();//<인벤토리 위치,몬스터이름> 인벤토리안에있는 아군 정보 
     public Dictionary<string, string> InventoryMon { get { return InvenInMonster; } }
     [SerializeField, Header("?????? ?????? ????????????")] int maxMonster;
-    [SerializeField, Header("???????? ????????")] int maxinvetory;
+    [SerializeField, Header("인벤토리 최대갯수 ")] int maxinvetory;
     public int MaxInventory { get { return maxinvetory; } }
     [SerializeField] List<List<byte>> goEnemyList;
 
@@ -87,6 +87,7 @@ public class GameManager : MonoBehaviour
     {
       
         SetLoadMonster();
+
         mainmenuscene.onClick.AddListener(backmainmenu);
         GameStartBT.onClick.AddListener( EnemyPatternSetting);
         MonsterGift = OpenSeletWindow.GetComponent<GiftChoice>();
@@ -253,9 +254,9 @@ public class GameManager : MonoBehaviour
     /// ???????? ?????? ???????????? ???? ???????? ?????? ????
     /// </summary>
     /// <param name="_transform"></param>
-    public void DeathMonster(Transform _transform)
+    public void DeathMonster(Monster _Mon)
     {
-        nowMonstertrs.Remove(_transform);
+        nowMonstertrs.Remove((_Mon.transform,_Mon));
     }
     public GameObject[] LoadInInventory()
     {
@@ -279,19 +280,22 @@ public class GameManager : MonoBehaviour
     {
         int count = DungeonInMonster.Count;
         int count2 = MonsterList.Count;
-        for(int i=0;i< count; i++)//n*n =n^2 ?????? ?????? ???? 2n???? ???????? ????????
+        for(int i=0;i< count; i++)
         {
             (string, Vector3Int) Data = (DungeonInMonster[ $"{i}" ].Item1, DungeonInMonster[$"{i}"].Item2);
             for(int j=0;j<count2; j++)
             {
                 if (MonsterList[j].gameObject.name == Data.Item1)
                 {
-                    GameObject gam = Instantiate(MonsterList[j].gameObject ,Data.Item2 ,Quaternion.identity);
-                    nowMonstertrs.Add(gam.transform);//???????? ???????? ???? + ?????????????? ???? ?????????? ?????????? ????
-                    DungeonInMonster.Remove($"{i}");
+                    Monster gam = Instantiate(MonsterList[j].gameObject ,Data.Item2 ,Quaternion.identity).GetComponent<Monster>();
+                    gam.MyPos =Data.Item2;
+                    nowMonstertrs.Add((gam.transform,gam));
+                   // DungeonInMonster.Remove($"{i}");
                 }
             }
         }
+
+
     }
     /// <summary>
     /// 스테이지가 끝날
@@ -330,6 +334,12 @@ public class GameManager : MonoBehaviour
             LevelText.text = $"Level : {waveLevel}";
             ScoreText.text = $"Score : {(int)score}";
             AllMonsterHeal();
+            int count = nowMonstertrs.Count;
+            for (int i = 0; i < count; i++)
+            {
+                nowMonstertrs[i].Item1.position = nowMonstertrs[i].Item2.MyPos;
+            }
+
             OpenSeletWindow.SetActive(true);
             MonsterGift.SetImage();
             isWaveClear = true;
@@ -356,8 +366,8 @@ public class GameManager : MonoBehaviour
     int FindMonsterList(string _Monster)
     {
         int count = MonsterList.Count;
-        int MonsterNum = -1; // -1 ???? ???? ????
-        for (int i = 0; i < count; i++)//?????????? ?????? ??????????
+        int MonsterNum = -1; // -1 
+        for (int i = 0; i < count; i++)//
         {
             if (_Monster == MonsterList[i].name)
             {
@@ -372,26 +382,26 @@ public class GameManager : MonoBehaviour
         int count = nowenemytrs.Count;
         for (int i = 0;i < count; i++)
         {
-            nowMonstertrs[i].GetComponent<Monster>().Heal();
+            nowMonstertrs[i].Item2.Heal();
         }
     }
   
-    public void InvenOutDungeonMonster(GameObject _Monster , Vector2Int _vec)
+    public void InvenOutDungeonMonster(Monster _Monster , Vector3Int _vec)
     {
         int count = DungeonInMonster.Count;
         for (int i = 0;i < count;i++)
         {
             if (DungeonInMonster.Count == 0 || DungeonInMonster[$"{i}"].Item1 == "None")
             {
-               DungeonInMonster[$"{i}"] = (_Monster.name, new Vector3Int( _vec.x,_vec.y,0));
-                nowMonstertrs.Add(_Monster.transform);
+               DungeonInMonster[$"{i}"] = (_Monster.name,  _vec);
+                nowMonstertrs.Add((_Monster.transform,_Monster));
                 break;
             }
         }
     }
     
      
-    void NewGameStart()//???????? ?????? ???? ???????? ????
+    void NewGameStart()//최초 지급 몬스터 
     {
         if(isNewGame == true)
         {
@@ -404,7 +414,7 @@ public class GameManager : MonoBehaviour
                 InvenInMonster.Add($"{i}", "None");
             }
 
-            InvenInMonster[$"{1}"] = "BigDemon"; // ???? ??????
+            InvenInMonster[$"{1}"] = "BigDemon"; 
             InvenInMonster[$"{2}"] = "BigDemon";
             InvenInMonster[$"{5}"] = "BigDemon";
             InvenInMonster[$"{8}"] = "BigDemon";

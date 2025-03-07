@@ -13,7 +13,8 @@ public class Monster : move
     Vector3 dir;
     protected Transform targetEnemy;
     Vector2Int targetPos;
-    Vector2Int mysponPos;
+    Vector3Int mysponPos;
+    public Vector3Int MyPos {get{ return mysponPos; }set{ mysponPos = value; } }
     SpriteRenderer spriteRenderer;
     protected bool ishit;
     [SerializeField] float hitmotionTime;
@@ -22,7 +23,7 @@ public class Monster : move
     float hitTimer=0;
     private void OnEnable()
     {
-        mysponPos = new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y));
+        //mysponPos = new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y));
         spriteRenderer =GetComponentInChildren<SpriteRenderer>();
         baseColors = spriteRenderer.color;
     }
@@ -142,7 +143,7 @@ public class Monster : move
         if (Hp <= 0 && isdeth == false)
         {
             isdeth = true;
-            GameManager.instance.DeathMonster(transform);
+            GameManager.instance.DeathMonster(this);
             Destroy(gameObject);
         }
     }

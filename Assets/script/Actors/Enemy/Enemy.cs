@@ -23,7 +23,7 @@ public class Enemy : move
     }
     protected virtual void Update()
     {
-        if (endTileOn == false)//마지막타일안에 들어가기전까지
+        if (endTileOn == false)//?????????????? ??????????????
         {
             if ((transform.position.x > AsrarAlgo.instance.TargetPos.x - 1 && transform.position.x < AsrarAlgo.instance.TargetPos.x + 1) &&
                                (-transform.position.y > AsrarAlgo.instance.TargetPos.y - 1 && -transform.position.y < AsrarAlgo.instance.TargetPos.y + 1))
@@ -37,7 +37,7 @@ public class Enemy : move
             }
             else if (startTileOn == true && targetEnemy != null)
             {
-                targetPos = new Vector2Int(Mathf.RoundToInt(targetEnemy.position.x),Mathf.RoundToInt(-targetEnemy.position.y));//의미없어보임
+                targetPos = new Vector2Int(Mathf.RoundToInt(targetEnemy.position.x),Mathf.RoundToInt(-targetEnemy.position.y));//????????????
                 Moving(targetPos);
             }
             else if (startTileOn == false)
@@ -53,7 +53,7 @@ public class Enemy : move
         }
         else if (endTileOn == true)
         {
-            EndAction();//마지막타일에 도착했을때 실행
+            EndAction();
         }
     }
     void SearchEnemy()
@@ -66,7 +66,7 @@ public class Enemy : move
             {
                 nullcheckcount = 0;
             }
-            dir = GameManager.instance.NowMonstertrs[i].position - transform.position;
+            dir = GameManager.instance.NowMonstertrs[i].Item1.position - transform.position;
             RaycastHit2D rays = Physics2D.Raycast(transform.position, dir.normalized, Searchrange, LayerMask.GetMask("Wall", "Monster"));
             if (rays && rays.transform.CompareTag("Monster"))
             {
@@ -129,10 +129,10 @@ public class Enemy : move
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("AttackBox") && collision.gameObject.layer !=gameObject.layer)//닿은 히트 박스가 자기팀인지아닌지 체크
+        if (collision.CompareTag("AttackBox") && collision.gameObject.layer !=gameObject.layer)//???? ???? ?????? ???????????????? ????
         {
             Hp -= collision.GetComponent<HitDamageSc>().GetDamage;
-            if(collision.GetComponent<projectileSc>() !=null)// 투사체 스크립트있으면 삭제
+            if(collision.GetComponent<projectileSc>() !=null)// ?????? ?????????????? ????
             {
                 Destroy(collision.gameObject);
             }
@@ -149,7 +149,7 @@ public class Enemy : move
             GameManager.instance.DeathEnemy(transform);
         }
     }
-    void HitMotion()//공격받는 애니메이션+넉백
+    void HitMotion()//???????? ??????????+????
     {
         anim.SetTrigger("Hit");
     }

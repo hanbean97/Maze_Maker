@@ -24,7 +24,7 @@ public class Dragable : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragHan
     {
         beforeParent = transform.parent;
         transform.SetParent(canvas);
-        transform.SetAsLastSibling();//맨밑으로 옮겨 가장 위에 그려지게 
+        transform.SetAsLastSibling();//???????? ???? ???? ???? ???????? 
        img.raycastTarget = false;
        GameManager.instance.ItemCatching = true;
     }
@@ -44,8 +44,9 @@ public class Dragable : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragHan
                 RaycastHit2D ray = Physics2D.Raycast(spownPos, Vector3.forward, float.PositiveInfinity, LayerMask.GetMask("Ground", "Wall","Monster"));
                 if (ray && ray.transform.CompareTag("Ground"))
                 {
-                    GameObject spown = Instantiate(havemonster, (Vector2)spownPos, Quaternion.identity);
-                    GameManager.instance.InvenOutDungeonMonster(spown, spownPos);
+                    Monster spown = Instantiate(havemonster, (Vector2)spownPos, Quaternion.identity).GetComponent<Monster>();
+                    spown.MyPos = new Vector3Int(spownPos.x, spownPos.y,0);
+                    GameManager.instance.InvenOutDungeonMonster(spown, spown.MyPos);
                     Destroy(gameObject);
                 }
            
