@@ -8,6 +8,7 @@ public class Monster : move
     [SerializeField] float Searchrange;
     [SerializeField] float attakrange;
     [SerializeField]MonsterType monstertype;
+    MonsterType MonT { get { return monstertype; } }
     int count =0;
     int nullcheckcount = 0;
     Vector3 dir;
@@ -29,7 +30,6 @@ public class Monster : move
     }
     void Update()
     {
-        DefaltMovePattern();
         SearchEnemy();
         FindingEnemy();
         if(targetEnemy != null)
@@ -39,21 +39,7 @@ public class Monster : move
         }
         hitMotion();
     }
-    void DefaltMovePattern()
-    {
-        if (targetEnemy == null)
-        {
-            switch (monstertype)
-            {
-                case MonsterType.defalt:
-                    
-                    break;
-                case MonsterType.None:
-                    break;
-            }
-        }
-    }
-
+  
     void SearchEnemy()
     {
         count = GameManager.instance.Nowenemytrs.Count;

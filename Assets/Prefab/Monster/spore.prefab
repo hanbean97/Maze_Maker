@@ -204,7 +204,7 @@ MonoBehaviour:
   size: {x: 1, y: 1}
   Searchrange: 6
   attakrange: 6
-  monstertype: 0
+  monstertype: 1
   hitmotionTime: 0.5
   hitcolor: {r: 1, g: 1, b: 1, a: 0.2784314}
   AttakPreFab: {fileID: 3703783624388386531, guid: f2891feb0b0674239bc7ae529cd910b7, type: 3}

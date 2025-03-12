@@ -290,11 +290,18 @@ public class GameManager : MonoBehaviour
                     Monster gam = Instantiate(MonsterList[j].gameObject ,Data.Item2 ,Quaternion.identity).GetComponent<Monster>();
                     gam.MyPos =Data.Item2;
                     nowMonstertrs.Add((gam.transform,gam));
-                   // DungeonInMonster.Remove($"{i}");
+                    DungeonInMonster.Remove($"{i}");
                 }
             }
         }
-
+    }
+    private void inMonsterDSave()
+    {
+        int count = nowMonstertrs.Count;
+        for (int i = 0; i < count; i++)
+        {
+           // DungeonInMonster[$"{i}"].Item1 = nowenemytrs[i]
+        }
 
     }
     /// <summary>
