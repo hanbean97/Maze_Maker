@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-enum MonsterType
+namespace EnumSpace
 {
-    BigDemon,
-    spore
+    enum MonsterType
+    {
+        BigDemon,
+        spore
+    }
 }
+
+

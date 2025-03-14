@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using EnumSpace;
 public class Monster : move
 {
     [SerializeField] Vector2 size;
