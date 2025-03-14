@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace EnumSpace
 {
-    enum MonsterType
+    public enum MonsterType
     {
         BigDemon,
         spore

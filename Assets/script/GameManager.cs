@@ -295,12 +295,16 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-    private void inMonsterDSave()
+    private void inMonsterDSave()//배치된 몬스터를 저장 (뒤로가기 했을때 저)
     {
-        int count = nowMonstertrs.Count;
+        int count = DungeonInMonster.Count;
         for (int i = 0; i < count; i++)
         {
-           // DungeonInMonster[$"{i}"].Item1 = nowenemytrs[i]
+            DungeonInMonster[$"{i}"] = ("",Vector3Int.zero);
+            if (i<nowMonstertrs.Count)
+            {
+                DungeonInMonster[$"{i}"] = (nowMonstertrs[i].Item2.MonT.ToString(), nowMonstertrs[i].Item2.MyPos);
+            }
         }
 
     }

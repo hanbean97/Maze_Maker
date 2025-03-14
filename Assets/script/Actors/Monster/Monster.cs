@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EnumSpace;
+
+
+
 public class Monster : move
 {
     [SerializeField] Vector2 size;
     [SerializeField] float Searchrange;
     [SerializeField] float attakrange;
     [SerializeField]MonsterType monstertype;
-    MonsterType MonT { get { return monstertype; } }
+    public MonsterType MonT { get { return monstertype; } }
     int count =0;
     int nullcheckcount = 0;
     Vector3 dir;
@@ -22,6 +25,7 @@ public class Monster : move
     [SerializeField] Color hitcolor;
     Color baseColors;
     float hitTimer=0;
+
     private void OnEnable()
     {
         //mysponPos = new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y));
