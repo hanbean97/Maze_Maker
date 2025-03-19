@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> MonsterLists { get { return MonsterList; } }
     [Header("현재 맵상에 있는 아군유닛 ")]
     List<(Transform,Monster)> nowMonstertrs = new List<(Transform,Monster)>();
-    Dictionary<string, (string, Vector3Int)> DungeonInMonster = new Dictionary<string, (string, Vector3Int)>();//<검색하기위한 list넘버,(몬스터이름,위치)>던전에 소환되어있는 아군 정보 저장
+    Dictionary<string, (string, Vector3Int)> DungeonInMonster = new Dictionary<string, (string, Vector3Int)>();//Json정보저장용<키값(몬스터이름,위치)>
     public List<(Transform,Monster)> NowMonstertrs { get { return nowMonstertrs; } }
     Dictionary<string, string> InvenInMonster = new Dictionary<string, string>();//<인벤토리 위치,몬스터이름> 인벤토리안에있는 아군 정보 
     public Dictionary<string, string> InventoryMon { get { return InvenInMonster; } }
@@ -85,14 +85,11 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-      
         SetLoadMonster();
-
         mainmenuscene.onClick.AddListener(backmainmenu);
         GameStartBT.onClick.AddListener( EnemyPatternSetting);
         MonsterGift = OpenSeletWindow.GetComponent<GiftChoice>();
         ScoreText.text = $"Score : {(int)score}";
-
         LevelText.text = $"Level : {waveLevel}";
     }
     void backmainmenu()
