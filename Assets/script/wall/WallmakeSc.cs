@@ -15,14 +15,16 @@ public class WallmakeSc : MonoBehaviour
     [SerializeField] Button wallModeButton;
     [SerializeField] TMP_Text wallModeText;
     Animation anim;
-    AnimationState anistate; // 중요
+    AnimationState anistate; // ????
     Color backgroundbasicColor;
     [SerializeField] Color backgroundchangeColor;
     NoWayCheck waycheck;
     CamerMovingSc cammoves;
     [SerializeField] TMP_Text wallcCounString;
     public bool wallModeOn { get { return wallmakemode; } }
-    [SerializeField, Header("처음에주는 벽 수")] int wallposiblecount; 
+    [SerializeField, Header("?????????? ?? ??")] int wallposiblecount;
+    Monster selectMon;
+    [SerializeField] GameObject selectMark;
     void Start()
     {
 
@@ -43,12 +45,12 @@ public class WallmakeSc : MonoBehaviour
     {
         if (walltile.transform.Find("MissingWall(Clone)") != null)
         {
-            Debug.Log("미완성벽 있음");
+            Debug.Log("???????? ????");
             return;
         }
         if(waycheck.check() == false)
         {
-            Debug.Log("벽이 막혀있음");
+            Debug.Log("???? ????????");
             return;
         }
         wallcCounString.gameObject.SetActive(!wallcCounString.gameObject.activeSelf);
@@ -150,4 +152,42 @@ public class WallmakeSc : MonoBehaviour
     {
         wallcCounString.text = $"Wall : {wallposiblecount}";
     }
+    private void MonMoveMode()
+    {
+        if (wallmakemode == true && GameManager.instance.IsGamStart == true) return;
+
+        if(Input.GetMouseButtonDown(0))//?? ?? ??? 
+        {
+            Vector2 mosPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            RaycastHit2D ray = Physics2D.Raycast(mosPos, Vector3.forward, 20, LayerMask.GetMask("Monster"));
+            if (ray && ray.transform.CompareTag("Monster"))
+            {
+                selectMon = ray.transform.GetComponent<Monster>();
+                selectMark.gameObject.SetActive(true);
+            }
+
+        }
+        else if(Input.GetMouseButton(0))//???? ?? 
+        {
+            selectMark.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        }
+        else if(Input.GetMouseButtonUp(0))//??? ?? ?
+        {
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2Int movePos = new Vector2Int(Mathf.RoundToInt(mousePos.x), Mathf.RoundToInt(mousePos.y));
+            RaycastHit2D ray = Physics2D.Raycast(movePos, Vector3.forward, float.PositiveInfinity, LayerMask.GetMask("Ground", "Wall", "Monster"));
+            if (ray && ray.transform.CompareTag("Ground"))
+            {
+                selectMon.transform.position = mousePos;
+            }
+            else
+            {
+
+            }
+            selectMon = null;
+            selectMark.gameObject.SetActive(false);
+        }
+
+    }
+
 }
