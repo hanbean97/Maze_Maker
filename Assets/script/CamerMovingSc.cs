@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class CamerMovingSc : MonoBehaviour
 {
@@ -14,10 +16,13 @@ public class CamerMovingSc : MonoBehaviour
     float ratioWidth;
     [SerializeField] float wheelspeed = 1.0f;
      WallmakeSc wallmode;
+    bool inventorych;
+    
     void Start()
     {
         cam = Camera.main;
         wallmode= GetComponent<WallmakeSc>();
+        inventorych = false;
     }
 
     // Update is called once per frame
@@ -28,16 +33,22 @@ public class CamerMovingSc : MonoBehaviour
     }
     private void CamMove()//카메라무브 기능
     {
-        if (CamermoveMode)
+        if (CamermoveMode && inventorych== false)
         {
+
             if (Input.GetMouseButtonDown(0))
             {
+                if (EventSystem.current.IsPointerOverGameObject())
+                {
+                    inventorych = true;
+                    return;
+                }
                 beforemosPos = Input.mousePosition;
                 beforeCamPos = cam.transform.position;
                 distancewoldcam = Mathf.Abs((cam.ViewportToWorldPoint(new Vector3(0,0,0))- cam.ViewportToWorldPoint(new Vector3(1, 0, 0))).x);//캠기준 좌우 끝점 길이
                 ratioWidth = distancewoldcam / cam.pixelWidth;//비율
             }
-            if (Input.GetMouseButton(0))
+            else if (Input.GetMouseButton(0))
             {
                 nowPos = beforemosPos - Input.mousePosition; 
                 nowCam = beforeCamPos + (nowPos* ratioWidth);
@@ -47,6 +58,12 @@ public class CamerMovingSc : MonoBehaviour
                 cam.transform.position = curcamPos; 
             }                                        
         }
+        if(Input.GetMouseButtonUp(0))
+        {
+            inventorych = false;
+        }
+
+
             if(Input.GetAxis("Mouse ScrollWheel") != 0) 
             {
                cam.orthographicSize -= Input.GetAxis("Mouse ScrollWheel")* wheelspeed;

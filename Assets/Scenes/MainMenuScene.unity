@@ -1825,7 +1825,7 @@ GameObject:
   - component: {fileID: 302284856}
   - component: {fileID: 302284857}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: FixedView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1855,9 +1855,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 302284855}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e0cb4338a74682448c457f714dfe066, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f431c6c130272e4db2e44822a0cc011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  setWidth: 1920
+  setHeight: 1080
 --- !u!1 &606701816
 GameObject:
   m_ObjectHideFlags: 0
@@ -2041,10 +2043,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -2111,7 +2113,6 @@ MonoBehaviour:
   fade: {fileID: 2038811707}
   startBt: {fileID: 891426288}
   nextscenetime: 1
-  dondest: {fileID: 0}
 --- !u!1 &891426287
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     [Header("적유닛 전체 리스트 ")]
     [SerializeField] List<GameObject> EnemyList = new List<GameObject>();
-    [Header("현 맵상에 있는 적")]
+    [Header("현 맵상에 있는 적")]
     List<Transform> nowenemytrs = new List<Transform>();
     public List<Transform> Nowenemytrs { get { return nowenemytrs; } }
     [Header("아군유닛 전체 리스트 ")]
@@ -136,17 +136,16 @@ public class GameManager : MonoBehaviour
         {
             randompattern = Random.Range(0, spawnE[waveLevel].SpwanNumber.Length);
             char[] EnemyChar = spawnE[waveLevel].SpwanNumber[randompattern].ToString().ToCharArray();
+            int[] enemyarray = new int[EnemyChar.Length];
             for(int i=0; i< EnemyChar.Length; i++)
             {
-               if(EnemyChar[i] > EnemyList.Count-1)
+               if(EnemyChar[i] < EnemyList.Count-1)
                 {
-
+                    enemyarray[i] = EnemyChar[i];
                 }
             }
 
-
-
-            Patterninstruct();
+            Patterninstruct(enemyarray);
         }
         else
         {
@@ -253,7 +252,7 @@ public class GameManager : MonoBehaviour
     /// <param name="_transform"></param>
     public void DeathMonster(Monster _Mon)
     {
-        nowMonstertrs.Remove((_Mon.transform,_Mon));
+         nowMonstertrs.Remove((_Mon.transform,_Mon));
     }
     public GameObject[] LoadInInventory()
     {
@@ -319,12 +318,12 @@ public class GameManager : MonoBehaviour
                     switch (waveLevel)//스테이지가 끝날때 레벨에 따른 보
                     {
                         case 0:
-                            waveLevel++;
+                           // waveLevel++;
                             wall.GiveWallcountUp(10);
                             score += 100;
                             break;
                         case 1:
-                            waveLevel++;
+                          //  waveLevel++;
                             wall.GiveWallcountUp(20);
                             score += 200;
                             break;

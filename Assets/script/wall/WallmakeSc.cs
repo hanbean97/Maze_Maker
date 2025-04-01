@@ -24,7 +24,10 @@ public class WallmakeSc : MonoBehaviour
     public bool wallModeOn { get { return wallmakemode; } }
     [SerializeField, Header("?????????? ?? ??")] int wallposiblecount;
     Monster selectMon;
-    [SerializeField] GameObject selectMark;
+    SpriteRenderer selectSpr;
+    [SerializeField] SpriteRenderer selectMark;
+    Color selectColor = new Color(1,1,1,0.2f);
+    bool isCatch = false;
     void Start()
     {
 
@@ -40,6 +43,7 @@ public class WallmakeSc : MonoBehaviour
     {
         wallmode();
         OnWallcountString();
+        MonMoveMode();
     }
     void wallmakemodeOnOff()
     {
@@ -154,7 +158,7 @@ public class WallmakeSc : MonoBehaviour
     }
     private void MonMoveMode()
     {
-        if (wallmakemode == true && GameManager.instance.IsGamStart == true) return;
+        if (wallmakemode == true || GameManager.instance.IsGamStart == true) return;
 
         if(Input.GetMouseButtonDown(0))//?? ?? ??? 
         {
@@ -162,17 +166,23 @@ public class WallmakeSc : MonoBehaviour
             RaycastHit2D ray = Physics2D.Raycast(mosPos, Vector3.forward, 20, LayerMask.GetMask("Monster"));
             if (ray && ray.transform.CompareTag("Monster"))
             {
+                GameManager.instance.ItemCatching = true;
                 selectMon = ray.transform.GetComponent<Monster>();
+                selectSpr = selectMon.MySprR;
+                selectSpr.color = selectColor;
+                selectMark.sprite = selectSpr.sprite;
                 selectMark.gameObject.SetActive(true);
+                isCatch = true;
             }
-
         }
         else if(Input.GetMouseButton(0))//???? ?? 
         {
-            selectMark.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if(isCatch)
+            selectMark.transform.position =new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0);
         }
         else if(Input.GetMouseButtonUp(0))//??? ?? ?
         {
+            if (isCatch == false) return;
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2Int movePos = new Vector2Int(Mathf.RoundToInt(mousePos.x), Mathf.RoundToInt(mousePos.y));
             RaycastHit2D ray = Physics2D.Raycast(movePos, Vector3.forward, float.PositiveInfinity, LayerMask.GetMask("Ground", "Wall", "Monster"));
@@ -180,12 +190,13 @@ public class WallmakeSc : MonoBehaviour
             {
                 selectMon.transform.position = mousePos;
             }
-            else
-            {
-
-            }
+            selectSpr.color =Color.white;
+            selectSpr = null;
+            selectMark.sprite =null;
             selectMon = null;
             selectMark.gameObject.SetActive(false);
+            GameManager.instance.ItemCatching = false;
+            isCatch = false;
         }
 
     }

@@ -20,12 +20,12 @@ public class Monster : move
     Vector3Int mysponPos;
     public Vector3Int MyPos {get{ return mysponPos; }set{ mysponPos = value; } }
     SpriteRenderer spriteRenderer;
+    public SpriteRenderer MySprR { get { return spriteRenderer; } }
     protected bool ishit;
     [SerializeField] float hitmotionTime;
     [SerializeField] Color hitcolor;
     Color baseColors;
     float hitTimer=0;
-
     private void OnEnable()
     {
         //mysponPos = new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y));

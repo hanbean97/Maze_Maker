@@ -61,7 +61,9 @@ public class move : PathFind
 
            
             anim.SetBool("Run", true);
+            if(this.FinalNodeList.Count != 1)
             nextdir = this.FinalNodeList[1].nodePosition - transform.position;
+
             transform.position += nextdir.normalized * speed * Time.deltaTime;
             if (nextdir.normalized.x > 0)
             {
