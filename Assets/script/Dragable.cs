@@ -46,7 +46,7 @@ public class Dragable : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragHan
                 {
                     Monster spown = Instantiate(havemonster, (Vector2)spownPos, Quaternion.identity).GetComponent<Monster>();
                     spown.MyPos = new Vector3Int(spownPos.x, spownPos.y,0);
-                    GameManager.instance.InvenOutDungeonMonster(spown, spown.MyPos);
+                    GameManager.instance.InvenOutDungeonMonster(spown.transform);
                     Destroy(gameObject);
                 }
            

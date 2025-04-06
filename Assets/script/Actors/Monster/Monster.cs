@@ -133,7 +133,7 @@ public class Monster : move
         if (Hp <= 0 && isdeth == false)
         {
             isdeth = true;
-            GameManager.instance.DeathMonster(this);
+            GameManager.instance.DeathMonster(this.transform);
             Destroy(gameObject);
         }
     }

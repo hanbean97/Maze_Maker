@@ -17,9 +17,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] List<GameObject> MonsterList = new List<GameObject>();
     public List<GameObject> MonsterLists { get { return MonsterList; } }
     [Header("현재 맵상에 있는 아군유닛 ")]
-    List<(Transform,Monster)> nowMonstertrs = new List<(Transform,Monster)>();
+    List<Transform> nowMonstertrs = new List<Transform>();
     Dictionary<string, (string, Vector3Int)> DungeonInMonster = new Dictionary<string, (string, Vector3Int)>();//Json정보저장용<키값(몬스터이름,위치)>
-    public List<(Transform,Monster)> NowMonstertrs { get { return nowMonstertrs; } }
+    public List<Transform> NowMonstertrs { get { return nowMonstertrs; } }
     Dictionary<string, string> InvenInMonster = new Dictionary<string, string>();//<인벤토리 위치,몬스터이름> 인벤토리안에있는 아군 정보 
     public Dictionary<string, string> InventoryMon { get { return InvenInMonster; } }
     [SerializeField, Header("?????? ?????? ????????????")] int maxMonster;
@@ -85,7 +85,6 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        SetLoadMonster();
         mainmenuscene.onClick.AddListener(backmainmenu);
         GameStartBT.onClick.AddListener( EnemyPatternSetting);
         MonsterGift = OpenSeletWindow.GetComponent<GiftChoice>();
@@ -225,7 +224,7 @@ public class GameManager : MonoBehaviour
     /// ???? ?????? ???? ???????? ???? ?????????????? ????
     /// </summary>
     /// <param name="_transform"></param>
-    public void DeathEnemy(Transform _transform)// ?????????? ?????? ?????? ?????? ???????? ???????? ?????? ????????
+    public void DeathEnemy(Transform _transform)
     {
         int count = nowenemytrs.Count;
         int allEnemyactive = 0;
@@ -250,9 +249,9 @@ public class GameManager : MonoBehaviour
     /// ???????? ?????? ???????????? ???? ???????? ?????? ????
     /// </summary>
     /// <param name="_transform"></param>
-    public void DeathMonster(Monster _Mon)
+    public void DeathMonster(Transform _Mon)
     {
-         nowMonstertrs.Remove((_Mon.transform,_Mon));
+         nowMonstertrs.Remove(_Mon);
     }
     public GameObject[] LoadInInventory()
     {
@@ -272,38 +271,8 @@ public class GameManager : MonoBehaviour
         }
         return mon;
     }
-    void SetLoadMonster()
-    {
-        int count = DungeonInMonster.Count;
-        int count2 = MonsterList.Count;
-        for(int i=0;i< count; i++)
-        {
-            (string, Vector3Int) Data = (DungeonInMonster[ $"{i}" ].Item1, DungeonInMonster[$"{i}"].Item2);
-            for(int j=0;j<count2; j++)
-            {
-                if (MonsterList[j].gameObject.name == Data.Item1)
-                {
-                    Monster gam = Instantiate(MonsterList[j].gameObject ,Data.Item2 ,Quaternion.identity).GetComponent<Monster>();
-                    gam.MyPos =Data.Item2;
-                    nowMonstertrs.Add((gam.transform,gam));
-                    DungeonInMonster.Remove($"{i}");
-                }
-            }
-        }
-    }
-    private void inMonsterDSave()//배치된 몬스터를 저장 (뒤로가기 했을때 저)
-    {
-        int count = DungeonInMonster.Count;
-        for (int i = 0; i < count; i++)
-        {
-            DungeonInMonster[$"{i}"] = ("",Vector3Int.zero);
-            if (i<nowMonstertrs.Count)
-            {
-                DungeonInMonster[$"{i}"] = (nowMonstertrs[i].Item2.MonT.ToString(), nowMonstertrs[i].Item2.MyPos);
-            }
-        }
-
-    }
+  
+   
     /// <summary>
     /// 스테이지가 끝날
     /// </summary>
@@ -344,7 +313,7 @@ public class GameManager : MonoBehaviour
             int count = nowMonstertrs.Count;
             for (int i = 0; i < count; i++)
             {
-                nowMonstertrs[i].Item1.position = nowMonstertrs[i].Item2.MyPos;
+           //     nowMonstertrs[i].Item1.position = nowMonstertrs[i].Item2.MyPos;
             }
 
             OpenSeletWindow.SetActive(true);
@@ -389,22 +358,13 @@ public class GameManager : MonoBehaviour
         int count = nowenemytrs.Count;
         for (int i = 0;i < count; i++)
         {
-            nowMonstertrs[i].Item2.Heal();
+            nowMonstertrs[i].GetComponent<Monster>().Heal();
         }
     }
   
-    public void InvenOutDungeonMonster(Monster _Monster , Vector3Int _vec)
+    public void InvenOutDungeonMonster(Transform _Monster)
     {
-        int count = DungeonInMonster.Count;
-        for (int i = 0;i < count;i++)
-        {
-            if (DungeonInMonster.Count == 0 || DungeonInMonster[$"{i}"].Item1 == "None")
-            {
-               DungeonInMonster[$"{i}"] = (_Monster.name,  _vec);
-                nowMonstertrs.Add((_Monster.transform,_Monster));
-                break;
-            }
-        }
+        nowMonstertrs.Add(_Monster);
     }
     
      

@@ -66,7 +66,7 @@ public class Enemy : move
             {
                 nullcheckcount = 0;
             }
-            dir = GameManager.instance.NowMonstertrs[i].Item1.position - transform.position;
+            dir = GameManager.instance.NowMonstertrs[i].position - transform.position;
             RaycastHit2D rays = Physics2D.Raycast(transform.position, dir.normalized, Searchrange, LayerMask.GetMask("Wall", "Monster"));
             if (rays && rays.transform.CompareTag("Monster"))
             {
