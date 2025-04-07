@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> MonsterLists { get { return MonsterList; } }
     [Header("현재 맵상에 있는 아군유닛 ")]
     List<Transform> nowMonstertrs = new List<Transform>();
-    Dictionary<string, (string, Vector3Int)> DungeonInMonster = new Dictionary<string, (string, Vector3Int)>();//Json정보저장용<키값(몬스터이름,위치)>
+    //Dictionary<string, (string, Vector3Int)> DungeonInMonster = new Dictionary<string, (string, Vector3Int)>();//Json정보저장용<키값(몬스터이름,위치)>
     public List<Transform> NowMonstertrs { get { return nowMonstertrs; } }
     Dictionary<string, string> InvenInMonster = new Dictionary<string, string>();//<인벤토리 위치,몬스터이름> 인벤토리안에있는 아군 정보 
     public Dictionary<string, string> InventoryMon { get { return InvenInMonster; } }
@@ -64,6 +64,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject GameoverPanel;
     [SerializeField] TMP_Text GameoverText;
     [SerializeField] Button mainmenuscene;
+    [SerializeField] Button mainmenuGoBt;
     [Header("레벨마다 나올 몬스터")]
     [SerializeField] List<SpawnEnemy> spawnE;
     private void Awake()
@@ -86,6 +87,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         mainmenuscene.onClick.AddListener(backmainmenu);
+        mainmenuGoBt.onClick.AddListener(backmainmenu);
         GameStartBT.onClick.AddListener( EnemyPatternSetting);
         MonsterGift = OpenSeletWindow.GetComponent<GiftChoice>();
         ScoreText.text = $"Score : {(int)score}";
@@ -108,8 +110,7 @@ public class GameManager : MonoBehaviour
                 loadscene = true;
             }
         }
-
-    }
+    } 
     void Update()
     {
         LoadSceneNow();
@@ -372,20 +373,16 @@ public class GameManager : MonoBehaviour
     {
         if(isNewGame == true)
         {
-            for (int i = 0; i < maxMonster; i++)
-            {
-                DungeonInMonster.Add($"{i}", ("None", Vector3Int.zero));
-            }
             for (int i = 0; i < maxinvetory; i++)
             {
                 InvenInMonster.Add($"{i}", "None");
             }
 
             InvenInMonster[$"{1}"] = "BigDemon"; 
-            InvenInMonster[$"{2}"] = "BigDemon";
+            InvenInMonster[$"{2}"] = MonsterList[1].name;
             InvenInMonster[$"{5}"] = "BigDemon";
-            InvenInMonster[$"{8}"] = "BigDemon";
-
+            InvenInMonster[$"{8}"] = MonsterList[0].name; ;
+            InvenInMonster[$"{9}"] = MonsterList[1].name;
         }
     }
 
