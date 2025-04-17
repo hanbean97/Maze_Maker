@@ -77,10 +77,11 @@ public class GameManager : MonoBehaviour
         {
             Destroy(instance);
         }
+        /*
         if(PlayerPrefs.GetInt("NewGame", 0) == 1)
         {
             firstgame = false;
-        }
+        }*/
         NewGameStart();
 
     }
