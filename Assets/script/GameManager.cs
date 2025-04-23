@@ -63,8 +63,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] GameObject GameoverPanel;
     [SerializeField] TMP_Text GameoverText;
-    [SerializeField] Button mainmenuscene;
-    [SerializeField] Button mainmenuGoBt;
+  
     [Header("레벨마다 나올 몬스터")]
     [SerializeField] List<SpawnEnemy> spawnE;
     private void Awake()
@@ -87,8 +86,6 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        mainmenuscene.onClick.AddListener(backmainmenu);
-        mainmenuGoBt.onClick.AddListener(backmainmenu);
         GameStartBT.onClick.AddListener( EnemyPatternSetting);
         MonsterGift = OpenSeletWindow.GetComponent<GiftChoice>();
         ScoreText.text = $"Score : {(int)score}";

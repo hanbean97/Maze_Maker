@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ButtonLinqSc : MonoBehaviour
@@ -14,10 +15,14 @@ public class ButtonLinqSc : MonoBehaviour
     [SerializeField] Animation invneanim;
     AnimationState anistate;
     WallmakeSc wallch;
+    [SerializeField] Button mainmenuscene;
+    [SerializeField] Button mainmenuGoBt;
     void Awake()
     {
         anistate = invneanim["inventoryanim"];
         wallch = GetComponent<WallmakeSc>();
+        mainmenuscene.onClick.AddListener(backmainmenu);
+        mainmenuGoBt.onClick.AddListener(backmainmenu);
     }
     void Update()
     {
@@ -81,5 +86,9 @@ public class ButtonLinqSc : MonoBehaviour
             iswallmode = false;
             startBt.SetActive(true);
         }
+    }
+    void backmainmenu()
+    {
+        SceneManager.LoadSceneAsync(0);
     }
 }
