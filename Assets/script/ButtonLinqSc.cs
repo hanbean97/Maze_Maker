@@ -15,14 +15,21 @@ public class ButtonLinqSc : MonoBehaviour
     [SerializeField] Animation invneanim;
     AnimationState anistate;
     WallmakeSc wallch;
-    [SerializeField] Button mainmenuscene;
+    [SerializeField] Button menuopen;
+    [SerializeField] Button Menuclose;
     [SerializeField] Button mainmenuGoBt;
+    [SerializeField] Button MainMengo;
+    [SerializeField] GameObject MenuPanel;
+
     void Awake()
     {
+        
         anistate = invneanim["inventoryanim"];
         wallch = GetComponent<WallmakeSc>();
-        mainmenuscene.onClick.AddListener(backmainmenu);
+        menuopen.onClick.AddListener(OpenMenu);
+        Menuclose.onClick.AddListener(CloseMennu);
         mainmenuGoBt.onClick.AddListener(backmainmenu);
+        MainMengo.onClick.AddListener(backmainmenu);
     }
     void Update()
     {
@@ -55,7 +62,7 @@ public class ButtonLinqSc : MonoBehaviour
     }
     void GameStartCh()
     {
-        if ( gamestart == false && GameManager.instance.IsGamStart == true)//한번만 실행시키기위해
+        if ( gamestart == false && GameManager.instance.IsGamStart == true)//?????? ??????????????
         {
             gamestart = true;
             wallBt.gameObject.SetActive(false);
@@ -86,6 +93,16 @@ public class ButtonLinqSc : MonoBehaviour
             iswallmode = false;
             startBt.SetActive(true);
         }
+    }
+    void OpenMenu()
+    {
+        Time.timeScale = 0;
+        MenuPanel.SetActive(true);
+    }
+    void CloseMennu()
+    {
+        Time.timeScale = 1;
+        MenuPanel.SetActive(false);
     }
     void backmainmenu()
     {
