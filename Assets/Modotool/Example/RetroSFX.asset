@@ -1,0 +1,3035 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 748fe92f6234c494d9a7de3b6cf4209d, type: 3}
+  m_Name: RetroSFX
+  m_EditorClassIdentifier: 
+  m_sounds:
+  - Name: Slash
+    Duration: 1
+    SectionMin: 0
+    SectionMax: 0
+    OctaveMin: 3
+    OctaveMax: 6
+    Loop: 0
+    SoundData:
+    - WaveForm: 5
+      Pitch: 37
+      Volume: 2
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 37
+      Volume: 2
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 38
+      Volume: 2
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 39
+      Volume: 2
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 41
+      Volume: 2
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 43
+      Volume: 2
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 45
+      Volume: 2
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 47
+      Volume: 2
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 49
+      Volume: 2
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 51
+      Volume: 1
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 53
+      Volume: 1
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 54
+      Volume: 1
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 57
+      Volume: 1
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 58
+      Volume: 1
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 61
+      Volume: 1
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 62
+      Volume: 1
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 64
+      Volume: 1
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    FXSettings:
+      DropMaxAmount: 2
+      DropPitch: 0
+      ARPSpeed: 2
+  - Name: WasHit
+    Duration: 1
+    SectionMin: 0
+    SectionMax: 0
+    OctaveMin: 0
+    OctaveMax: 8
+    Loop: 0
+    SoundData:
+    - WaveForm: 2
+      Pitch: 77
+      Volume: 3
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 70
+      Volume: 3
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 62
+      Volume: 3
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 51
+      Volume: 3
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 39
+      Volume: 3
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 28
+      Volume: 2
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 17
+      Volume: 2
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 10
+      Volume: 2
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 2
+      Volume: 2
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    FXSettings:
+      DropMaxAmount: 0
+      DropPitch: 0
+      ARPSpeed: 2
+  - Name: Pipe
+    Duration: 4
+    SectionMin: 0
+    SectionMax: 0
+    OctaveMin: 0
+    OctaveMax: 8
+    Loop: 0
+    SoundData:
+    - WaveForm: 2
+      Pitch: 58
+      Volume: 3
+      Effect: 6
+    - WaveForm: 2
+      Pitch: 56
+      Volume: 3
+      Effect: 6
+    - WaveForm: 2
+      Pitch: 52
+      Volume: 3
+      Effect: 6
+    - WaveForm: 2
+      Pitch: 48
+      Volume: 3
+      Effect: 6
+    - WaveForm: 2
+      Pitch: 47
+      Volume: 3
+      Effect: 6
+    - WaveForm: 2
+      Pitch: 42
+      Volume: 3
+      Effect: 6
+    - WaveForm: 2
+      Pitch: 38
+      Volume: 3
+      Effect: 6
+    - WaveForm: 2
+      Pitch: 35
+      Volume: 3
+      Effect: 6
+    - WaveForm: 0
+      Pitch: 8
+      Volume: 0
+      Effect: 6
+    - WaveForm: 0
+      Pitch: 8
+      Volume: 0
+      Effect: 6
+    - WaveForm: 0
+      Pitch: 8
+      Volume: 0
+      Effect: 6
+    - WaveForm: 0
+      Pitch: 8
+      Volume: 0
+      Effect: 6
+    - WaveForm: 2
+      Pitch: 58
+      Volume: 3
+      Effect: 6
+    - WaveForm: 2
+      Pitch: 56
+      Volume: 3
+      Effect: 6
+    - WaveForm: 2
+      Pitch: 52
+      Volume: 3
+      Effect: 6
+    - WaveForm: 2
+      Pitch: 48
+      Volume: 3
+      Effect: 6
+    - WaveForm: 2
+      Pitch: 47
+      Volume: 3
+      Effect: 6
+    - WaveForm: 2
+      Pitch: 42
+      Volume: 3
+      Effect: 6
+    - WaveForm: 2
+      Pitch: 38
+      Volume: 3
+      Effect: 6
+    - WaveForm: 2
+      Pitch: 35
+      Volume: 3
+      Effect: 6
+    - WaveForm: 0
+      Pitch: 8
+      Volume: 0
+      Effect: 6
+    - WaveForm: 0
+      Pitch: 8
+      Volume: 0
+      Effect: 6
+    - WaveForm: 0
+      Pitch: 8
+      Volume: 0
+      Effect: 6
+    - WaveForm: 0
+      Pitch: 8
+      Volume: 0
+      Effect: 6
+    - WaveForm: 2
+      Pitch: 58
+      Volume: 3
+      Effect: 6
+    - WaveForm: 2
+      Pitch: 56
+      Volume: 3
+      Effect: 6
+    - WaveForm: 2
+      Pitch: 52
+      Volume: 3
+      Effect: 6
+    - WaveForm: 2
+      Pitch: 48
+      Volume: 3
+      Effect: 6
+    - WaveForm: 2
+      Pitch: 47
+      Volume: 3
+      Effect: 6
+    - WaveForm: 2
+      Pitch: 42
+      Volume: 3
+      Effect: 6
+    - WaveForm: 2
+      Pitch: 38
+      Volume: 3
+      Effect: 6
+    - WaveForm: 2
+      Pitch: 35
+      Volume: 3
+      Effect: 6
+    FXSettings:
+      DropMaxAmount: 0
+      DropPitch: 0
+      ARPSpeed: 2
+  - Name: Stairs
+    Duration: 4
+    SectionMin: 0
+    SectionMax: 0
+    OctaveMin: 0
+    OctaveMax: 8
+    Loop: 0
+    SoundData:
+    - WaveForm: 5
+      Pitch: 62
+      Volume: 3
+      Effect: 2
+    - WaveForm: 5
+      Pitch: 59
+      Volume: 3
+      Effect: 2
+    - WaveForm: 5
+      Pitch: 57
+      Volume: 3
+      Effect: 2
+    - WaveForm: 5
+      Pitch: 49
+      Volume: 3
+      Effect: 2
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 2
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 2
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 2
+    - WaveForm: 5
+      Pitch: 50
+      Volume: 2
+      Effect: 2
+    - WaveForm: 5
+      Pitch: 47
+      Volume: 2
+      Effect: 2
+    - WaveForm: 5
+      Pitch: 45
+      Volume: 2
+      Effect: 2
+    - WaveForm: 5
+      Pitch: 37
+      Volume: 2
+      Effect: 2
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 2
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 2
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 2
+    - WaveForm: 5
+      Pitch: 34
+      Volume: 1
+      Effect: 2
+    - WaveForm: 5
+      Pitch: 31
+      Volume: 1
+      Effect: 2
+    - WaveForm: 5
+      Pitch: 29
+      Volume: 1
+      Effect: 2
+    - WaveForm: 5
+      Pitch: 21
+      Volume: 1
+      Effect: 2
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 2
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    FXSettings:
+      DropMaxAmount: 0
+      DropPitch: 0
+      ARPSpeed: 0
+  - Name: BeatHH
+    Duration: 16
+    SectionMin: 0
+    SectionMax: 0
+    OctaveMin: 2
+    OctaveMax: 8
+    Loop: 1
+    SoundData:
+    - WaveForm: 5
+      Pitch: 91
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 24
+      Volume: 6
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 24
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 24
+      Volume: 6
+      Effect: 2
+    - WaveForm: 5
+      Pitch: 91
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 24
+      Volume: 6
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 24
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 24
+      Volume: 6
+      Effect: 2
+    - WaveForm: 5
+      Pitch: 91
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 24
+      Volume: 6
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 24
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 24
+      Volume: 6
+      Effect: 2
+    - WaveForm: 5
+      Pitch: 91
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 24
+      Volume: 6
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 24
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 24
+      Volume: 6
+      Effect: 2
+    - WaveForm: 5
+      Pitch: 91
+      Volume: 3
+      Effect: 2
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 2
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 2
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 2
+    - WaveForm: 5
+      Pitch: 91
+      Volume: 3
+      Effect: 2
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 2
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 24
+      Volume: 6
+      Effect: 2
+    - WaveForm: 5
+      Pitch: 91
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 24
+      Volume: 6
+      Effect: 2
+    - WaveForm: 0
+      Pitch: 13
+      Volume: 0
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 24
+      Volume: 6
+      Effect: 2
+    - WaveForm: 5
+      Pitch: 91
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 24
+      Volume: 6
+      Effect: 2
+    - WaveForm: 0
+      Pitch: 13
+      Volume: 0
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 29
+      Volume: 6
+      Effect: 3
+    FXSettings:
+      DropMaxAmount: 2
+      DropPitch: 0
+      ARPSpeed: 2
+  - Name: BeatHH2
+    Duration: 16
+    SectionMin: 0
+    SectionMax: 0
+    OctaveMin: 1
+    OctaveMax: 8
+    Loop: 1
+    SoundData:
+    - WaveForm: 5
+      Pitch: 83
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 24
+      Volume: 6
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 24
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 24
+      Volume: 6
+      Effect: 2
+    - WaveForm: 5
+      Pitch: 85
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 24
+      Volume: 6
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 24
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 24
+      Volume: 6
+      Effect: 2
+    - WaveForm: 5
+      Pitch: 84
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 24
+      Volume: 6
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 24
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 24
+      Volume: 6
+      Effect: 2
+    - WaveForm: 5
+      Pitch: 85
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 24
+      Volume: 6
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 24
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 24
+      Volume: 6
+      Effect: 2
+    - WaveForm: 5
+      Pitch: 82
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 21
+      Volume: 6
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 21
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 21
+      Volume: 6
+      Effect: 2
+    - WaveForm: 5
+      Pitch: 83
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 21
+      Volume: 6
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 21
+      Volume: 3
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 21
+      Volume: 6
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 83
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 23
+      Volume: 6
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 23
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 23
+      Volume: 6
+      Effect: 2
+    - WaveForm: 5
+      Pitch: 82
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 23
+      Volume: 6
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 23
+      Volume: 3
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 23
+      Volume: 6
+      Effect: 0
+    FXSettings:
+      DropMaxAmount: 2
+      DropPitch: 0
+      ARPSpeed: 2
+  - Name: Drop
+    Duration: 16
+    SectionMin: 0
+    SectionMax: 0
+    OctaveMin: 0
+    OctaveMax: 8
+    Loop: 0
+    SoundData:
+    - WaveForm: 3
+      Pitch: 63
+      Volume: 3
+      Effect: 5
+    - WaveForm: 3
+      Pitch: 59
+      Volume: 3
+      Effect: 5
+    - WaveForm: 3
+      Pitch: 52
+      Volume: 3
+      Effect: 5
+    - WaveForm: 3
+      Pitch: 42
+      Volume: 3
+      Effect: 5
+    - WaveForm: 3
+      Pitch: 37
+      Volume: 3
+      Effect: 5
+    - WaveForm: 3
+      Pitch: 31
+      Volume: 3
+      Effect: 5
+    - WaveForm: 3
+      Pitch: 22
+      Volume: 3
+      Effect: 5
+    - WaveForm: 3
+      Pitch: 14
+      Volume: 3
+      Effect: 5
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 5
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 5
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 5
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 5
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 5
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 5
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 5
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 5
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 5
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 5
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 5
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 5
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    FXSettings:
+      DropMaxAmount: 24
+      DropPitch: 0
+      ARPSpeed: 2
+  - Name: Beat
+    Duration: 16
+    SectionMin: 0
+    SectionMax: 0
+    OctaveMin: 1
+    OctaveMax: 8
+    Loop: 1
+    SoundData:
+    - WaveForm: 4
+      Pitch: 32
+      Volume: 3
+      Effect: 5
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 5
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 84
+      Volume: 1
+      Effect: 5
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 4
+      Pitch: 31
+      Volume: 3
+      Effect: 5
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 5
+    - WaveForm: 4
+      Pitch: 31
+      Volume: 3
+      Effect: 5
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 84
+      Volume: 1
+      Effect: 5
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 4
+      Pitch: 32
+      Volume: 3
+      Effect: 5
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 4
+      Pitch: 32
+      Volume: 3
+      Effect: 5
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 84
+      Volume: 1
+      Effect: 5
+    - WaveForm: 4
+      Pitch: 32
+      Volume: 3
+      Effect: 5
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 4
+      Pitch: 31
+      Volume: 3
+      Effect: 5
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 83
+      Volume: 1
+      Effect: 5
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 4
+      Pitch: 32
+      Volume: 3
+      Effect: 5
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    FXSettings:
+      DropMaxAmount: 30
+      DropPitch: 0
+      ARPSpeed: 2
+  - Name: Beat 2
+    Duration: 16
+    SectionMin: 0
+    SectionMax: 0
+    OctaveMin: 1
+    OctaveMax: 8
+    Loop: 1
+    SoundData:
+    - WaveForm: 4
+      Pitch: 25
+      Volume: 7
+      Effect: 5
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 5
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 84
+      Volume: 1
+      Effect: 5
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 4
+      Pitch: 24
+      Volume: 7
+      Effect: 5
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 5
+    - WaveForm: 4
+      Pitch: 24
+      Volume: 7
+      Effect: 5
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 84
+      Volume: 1
+      Effect: 5
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 4
+      Pitch: 24
+      Volume: 7
+      Effect: 5
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 4
+      Pitch: 25
+      Volume: 7
+      Effect: 5
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 84
+      Volume: 1
+      Effect: 5
+    - WaveForm: 4
+      Pitch: 25
+      Volume: 7
+      Effect: 5
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 4
+      Pitch: 24
+      Volume: 7
+      Effect: 5
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 83
+      Volume: 1
+      Effect: 5
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 5
+    - WaveForm: 5
+      Pitch: 83
+      Volume: 1
+      Effect: 5
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 84
+      Volume: 1
+      Effect: 5
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    FXSettings:
+      DropMaxAmount: 30
+      DropPitch: 0
+      ARPSpeed: 2
+  - Name: Melody A
+    Duration: 16
+    SectionMin: 0
+    SectionMax: 0
+    OctaveMin: 4
+    OctaveMax: 6
+    Loop: 1
+    SoundData:
+    - WaveForm: 2
+      Pitch: 57
+      Volume: 3
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 62
+      Volume: 3
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 65
+      Volume: 3
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 62
+      Volume: 3
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 57
+      Volume: 3
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 57
+      Volume: 3
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 57
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 57
+      Volume: 3
+      Effect: 2
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 6
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 6
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 3
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 3
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 57
+      Volume: 3
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 62
+      Volume: 3
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 65
+      Volume: 3
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 62
+      Volume: 3
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 57
+      Volume: 3
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 59
+      Volume: 3
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 69
+      Volume: 3
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 65
+      Volume: 3
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 60
+      Volume: 3
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 67
+      Volume: 3
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 60
+      Volume: 3
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 62
+      Volume: 3
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 64
+      Volume: 3
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 64
+      Volume: 3
+      Effect: 2
+    FXSettings:
+      DropMaxAmount: 2
+      DropPitch: 0
+      ARPSpeed: 2
+  - Name: Drone
+    Duration: 16
+    SectionMin: 0
+    SectionMax: 0
+    OctaveMin: 0
+    OctaveMax: 8
+    Loop: 0
+    SoundData:
+    - WaveForm: 2
+      Pitch: 14
+      Volume: 2
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 14
+      Volume: 2
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 14
+      Volume: 2
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 14
+      Volume: 2
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 14
+      Volume: 2
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 14
+      Volume: 2
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 14
+      Volume: 2
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 14
+      Volume: 2
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 14
+      Volume: 2
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 14
+      Volume: 2
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 14
+      Volume: 2
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 14
+      Volume: 2
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 14
+      Volume: 2
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 11
+      Volume: 2
+      Effect: 2
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 3
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 3
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 3
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 3
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 3
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 3
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 0
+      Volume: 0
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 0
+      Volume: 0
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 0
+      Volume: 0
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 0
+      Volume: 0
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 0
+      Volume: 0
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 0
+      Volume: 0
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 0
+      Volume: 0
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 0
+      Volume: 0
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 0
+      Volume: 0
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 0
+      Volume: 0
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 0
+      Volume: 0
+      Effect: 3
+    FXSettings:
+      DropMaxAmount: 12
+      DropPitch: 0
+      ARPSpeed: 2
+  - Name: Melody B
+    Duration: 16
+    SectionMin: 0
+    SectionMax: 0
+    OctaveMin: 4
+    OctaveMax: 6
+    Loop: 0
+    SoundData:
+    - WaveForm: 2
+      Pitch: 57
+      Volume: 3
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 62
+      Volume: 3
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 65
+      Volume: 3
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 62
+      Volume: 3
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 57
+      Volume: 3
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 57
+      Volume: 3
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 57
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 57
+      Volume: 3
+      Effect: 2
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 6
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 6
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 3
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 3
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 57
+      Volume: 3
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 62
+      Volume: 3
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 65
+      Volume: 3
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 62
+      Volume: 3
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 57
+      Volume: 3
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 57
+      Volume: 3
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 55
+      Volume: 3
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 55
+      Volume: 3
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 55
+      Volume: 3
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 55
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 53
+      Volume: 3
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 53
+      Volume: 3
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 53
+      Volume: 3
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 53
+      Volume: 3
+      Effect: 2
+    FXSettings:
+      DropMaxAmount: 2
+      DropPitch: 0
+      ARPSpeed: 2
+  - Name: Melady Fast A
+    Duration: 16
+    SectionMin: 0
+    SectionMax: 0
+    OctaveMin: 3
+    OctaveMax: 5
+    Loop: 1
+    SoundData:
+    - WaveForm: 2
+      Pitch: 53
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 50
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 45
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 53
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 50
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 45
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 53
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 50
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 57
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 55
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 50
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 57
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 55
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 50
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 57
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 55
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 53
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 52
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 47
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 53
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 52
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 47
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 53
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 52
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 55
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 53
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 48
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 55
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 57
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 52
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 55
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 52
+      Volume: 3
+      Effect: 2
+    FXSettings:
+      DropMaxAmount: 2
+      DropPitch: 0
+      ARPSpeed: 2
+  - Name: Melady Fast B
+    Duration: 16
+    SectionMin: 0
+    SectionMax: 0
+    OctaveMin: 3
+    OctaveMax: 5
+    Loop: 1
+    SoundData:
+    - WaveForm: 2
+      Pitch: 53
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 50
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 45
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 53
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 50
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 45
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 53
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 50
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 59
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 57
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 52
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 59
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 57
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 50
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 53
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 52
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 53
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 52
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 47
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 52
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 50
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 47
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 53
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 52
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 55
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 53
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 47
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 55
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 57
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 52
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 59
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 57
+      Volume: 3
+      Effect: 2
+    FXSettings:
+      DropMaxAmount: 2
+      DropPitch: 0
+      ARPSpeed: 2
+  - Name: Bass Fast A
+    Duration: 16
+    SectionMin: 0
+    SectionMax: 0
+    OctaveMin: 0
+    OctaveMax: 8
+    Loop: 0
+    SoundData:
+    - WaveForm: 2
+      Pitch: 23
+      Volume: 3
+      Effect: 4
+    - WaveForm: 2
+      Pitch: 26
+      Volume: 3
+      Effect: 4
+    - WaveForm: 2
+      Pitch: 26
+      Volume: 3
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 26
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 12
+      Volume: 0
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 12
+      Volume: 0
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 12
+      Volume: 0
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 12
+      Volume: 0
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 23
+      Volume: 3
+      Effect: 4
+    - WaveForm: 2
+      Pitch: 26
+      Volume: 3
+      Effect: 4
+    - WaveForm: 2
+      Pitch: 26
+      Volume: 3
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 26
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 12
+      Volume: 0
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 12
+      Volume: 0
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 12
+      Volume: 0
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 12
+      Volume: 0
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 23
+      Volume: 3
+      Effect: 4
+    - WaveForm: 2
+      Pitch: 24
+      Volume: 3
+      Effect: 4
+    - WaveForm: 2
+      Pitch: 24
+      Volume: 3
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 24
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 12
+      Volume: 0
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 12
+      Volume: 0
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 12
+      Volume: 0
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 12
+      Volume: 0
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 17
+      Volume: 3
+      Effect: 4
+    - WaveForm: 2
+      Pitch: 19
+      Volume: 3
+      Effect: 4
+    - WaveForm: 2
+      Pitch: 19
+      Volume: 3
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 19
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 11
+      Volume: 0
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 12
+      Volume: 0
+      Effect: 3
+    - WaveForm: 2
+      Pitch: 12
+      Volume: 0
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 12
+      Volume: 0
+      Effect: 0
+    FXSettings:
+      DropMaxAmount: 2
+      DropPitch: 0
+      ARPSpeed: 0
+  - Name: BassBeat
+    Duration: 16
+    SectionMin: 0
+    SectionMax: 0
+    OctaveMin: 0
+    OctaveMax: 8
+    Loop: 0
+    SoundData:
+    - WaveForm: 1
+      Pitch: 24
+      Volume: 3
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 2
+      Volume: 0
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 24
+      Volume: 3
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 2
+      Volume: 0
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 24
+      Volume: 3
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 2
+      Volume: 0
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 24
+      Volume: 3
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 2
+      Volume: 0
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 24
+      Volume: 3
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 2
+      Volume: 0
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 24
+      Volume: 3
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 2
+      Volume: 0
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 24
+      Volume: 3
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 2
+      Volume: 0
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 24
+      Volume: 3
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 2
+      Volume: 0
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 24
+      Volume: 3
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 2
+      Volume: 0
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 24
+      Volume: 3
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 2
+      Volume: 0
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 24
+      Volume: 3
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 2
+      Volume: 0
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 24
+      Volume: 3
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 2
+      Volume: 0
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 24
+      Volume: 3
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 2
+      Volume: 0
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 17
+      Volume: 4
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 2
+      Volume: 0
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 19
+      Volume: 5
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 2
+      Volume: 0
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 21
+      Volume: 5
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 2
+      Volume: 0
+      Effect: 2
+    FXSettings:
+      DropMaxAmount: 3
+      DropPitch: 0
+      ARPSpeed: 0
+  - Name: BassBeat2
+    Duration: 16
+    SectionMin: 0
+    SectionMax: 0
+    OctaveMin: 0
+    OctaveMax: 8
+    Loop: 0
+    SoundData:
+    - WaveForm: 1
+      Pitch: 24
+      Volume: 3
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 0
+      Volume: 0
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 24
+      Volume: 3
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 0
+      Volume: 0
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 24
+      Volume: 3
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 0
+      Volume: 0
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 24
+      Volume: 3
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 0
+      Volume: 0
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 24
+      Volume: 3
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 0
+      Volume: 0
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 24
+      Volume: 3
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 0
+      Volume: 0
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 24
+      Volume: 3
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 0
+      Volume: 0
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 24
+      Volume: 3
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 0
+      Volume: 0
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 24
+      Volume: 3
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 0
+      Volume: 0
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 21
+      Volume: 5
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 0
+      Volume: 0
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 21
+      Volume: 5
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 0
+      Volume: 0
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 21
+      Volume: 4
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 0
+      Volume: 0
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 21
+      Volume: 4
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 0
+      Volume: 0
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 23
+      Volume: 4
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 0
+      Volume: 0
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 23
+      Volume: 5
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 0
+      Volume: 0
+      Effect: 2
+    - WaveForm: 1
+      Pitch: 23
+      Volume: 5
+      Effect: 2
+    - WaveForm: 0
+      Pitch: 2
+      Volume: 0
+      Effect: 5
+    FXSettings:
+      DropMaxAmount: 3
+      DropPitch: 0
+      ARPSpeed: 0
+  - Name: B2
+    Duration: 8
+    SectionMin: 0
+    SectionMax: 0
+    OctaveMin: 0
+    OctaveMax: 8
+    Loop: 1
+    SoundData:
+    - WaveForm: 3
+      Pitch: 47
+      Volume: 3
+      Effect: 5
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 2
+    - WaveForm: 3
+      Pitch: 47
+      Volume: 3
+      Effect: 5
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 83
+      Volume: 1
+      Effect: 5
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 2
+    - WaveForm: 3
+      Pitch: 47
+      Volume: 3
+      Effect: 5
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 2
+    - WaveForm: 3
+      Pitch: 47
+      Volume: 3
+      Effect: 5
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 83
+      Volume: 1
+      Effect: 5
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 2
+    - WaveForm: 5
+      Pitch: 57
+      Volume: 1
+      Effect: 2
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 57
+      Volume: 1
+      Effect: 2
+    - WaveForm: 5
+      Pitch: 57
+      Volume: 2
+      Effect: 2
+    - WaveForm: 5
+      Pitch: 57
+      Volume: 1
+      Effect: 2
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 84
+      Volume: 1
+      Effect: 5
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 5
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 4
+      Pitch: 31
+      Volume: 3
+      Effect: 5
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 47
+      Volume: 2
+      Effect: 2
+    - WaveForm: 5
+      Pitch: 47
+      Volume: 2
+      Effect: 2
+    - WaveForm: 5
+      Pitch: 83
+      Volume: 1
+      Effect: 5
+    - WaveForm: 0
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    - WaveForm: 4
+      Pitch: 32
+      Volume: 3
+      Effect: 5
+    - WaveForm: 5
+      Pitch: 0
+      Volume: 0
+      Effect: 0
+    FXSettings:
+      DropMaxAmount: 30
+      DropPitch: 0
+      ARPSpeed: 0
+  - Name: Beat
+    Duration: 16
+    SectionMin: 0
+    SectionMax: 0
+    OctaveMin: 0
+    OctaveMax: 8
+    Loop: 1
+    SoundData:
+    - WaveForm: 2
+      Pitch: 33
+      Volume: 3
+      Effect: 2
+    - WaveForm: 0
+      Pitch: 11
+      Volume: 0
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 33
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 33
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 33
+      Volume: 3
+      Effect: 2
+    - WaveForm: 0
+      Pitch: 11
+      Volume: 0
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 33
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 33
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 36
+      Volume: 3
+      Effect: 2
+    - WaveForm: 0
+      Pitch: 11
+      Volume: 0
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 33
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 33
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 33
+      Volume: 3
+      Effect: 2
+    - WaveForm: 0
+      Pitch: 11
+      Volume: 0
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 33
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 33
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 33
+      Volume: 3
+      Effect: 2
+    - WaveForm: 0
+      Pitch: 11
+      Volume: 0
+      Effect: 0
+    - WaveForm: 2
+      Pitch: 33
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 33
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 33
+      Volume: 3
+      Effect: 2
+    - WaveForm: 0
+      Pitch: 11
+      Volume: 0
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 33
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 33
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 38
+      Volume: 3
+      Effect: 2
+    - WaveForm: 0
+      Pitch: 11
+      Volume: 0
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 33
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 33
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 33
+      Volume: 3
+      Effect: 2
+    - WaveForm: 0
+      Pitch: 11
+      Volume: 0
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 33
+      Volume: 3
+      Effect: 2
+    - WaveForm: 2
+      Pitch: 33
+      Volume: 3
+      Effect: 2
+    FXSettings:
+      DropMaxAmount: 2
+      DropPitch: 0
+      ARPSpeed: 0
+  - Name: Explosion
+    Duration: 5
+    SectionMin: 0
+    SectionMax: 0
+    OctaveMin: 0
+    OctaveMax: 8
+    Loop: 0
+    SoundData:
+    - WaveForm: 5
+      Pitch: 7
+      Volume: 6
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 22
+      Volume: 6
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 28
+      Volume: 6
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 37
+      Volume: 6
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 49
+      Volume: 6
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 58
+      Volume: 6
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 61
+      Volume: 7
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 65
+      Volume: 7
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 71
+      Volume: 7
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 73
+      Volume: 7
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 75
+      Volume: 6
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 76
+      Volume: 6
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 79
+      Volume: 6
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 81
+      Volume: 6
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 84
+      Volume: 5
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 71
+      Volume: 5
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 59
+      Volume: 5
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 59
+      Volume: 5
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 59
+      Volume: 4
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 59
+      Volume: 4
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 59
+      Volume: 4
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 59
+      Volume: 4
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 59
+      Volume: 3
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 59
+      Volume: 3
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 59
+      Volume: 3
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 59
+      Volume: 3
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 59
+      Volume: 2
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 59
+      Volume: 2
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 59
+      Volume: 2
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 59
+      Volume: 2
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 59
+      Volume: 1
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 59
+      Volume: 1
+      Effect: 0
+    FXSettings:
+      DropMaxAmount: 0
+      DropPitch: 0
+      ARPSpeed: 0
+  - Name: Pffft
+    Duration: 8
+    SectionMin: 0
+    SectionMax: 0
+    OctaveMin: 0
+    OctaveMax: 8
+    Loop: 0
+    SoundData:
+    - WaveForm: 5
+      Pitch: 71
+      Volume: 3
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 71
+      Volume: 1
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 71
+      Volume: 2
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 71
+      Volume: 2
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 71
+      Volume: 3
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 77
+      Volume: 4
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 72
+      Volume: 3
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 82
+      Volume: 4
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 73
+      Volume: 3
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 74
+      Volume: 2
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 74
+      Volume: 3
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 71
+      Volume: 2
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 77
+      Volume: 3
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 74
+      Volume: 2
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 73
+      Volume: 3
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 73
+      Volume: 4
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 73
+      Volume: 3
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 73
+      Volume: 4
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 76
+      Volume: 3
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 75
+      Volume: 4
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 73
+      Volume: 4
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 72
+      Volume: 4
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 73
+      Volume: 2
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 73
+      Volume: 2
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 72
+      Volume: 3
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 73
+      Volume: 3
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 72
+      Volume: 2
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 72
+      Volume: 2
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 72
+      Volume: 4
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 72
+      Volume: 4
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 72
+      Volume: 3
+      Effect: 0
+    - WaveForm: 5
+      Pitch: 69
+      Volume: 3
+      Effect: 0
+    FXSettings:
+      DropMaxAmount: 0
+      DropPitch: 0
+      ARPSpeed: 0
+  m_customCurves:
+  - serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0038492735
+      value: -1.0022275
+      inSlope: 5.39377
+      outSlope: 5.39377
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.36200964
+      value: 0.9296071
+      inSlope: -3.6905153
+      outSlope: -3.6905153
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.057485517
+      outWeight: 0.05266947
+    - serializedVersion: 3
+      time: 0.66258
+      value: -0.47373548
+      inSlope: 12.294189
+      outSlope: 12.294189
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.06205301
+    - serializedVersion: 3
+      time: 0.994812
+      value: -1.0069504
+      inSlope: -1.6049476
+      outSlope: -1.6049476
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  - serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  - serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  - serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  - serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  - serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  - serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_customCurveColors:
+  - {r: 0.468, g: 0.106235996, b: 0.4658891, a: 1}
+  - {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  - {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  - {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  - {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  - {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  - {r: 0.5, g: 0.5, b: 0.5, a: 1}
