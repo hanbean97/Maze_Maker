@@ -10,15 +10,15 @@ public class SoundManager : MonoBehaviour
     [Header("#BGM")]
     [SerializeField] AudioClip[] bgmCilp;
     [SerializeField] float bgmVolume;
+    public float BgmVolume { get { return bgmVolume; } set { bgmVolume = value; } }
     AudioSource bgmPlayer;
     [Header("#SFX")]
     [SerializeField] AudioClip[] sfxCilps;
     [SerializeField] float sfxVolume;
+    public float SfxVolume { get { return sfxVolume; } set { sfxVolume = value; } }
     [SerializeField] int channels;
     AudioSource[] sfxPlayers;
     int channelIndex;
-    [SerializeField] Slider BgmSlider;
-    [SerializeField] Slider SfxSlider;
     //클립들을 이넘 순서에 맞게 저장
     public enum Bgm { }
     public enum Sfx { }
@@ -34,7 +34,6 @@ public class SoundManager : MonoBehaviour
             Destroy(this);
         }
         Init();
-        SettingInit();
     }
     void Init()
     {
@@ -57,11 +56,7 @@ public class SoundManager : MonoBehaviour
             sfxPlayers[i].volume = sfxVolume;
         }
     }
-    void SettingInit()
-    {
-        BgmSlider.value = bgmVolume;
-        SfxSlider.value = sfxVolume;
-    }
+  
     public void PlayBgm(Bgm bgm)
     {
         bgmPlayer.clip = bgmCilp[(int)bgm];
@@ -109,12 +104,5 @@ public class SoundManager : MonoBehaviour
             sfxPlayers[i].volume = volume;
         }
     }
-    public void BgmSliderChange()
-    {
-        BgmVolumeChange(BgmSlider.value);
-    }
-    public void SfxSliderChange()
-    {
-        SfxVolumeChange(SfxSlider.value);
-    }
+    
 }
