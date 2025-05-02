@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     public List<Transform> NowMonstertrs { get { return nowMonstertrs; } }
     Dictionary<string, string> InvenInMonster = new Dictionary<string, string>();//<인벤토리 위치,몬스터이름> 인벤토리안에있는 아군 정보 
     public Dictionary<string, string> InventoryMon { get { return InvenInMonster; } }
-    [SerializeField, Header("?????? ?????? ????????????")] int maxMonster;
+    [SerializeField, Header("?????? ?????? ????????????")] int maxMonster; 
     [SerializeField, Header("인벤토리 최대갯수 ")] int maxinvetory;
     public int MaxInventory { get { return maxinvetory; } }
     [SerializeField] List<List<byte>> goEnemyList;
