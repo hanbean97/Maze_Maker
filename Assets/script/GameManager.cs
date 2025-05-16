@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
   
     [Header("레벨마다 나올 몬스터")]
     [SerializeField] List<SpawnEnemy> spawnE;
+
     private void Awake()
     {
         if (instance == null)

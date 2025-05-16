@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Text.RegularExpressions;
+using TMPro;
 
 public class ButtonLinqSc : MonoBehaviour
 {
@@ -20,7 +22,8 @@ public class ButtonLinqSc : MonoBehaviour
     [SerializeField] Button mainmenuGoBt;
     [SerializeField] Button MainMengo;
     [SerializeField] GameObject MenuPanel;
-
+    [SerializeField] InputField nametextfield;
+    
     void Awake()
     {
         
@@ -28,8 +31,9 @@ public class ButtonLinqSc : MonoBehaviour
         wallch = GetComponent<WallmakeSc>();
         menuopen.onClick.AddListener(OpenMenu);
         Menuclose.onClick.AddListener(CloseMennu);
-        mainmenuGoBt.onClick.AddListener(backmainmenu);
+        mainmenuGoBt.onClick.AddListener(Finishgame);
         MainMengo.onClick.AddListener(backmainmenu);
+        nametextfield.onValueChanged.AddListener((w) => nametextfield.text = Regex.Replace(w, @"[^0-9a-zA-Z]", ""));
     }
     void Update()
     {
@@ -107,5 +111,12 @@ public class ButtonLinqSc : MonoBehaviour
     void backmainmenu()
     {
         SceneManager.LoadSceneAsync(0);
+    }
+    void Finishgame()
+    {
+
+
+
+        backmainmenu();
     }
 }
