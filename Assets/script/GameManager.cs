@@ -133,6 +133,7 @@ public class GameManager : MonoBehaviour
         if(waveLevel >-1)
         {
             randompattern = Random.Range(0, spawnE[waveLevel].SpwanNumber.Length);
+            //문자형인 데이터를 정수형으로 형변환
             char[] EnemyChar = spawnE[waveLevel].SpwanNumber[randompattern].ToString().ToCharArray();
             int[] enemyarray = new int[EnemyChar.Length];
             for(int i=0; i< EnemyChar.Length; i++)
@@ -142,7 +143,7 @@ public class GameManager : MonoBehaviour
                     enemyarray[i] = EnemyChar[i];
                 }
             }
-
+            //params를 이용한 가변 길이 적들 소환하는 함수
             Patterninstruct(enemyarray);
         }
         else

@@ -45,7 +45,8 @@ public class CamerMovingSc : MonoBehaviour
                 }
                 beforemosPos = Input.mousePosition;
                 beforeCamPos = cam.transform.position;
-                distancewoldcam = Mathf.Abs((cam.ViewportToWorldPoint(new Vector3(0,0,0))- cam.ViewportToWorldPoint(new Vector3(1, 0, 0))).x);//캠기준 좌우 끝점 길이
+                //캠기준 좌우 끝점 길이
+                distancewoldcam = Mathf.Abs((cam.ViewportToWorldPoint(new Vector3(0,0,0))- cam.ViewportToWorldPoint(new Vector3(1, 0, 0))).x);
                 ratioWidth = distancewoldcam / cam.pixelWidth;//비율
             }
             else if (Input.GetMouseButton(0))
