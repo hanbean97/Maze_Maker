@@ -13,13 +13,13 @@ public class InventorySc : MonoBehaviour
     {
         int count = GameManager.instance.MaxInventory;
         invenSlots = new Transform[count];
-        GameObject[] monster= GameManager.instance.LoadInInventory();//°ÔÀÓ¸Å´ÏÀú¿¡ ÀúÀåµÇ¾îÀÖ´Â Á¤º¸ ºÒ·¯¿È
+        GameObject[] monster= GameManager.instance.LoadInInventory();//ê²Œì„ë§¤ë‹ˆì €ì— ì €ì¥ë˜ì–´ìˆëŠ” ì •ë³´ ë¶ˆëŸ¬ì˜´
         for (int i = 0; i < count; i++)
         {
-            invenSlots[i] = Instantiate(Slot,transform).transform;//ÀÚ½ÄÀ¸·Î ÀÎº¥Åä¸® ½½·Î»ı¼º
+            invenSlots[i] = Instantiate(Slot,transform).transform;//ìì‹ìœ¼ë¡œ ì¸ë²¤í† ë¦¬ ìŠ¬ë¡œìƒì„±
             if (monster[i] != null)
             {
-                Dragable items =  Instantiate(item, invenSlots[i]).GetComponent<Dragable>();//½½·ÔÀüÃ¼¿¡ ¾ÆÀÌÅÛÀÚ½Ä »ı¼º
+                Dragable items =  Instantiate(item, invenSlots[i]).GetComponent<Dragable>();//ìŠ¬ë¡¯ì „ì²´ì— ì•„ì´í…œìì‹ ìƒì„±
                 items.SetMonster(monster[i]);
             }
 
@@ -31,7 +31,7 @@ public class InventorySc : MonoBehaviour
     }
      
   /// <summary>
-  ///  ÀÎº¥Åä¸®¿¡ µé¾îÀÖ´Â ¾ÆÀÌÅÛ À§Ä¡¿Í ±×¾ÆÀÌÅÛÀÇ ½ºÇÁ¶óÀÌÆ® Ã³À½ ÀúÀå Á¤º¸¸¦ ºÒ·¯¿Ã¶§ ÇÑ¹ø
+  ///  ì¸ë²¤í† ë¦¬ì— ë“¤ì–´ìˆëŠ” ì•„ì´í…œ ìœ„ì¹˜ì™€ ê·¸ì•„ì´í…œì˜ ìŠ¤í”„ë¼ì´íŠ¸ ì²˜ìŒ ì €ì¥ ì •ë³´ë¥¼ ë¶ˆëŸ¬ì˜¬ë•Œ í•œë²ˆ
   /// </summary>
   /// <param name="_inventory"></param>
     public void SetInvetory(GameObject _Monster)
@@ -41,19 +41,19 @@ public class InventorySc : MonoBehaviour
         {
             if (invenSlots[i].childCount == 0)
             {
-                Dragable items = Instantiate(item, invenSlots[i]).GetComponent<Dragable>();//½½·ÔÀüÃ¼¿¡ ¾ÆÀÌÅÛÀÚ½Ä »ı¼º
+                Dragable items = Instantiate(item, invenSlots[i]).GetComponent<Dragable>();//ìŠ¬ë¡¯ì „ì²´ì— ì•„ì´í…œìì‹ ìƒì„±
                 items.SetMonster(_Monster);
                 break;
             }
-        }
+        } 
     }
-    void InvenSave()//°ÔÀÓµµÁß ÀúÀå
+    void InvenSave()//ê²Œì„ë„ì¤‘ ì €ì¥
     {
-        //  string jsonData = JsonUtility.ToJson(inven,true);// ³¡¿¡ true´Â »ç¶÷ÀÌ ÀĞ±â ÁÁÀºÇüÅÂ·Î º¯È­
-        // string path = Path.Combine(Application.dataPath + "itemData.json");//ÇÕÃ¼ = °æ·Î°¡ ¿î¿µÃ¼Á¦¸¶´Ù ´Ù¸¦¼öÀÖ¾î¼­ +¸¦ »ç¿ë¾ÈÇÏ°íCombineÀ¸·Î ÇÕÃ¼
-        // File.WriteAllText(path, jsonData);// (°æ·Î,µ¥ÀÌÅÍ)
+        //  string jsonData = JsonUtility.ToJson(inven,true);// ëì— trueëŠ” ì‚¬ëŒì´ ì½ê¸° ì¢‹ì€í˜•íƒœë¡œ ë³€í™”
+        // string path = Path.Combine(Application.dataPath + "itemData.json");//í•©ì²´ = ê²½ë¡œê°€ ìš´ì˜ì²´ì œë§ˆë‹¤ ë‹¤ë¥¼ìˆ˜ìˆì–´ì„œ +ë¥¼ ì‚¬ìš©ì•ˆí•˜ê³ Combineìœ¼ë¡œ í•©ì²´
+        // File.WriteAllText(path, jsonData);// (ê²½ë¡œ,ë°ì´í„°)
     }
-    void InvenLoad()//°ÔÀÓ ½ÃÀÛ½Ã ºÒ·¯¿Í Ã¼Å©
+    void InvenLoad()//ê²Œì„ ì‹œì‘ì‹œ ë¶ˆëŸ¬ì™€ ì²´í¬
     {
         string path = Path.Combine(Application.dataPath, "itemData.json");
         string jsonData = File.ReadAllText(path);

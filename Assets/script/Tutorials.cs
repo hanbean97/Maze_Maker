@@ -61,7 +61,7 @@ public class Tutorials : MonoBehaviour
         wallBt.enabled = false;
         startBt.enabled = false;
         maintext.gameObject.SetActive(true);
-        maintext.text = "MazeMaker´Â ¹Ì·Î¸¦ ¸¸µé°í ¸ó½ºÅÍ¸¦ ¼ÒÈ¯ÇØ¼­ ¸ô·Á¿À´Â ÀûÀ» ¸·´Â °ÔÀÓÀÔ´Ï´Ù.";
+        maintext.text = "MazeMakerëŠ” ë¯¸ë¡œë¥¼ ë§Œë“¤ê³  ëª¬ìŠ¤í„°ë¥¼ ì†Œí™˜í•´ì„œ ëª°ë ¤ì˜¤ëŠ” ì ì„ ë§‰ëŠ” ê²Œìž„ìž…ë‹ˆë‹¤.";
         timer += Time.deltaTime;
         if(timer > 5)
         {
@@ -71,7 +71,7 @@ public class Tutorials : MonoBehaviour
     }
     void root1()
     {
-        maintext.text = "ÀûµéÀÌ ´øÀü¿¡ ¿À·¡ ÀÖÀ»¼ö·Ï ´õ ¸¹Àº Á¡¼ö¸¦ ¾ò½À´Ï´Ù.";
+        maintext.text = "ì ë“¤ì´ ë˜ì „ì— ì˜¤ëž˜ ìžˆì„ìˆ˜ë¡ ë” ë§Žì€ ì ìˆ˜ë¥¼ ì–»ìŠµë‹ˆë‹¤.";
         timer += Time.deltaTime;
         if (timer > 5)
         {
@@ -88,13 +88,13 @@ public class Tutorials : MonoBehaviour
         else
         {
             ismissingmessage = true;
-            maintext.text = "¹Ì¿Ï¼ºµÈ º®ÀÌ ÀÖ½À´Ï´Ù.";
+            maintext.text = "ë¯¸ì™„ì„±ëœ ë²½ì´ ìžˆìŠµë‹ˆë‹¤.";
         }
     }
     void root2()
     {
         wallBt.enabled = true;
-        maintext.text = " Wall ¹öÆ°À» ´­·¯ º¸¼¼¿ä.";
+        maintext.text = " Wall ë²„íŠ¼ì„ ëˆŒëŸ¬ ë³´ì„¸ìš”.";
         if (wallbuttonCheck == true)
         {
             next++; 
@@ -104,7 +104,7 @@ public class Tutorials : MonoBehaviour
     {
         if(ismissingmessage ==false)
         {
-            maintext.text = "make¹öÆ°À» ´­·¯ ¸ðµå¸¦ ¹Ù²Ü¼ö ÀÖ½À´Ï´Ù. make¸ðµå´Â º®À» »ý¼ºÇÏ°í erase¸ðµå´Â º®À» Áö¿ó´Ï´Ù. \n ¹Ì·Î¸¦ ¿Ï¼ºÇÏ¼Ì´Ù¸é Wall¹öÆ°À» ´­·¯ÁÖ¼¼¿ä.";
+            maintext.text = "makeë²„íŠ¼ì„ ëˆŒëŸ¬ ëª¨ë“œë¥¼ ë°”ê¿€ìˆ˜ ìžˆìŠµë‹ˆë‹¤. makeëª¨ë“œëŠ” ë²½ì„ ìƒì„±í•˜ê³  eraseëª¨ë“œëŠ” ë²½ì„ ì§€ì›ë‹ˆë‹¤. \n ë¯¸ë¡œë¥¼ ì™„ì„±í•˜ì…¨ë‹¤ë©´ Wallë²„íŠ¼ì„ ëˆŒëŸ¬ì£¼ì„¸ìš”.";
         }
         if (wallbuttonCheck == false)
         {
@@ -114,7 +114,7 @@ public class Tutorials : MonoBehaviour
     }
     void root4()
     {
-        maintext.text = "i Å°¸¦ ´­·¯ ÀÎº¥Åä¸®¸¦ ¿­¾î º¸¼¼¿ä.";
+        maintext.text = "i í‚¤ë¥¼ ëˆŒëŸ¬ ì¸ë²¤í† ë¦¬ë¥¼ ì—´ì–´ ë³´ì„¸ìš”."; 
         if(Input.GetKeyDown(KeyCode.I))
         {
             next++;
@@ -122,7 +122,7 @@ public class Tutorials : MonoBehaviour
     }
     void root5()
     {
-        maintext.text = "ÀÎº¥Åä¸® ¾ÈÀÇ ¸ó½ºÅÍ¸¦ µå·¡±×ÇØ ¿øÇÏ´Â ¹Ù´Ú¿¡ ¸ó½ºÅÍ¸¦ ¼ÒÈ¯ÇÏ°í Start¹öÆ°À» ´­·¯ °ÔÀÓÀ» ½ÃÀÛÇÏ¼¼¿ä.";
+        maintext.text = "ì¸ë²¤í† ë¦¬ ì•ˆì˜ ëª¬ìŠ¤í„°ë¥¼ ë“œëž˜ê·¸í•´ ì›í•˜ëŠ” ë°”ë‹¥ì— ëª¬ìŠ¤í„°ë¥¼ ì†Œí™˜í•˜ê³  Startë²„íŠ¼ì„ ëˆŒëŸ¬ ê²Œìž„ì„ ì‹œìž‘í•˜ì„¸ìš”.";
         startBt.enabled = true;
         timer += Time.deltaTime;
         if (timer > 8)

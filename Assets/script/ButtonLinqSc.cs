@@ -22,7 +22,7 @@ public class ButtonLinqSc : MonoBehaviour
     [SerializeField] Button mainmenuGoBt;
     [SerializeField] Button MainMengo;
     [SerializeField] GameObject MenuPanel;
-    [SerializeField] InputField nametextfield;
+    [SerializeField] TMP_InputField nametextfield;
     
     void Awake()
     {
@@ -114,8 +114,10 @@ public class ButtonLinqSc : MonoBehaviour
     }
     void Finishgame()
     {
+        if(nametextfield.text == "")
+        {
 
-
+        }
 
         backmainmenu();
     }

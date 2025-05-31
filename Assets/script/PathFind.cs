@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PathFind : MonoBehaviour
 {
-    protected List<Node> FinalNodeList;//ÃÖÁ¾·çÆ®
-    Node StartNode, TargetNode, CurNode;//Å½»ö½ÃÀÛÁ¡, Å½»ö ¸ñÀûÁö , Å½»öÁßÀÎ ³ëµå
-    List<Node> OpenList;// °¥¼öÀÖ´Â ³ëµå 
-    List<Node> CloseList;// Å½»öÀÌ ³¡³­ ³ëµå
+    protected List<Node> FinalNodeList;//ìµœì¢…ë£¨íŠ¸
+    Node StartNode, TargetNode, CurNode;//íƒìƒ‰ì‹œì‘ì , íƒìƒ‰ ëª©ì ì§€ , íƒìƒ‰ì¤‘ì¸ ë…¸ë“œ
+    List<Node> OpenList;// ê°ˆìˆ˜ìˆëŠ” ë…¸ë“œ 
+    List<Node> CloseList;// íƒìƒ‰ì´ ëë‚œ ë…¸ë“œ
     public bool PathFinding(Vector2Int nowPos,Vector2Int targetPos)
     {
         StartNode =AsrarAlgo.instance.NodeArray[nowPos.x, nowPos.y];
@@ -15,37 +15,37 @@ public class PathFind : MonoBehaviour
         OpenList = new List<Node>() { StartNode };
         CloseList = new List<Node>();
         FinalNodeList = new List<Node>();
-        while (OpenList.Count > 0)// openList¾ø´Ù = °¥°÷ÀÌ ¾Æ¿¹¾ø´Ù
+        while (OpenList.Count > 0)// openListì—†ë‹¤ = ê°ˆê³³ì´ ì•„ì˜ˆì—†ë‹¤
         {
-            CurNode = OpenList[0];//³ëµå ½ÃÀÛÁ¡
+            CurNode = OpenList[0];//ë…¸ë“œ ì‹œì‘ì 
             for (int i = 1; i < OpenList.Count; i++)
             {
-                //°¥¼öÀÖ´ÂÁöÁ¡Áß ÇöÁöÁ¡¿¡¼­ F,H,G°¡ °¡Àå³·Àº ÁöÁ¡À» ¸ÕÀú ¼±ÅÃ
+                //ê°ˆìˆ˜ìˆëŠ”ì§€ì ì¤‘ í˜„ì§€ì ì—ì„œ F,H,Gê°€ ê°€ì¥ë‚®ì€ ì§€ì ì„ ë¨¼ì € ì„ íƒ
                 if (OpenList[i].F <= CurNode.F && OpenList[i].H < CurNode.H && OpenList[i].G < CurNode.G)
                 {
                     CurNode = OpenList[i];
                 }
             }
-            OpenList.Remove(CurNode);//Å½»öÀÌ ³¡³­ ³ëµå´Â ¿ÀÇÂ¸®½ºÆ®¿¡¼­ »èÁ¦
-            CloseList.Add(CurNode); // Å½»öÀÌ ³¡³­ ³ëµå¸¦ ´İÈù¸®½ºÆ®¿¡ ³ÖÀ½
-            if (CurNode == TargetNode) //ÇöÀç³ëµå°¡ µµÂøÁöÀÏ¶§
+            OpenList.Remove(CurNode);//íƒìƒ‰ì´ ëë‚œ ë…¸ë“œëŠ” ì˜¤í”ˆë¦¬ìŠ¤íŠ¸ì—ì„œ ì‚­ì œ
+            CloseList.Add(CurNode); // íƒìƒ‰ì´ ëë‚œ ë…¸ë“œë¥¼ ë‹«íŒë¦¬ìŠ¤íŠ¸ì— ë„£ìŒ
+            if (CurNode == TargetNode) //í˜„ì¬ë…¸ë“œê°€ ë„ì°©ì§€ì¼ë•Œ
             {
                 Node TatgetCurNode = TargetNode;
-                //Å¸°Ù³ëµå°¡ ½ºÅ¸Æ®³ëµå¿Í °°¾ÆÁú¶§±îÁö
+                //íƒ€ê²Ÿë…¸ë“œê°€ ìŠ¤íƒ€íŠ¸ë…¸ë“œì™€ ê°™ì•„ì§ˆë•Œê¹Œì§€
                 while (TatgetCurNode != StartNode)
                 {
-                    //Å¸°Ù ³ëµå ÁöÁ¡ºÎÅÍ ÃÖÁ¾·çÆ®¿¡ ³Ö°í
+                    //íƒ€ê²Ÿ ë…¸ë“œ ì§€ì ë¶€í„° ìµœì¢…ë£¨íŠ¸ì— ë„£ê³ 
                     FinalNodeList.Add(TatgetCurNode);
-                    // Å¸°Ù³ëµå¸¦ ¿À°ÔµÈ ÀÌÀü³ëµå¸¦ Å¸°Ù³ëµå·Î º¯°æ -> ½ÃÀÛÁ¡±îÁö ¹İº¹
+                    // íƒ€ê²Ÿë…¸ë“œë¥¼ ì˜¤ê²Œëœ ì´ì „ë…¸ë“œë¥¼ íƒ€ê²Ÿë…¸ë“œë¡œ ë³€ê²½ -> ì‹œì‘ì ê¹Œì§€ ë°˜ë³µ
                     TatgetCurNode = TatgetCurNode.ParentNode;
                 }
-                FinalNodeList.Add(StartNode);//¸¶Áö¸· ½ÃÀÛÁöÁ¡±îÁö ³Ö°í
-                FinalNodeList.Reverse();// ¸®¹ö½º ½ÃÄÑ ½ÃÀÛÁöÁ¡ºÎÅÍ ¼ø¼­´ë·Î
-                return true;// ±æÃ£±â ¼º°ø 
+                FinalNodeList.Add(StartNode);//ë§ˆì§€ë§‰ ì‹œì‘ì§€ì ê¹Œì§€ ë„£ê³ 
+                FinalNodeList.Reverse();// ë¦¬ë²„ìŠ¤ ì‹œì¼œ ì‹œì‘ì§€ì ë¶€í„° ìˆœì„œëŒ€ë¡œ
+                return true;// ê¸¸ì°¾ê¸° ì„±ê³µ 
             }
-            OpenListAdd(CurNode.x, CurNode.y + 1);//Çö³ëµåÀÇ(´ÙÀ½À§Ä¡ Å½»ö)
+            OpenListAdd(CurNode.x, CurNode.y + 1);//í˜„ë…¸ë“œì˜(ë‹¤ìŒìœ„ì¹˜ íƒìƒ‰)
             OpenListAdd(CurNode.x + 1, CurNode.y);
-            OpenListAdd(CurNode.x, CurNode.y - 1);
+            OpenListAdd(CurNode.x, CurNode.y - 1); 
             OpenListAdd(CurNode.x - 1, CurNode.y);
         }
        return false;
@@ -53,25 +53,25 @@ public class PathFind : MonoBehaviour
     }
     private void OpenListAdd(int checkX, int checkY)
     {
-        //±æÀÌ+ º® Ã¼Å©
+        //ê¸¸ì´+ ë²½ ì²´í¬
         if (checkX >= 0 && checkX <AsrarAlgo.instance.Size.x && checkY >= 0 && checkY 
             < AsrarAlgo.instance.Size.y && AsrarAlgo.instance.NodeArray[checkX, checkY].isWall 
             && !CloseList.Contains(AsrarAlgo.instance.NodeArray[checkX, checkY]))
         {
-            //ÇöÀç³ëµå¿¡ ÀÌ¿ô³ëµåµé
+            //í˜„ì¬ë…¸ë“œì— ì´ì›ƒë…¸ë“œë“¤
             Node NeighborNode = AsrarAlgo.instance.NodeArray[checkX, checkY];
-            // ´ë°¢¼± Ã¼Å©(ÇöÇÁ·ÎÁ§Æ®¿¡¼± ÇÊ¿ä¾øÀ½)
+            // ëŒ€ê°ì„  ì²´í¬(í˜„í”„ë¡œì íŠ¸ì—ì„  í•„ìš”ì—†ìŒ)
             int MoveCost = CurNode.G + (CurNode.x - checkX == 0 || CurNode.y - checkY == 0 ? 10 : 14);
-            //ÀÌ¿ô³ëµå°¡ ¿ÀÇÂ¸®½ºÆ®¿¡ ¾øÀ¸¸é 
+            //ì´ì›ƒë…¸ë“œê°€ ì˜¤í”ˆë¦¬ìŠ¤íŠ¸ì— ì—†ìœ¼ë©´ 
             if (MoveCost < NeighborNode.G || !OpenList.Contains(NeighborNode))
             {
-                // ÇöÀç³ëµå+ÀÌµ¿°¡ÁßÄ¡¸¦ ³Ö°í
+                // í˜„ì¬ë…¸ë“œ+ì´ë™ê°€ì¤‘ì¹˜ë¥¼ ë„£ê³ 
                 NeighborNode.G = MoveCost;
-                //Å¸°Ù³ëµå±îÁö °¡´Â±æÀÌ °è»ê 
+                //íƒ€ê²Ÿë…¸ë“œê¹Œì§€ ê°€ëŠ”ê¸¸ì´ ê³„ì‚° 
                 NeighborNode.H = (Mathf.Abs(NeighborNode.x - TargetNode.x) + Mathf.Abs(NeighborNode.y - TargetNode.y)) * 10;
-                // ÀÌ ÀÌ¿ô³ëµåÀÇ ºÎ¸ğ³ëµå¸¦ Çö³ëµå·Î ¹Ù²Ş
+                // ì´ ì´ì›ƒë…¸ë“œì˜ ë¶€ëª¨ë…¸ë“œë¥¼ í˜„ë…¸ë“œë¡œ ë°”ê¿ˆ
                 NeighborNode.ParentNode = CurNode;
-                //°¥¼öÀÖ´Â ³ëµå¿¡ Ãß°¡
+                //ê°ˆìˆ˜ìˆëŠ” ë…¸ë“œì— ì¶”ê°€
                 OpenList.Add(NeighborNode);
             }
         }
