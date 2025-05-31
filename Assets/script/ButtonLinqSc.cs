@@ -116,9 +116,10 @@ public class ButtonLinqSc : MonoBehaviour
     {
         if(nametextfield.text == "")
         {
-
+            nametextfield.text = "aaa";
         }
 
+        LoadDatas.instance.RankAdd(nametextfield.text,(int)GameManager.instance.Score);
         backmainmenu();
     }
 }

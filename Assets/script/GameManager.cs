@@ -305,6 +305,12 @@ public class GameManager : MonoBehaviour
             }
             else if (isgamestart == true && isWaveClear == false )
             {
+                if(score >= LoadDatas.)
+                {
+
+                }
+
+
                 GameoverPanel.SetActive(true);
                 GameoverText.text = $"{(int)score}";
             }
@@ -314,7 +320,7 @@ public class GameManager : MonoBehaviour
             int count = nowMonstertrs.Count;
             for (int i = 0; i < count; i++)
             {
-           //     nowMonstertrs[i].Item1.position = nowMonstertrs[i].Item2.MyPos;
+           //    nowMonstertrs[i].Item1.position = nowMonstertrs[i].Item2.MyPos;
             }
 
             OpenSeletWindow.SetActive(true);
