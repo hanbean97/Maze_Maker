@@ -7,7 +7,7 @@ public class LoadDatas : MonoBehaviour
 
     public static LoadDatas instance;
     List<(string,int)> ranking = new List<(string,int)>();
-   public List<(string, int)> Rlists { get; set; }
+    public List<(string, int)> Rlists {get{ return ranking; }  }
     public int maxrank;
     void Start()
     {
@@ -26,14 +26,11 @@ public class LoadDatas : MonoBehaviour
 
     public void RankAdd(string name, int score)
     {
-        if (ranking[ranking.Count-1].Item2 < score)
+        ranking.Add((name,score));
+        ranking.Sort((a, b) => b.Item2.CompareTo(a.Item2));
+        if (ranking.Count > maxrank)
         {
-            if(score >1)
-            {
-                ranking.RemoveAt(ranking.Count-1);
-            }
-            ranking.Add((name,score));
-
+            ranking.RemoveAt(maxrank+1);
         }
     }
    
