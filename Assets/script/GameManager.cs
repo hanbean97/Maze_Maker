@@ -305,7 +305,7 @@ public class GameManager : MonoBehaviour
             }
             else if (isgamestart == true && isWaveClear == false )
             {
-                if(score >= LoadDatas.)
+                if(score >= (int)LoadDatas.instance.Rlists[LoadDatas.instance.maxrank].Item2)
                 {
 
                 }

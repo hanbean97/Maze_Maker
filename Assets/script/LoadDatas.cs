@@ -7,8 +7,8 @@ public class LoadDatas : MonoBehaviour
 
     public static LoadDatas instance;
     List<(string,int)> ranking = new List<(string,int)>();
-   
-
+   public List<(string, int)> Rlists { get; set; }
+    public int maxrank;
     void Start()
     {
 
