@@ -12,18 +12,21 @@ public class MenuScene : MonoBehaviour
     bool isstart = false;
     float timmer;
     [SerializeField] float nextscenetime;
-    [SerializeField] Button LoadBt;
     [SerializeField] Button MenuOpenBt;
     [SerializeField] Button MenuCloseBt;
     [SerializeField] Button QuitBt;
     [SerializeField] GameObject MenuPanel;
+    [SerializeField] Button RankOpenBt;
+    [SerializeField] Button RankCloseBt;
+    [SerializeField] GameObject RankPanel;
     void Start()
     {
         startBt.onClick.AddListener(nextScecnbool);
-        LoadBt.onClick.AddListener(LoadGames);
         MenuOpenBt.onClick.AddListener(OpenMenu);
         MenuCloseBt.onClick.AddListener(CloseMenu);
         QuitBt.onClick.AddListener(QuitGmae);
+        RankOpenBt.onClick.AddListener(onRankPanel);
+        RankCloseBt.onClick.AddListener(offRankPanel);
     }
 
     void Update()
@@ -57,8 +60,12 @@ public class MenuScene : MonoBehaviour
     {
         Application.Quit();
     }
-    private void LoadGames()
+   private void onRankPanel()
     {
-
+        RankPanel.SetActive(true);
+    }
+    private void offRankPanel()
+    {
+        RankPanel.SetActive(false);
     }
 }

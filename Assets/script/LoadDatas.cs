@@ -6,12 +6,11 @@ public class LoadDatas : MonoBehaviour
 {
 
     public static LoadDatas instance;
-    List<(string,int)> ranking = new List<(string,int)>();
+    List<(string,int)> ranking;
     public List<(string, int)> Rlists {get{ return ranking; }  }
-    public int maxrank;
-    void Start()
+    public int maxrank =10;
+    void Awake()
     {
-
         if (instance == null)
         {
             instance = this;
@@ -20,9 +19,19 @@ public class LoadDatas : MonoBehaviour
         {
             Destroy(instance);
         }
+        DontDestroyOnLoad(this);
 
-        DontDestroyOnLoad(this);    
+        SaveLoadData rloads = SaveLoad.LoadGame();
+        if (rloads != null)
+        {
+            ranking = rloads.RankLists;
+        }
+        else
+        {
+            ranking = new List<(string, int)>();
+        }
     }
+
 
     public void RankAdd(string name, int score)
     {
@@ -30,8 +39,9 @@ public class LoadDatas : MonoBehaviour
         ranking.Sort((a, b) => b.Item2.CompareTo(a.Item2));
         if (ranking.Count > maxrank)
         {
-            ranking.RemoveAt(maxrank+1);
+            ranking.RemoveAt(maxrank);
         }
+        SaveLoad.SaveGame();
     }
    
 }

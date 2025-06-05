@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -63,7 +64,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] GameObject GameoverPanel;
     [SerializeField] TMP_Text GameoverText;
-  
+    [SerializeField] GameObject ranktext;
+    bool chartin= false;
+    public bool ChartIn { get { return chartin; } }
     [Header("레벨마다 나올 몬스터")]
     [SerializeField] List<SpawnEnemy> spawnE;
 
@@ -305,9 +308,10 @@ public class GameManager : MonoBehaviour
             }
             else if (isgamestart == true && isWaveClear == false )
             {
-                if(score >= (int)LoadDatas.instance.Rlists[LoadDatas.instance.maxrank].Item2)
+                if(LoadDatas.instance.Rlists.Count < LoadDatas.instance.maxrank||score >= LoadDatas.instance.Rlists[LoadDatas.instance.maxrank-1].Item2)
                 {
-
+                    chartin = true;
+                    ranktext.gameObject.SetActive(true);
                 }
 
 

@@ -23,6 +23,7 @@ public class ButtonLinqSc : MonoBehaviour
     [SerializeField] Button MainMengo;
     [SerializeField] GameObject MenuPanel;
     [SerializeField] TMP_InputField nametextfield;
+    bool isend= false;
     
     void Awake()
     {
@@ -114,12 +115,20 @@ public class ButtonLinqSc : MonoBehaviour
     }
     void Finishgame()
     {
-        if(nametextfield.text == "")
-        {
-            nametextfield.text = "aaa";
-        }
+        if (isend == true) return;
 
-        LoadDatas.instance.RankAdd(nametextfield.text,(int)GameManager.instance.Score);
+        isend = true;
+
+        if(GameManager.instance.ChartIn == true)
+        {
+            if (nametextfield.text == "")
+            {
+                nametextfield.text = "aaa";
+            }
+
+            LoadDatas.instance.RankAdd(nametextfield.text, (int)GameManager.instance.Score);
+        }
+      
         backmainmenu();
     }
 }
