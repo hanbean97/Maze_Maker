@@ -722,7 +722,7 @@ MonoBehaviour:
   fade: {fileID: 556466078}
   GameoverPanel: {fileID: 8543311}
   GameoverText: {fileID: 760595321}
-  ranktext: {fileID: 0}
+  ranktext: {fileID: 488789397}
   spawnE:
   - SpwanNumber: 57040000bc040000ae080000
   - SpwanNumber: 62040000ce560000592f0000

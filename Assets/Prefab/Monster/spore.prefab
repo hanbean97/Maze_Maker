@@ -42,7 +42,6 @@ GameObject:
   - component: {fileID: 26408463194595433}
   - component: {fileID: 5977727566530152259}
   - component: {fileID: 663963118727099351}
-  - component: {fileID: 3495625000922173478}
   m_Layer: 8
   m_Name: Image
   m_TagString: Monster
@@ -138,19 +137,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3495625000922173478
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1299116481031183852}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbec615d04a4ce046bb5d263356f53b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Attackcoll: {fileID: 0}
 --- !u!1 &4876546578012998620
 GameObject:
   m_ObjectHideFlags: 0

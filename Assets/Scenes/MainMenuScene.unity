@@ -376,11 +376,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b1c77053cde7734eaffb4e62b1bc951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgmCilp: []
-  bgmVolume: 0
-  sfxCilps: []
-  sfxVolume: 0
-  channels: 0
+  bgmCilp:
+  - {fileID: 8300000, guid: 0ad591428b0c18c4da51fe3bf98dbc63, type: 3}
+  - {fileID: 8300000, guid: 559c232a43caebe41870ce54786f604e, type: 3}
+  bgmVolume: 0.5
+  sfxCilps:
+  - {fileID: 8300000, guid: 88d30c9c845d25f499caa621c4205056, type: 3}
+  sfxVolume: 0.5
+  channels: 5
 --- !u!4 &73610357
 Transform:
   m_ObjectHideFlags: 0
