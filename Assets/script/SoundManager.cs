@@ -19,9 +19,9 @@ public class SoundManager : MonoBehaviour
     [SerializeField] int channels;
     AudioSource[] sfxPlayers;
     int channelIndex;
-    //Å¬¸³µéÀ» ÀÌ³Ñ ¼ø¼­¿¡ ¸Â°Ô ÀúÀå
-    public enum Bgm { }
-    public enum Sfx { }
+    //í´ë¦½ë“¤ì„ ì´ë„˜ ìˆœì„œì— ë§ê²Œ ì €ì¥
+    public enum Bgm {start,fight }
+    public enum Sfx {hit }
 
     private void Awake()
     {
@@ -33,6 +33,8 @@ public class SoundManager : MonoBehaviour
         {
             Destroy(this);
         }
+        
+        DontDestroyOnLoad(gameObject);
         Init();
     }
     void Init()

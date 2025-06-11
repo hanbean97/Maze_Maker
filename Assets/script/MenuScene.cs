@@ -27,6 +27,8 @@ public class MenuScene : MonoBehaviour
         QuitBt.onClick.AddListener(QuitGmae);
         RankOpenBt.onClick.AddListener(onRankPanel);
         RankCloseBt.onClick.AddListener(offRankPanel);
+
+        SoundManager.instance.PlayBgm(SoundManager.Bgm.start);
     }
 
     void Update()

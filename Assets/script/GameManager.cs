@@ -94,6 +94,8 @@ public class GameManager : MonoBehaviour
         MonsterGift = OpenSeletWindow.GetComponent<GiftChoice>();
         ScoreText.text = $"Score : {(int)score}";
         LevelText.text = $"Level : {waveLevel}";
+
+        SoundManager.instance.PlayBgm(SoundManager.Bgm.fight);
     }
     void backmainmenu()
     {
