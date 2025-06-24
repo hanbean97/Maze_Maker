@@ -31,7 +31,7 @@ public class ButtonLinqSc : MonoBehaviour
         anistate = invneanim["inventoryanim"];
         wallch = GetComponent<WallmakeSc>();
         menuopen.onClick.AddListener(OpenMenu);
-        Menuclose.onClick.AddListener(CloseMennu);
+        Menuclose.onClick.AddListener(OpenMenu);
         mainmenuGoBt.onClick.AddListener(Finishgame);
         MainMengo.onClick.AddListener(backmainmenu);
         nametextfield.onValueChanged.AddListener((w) => nametextfield.text = Regex.Replace(w, @"[^0-9a-zA-Z]", ""));
@@ -101,14 +101,10 @@ public class ButtonLinqSc : MonoBehaviour
     }
     void OpenMenu()
     {
-        Time.timeScale = 0;
-        MenuPanel.SetActive(true);
+        MenuPanel.SetActive(!MenuPanel.activeSelf);
+        Time.timeScale = MenuPanel.activeSelf ? 0:1;
     }
-    void CloseMennu()
-    {
-        Time.timeScale = 1;
-        MenuPanel.SetActive(false);
-    }
+    
     void backmainmenu()
     {
         SceneManager.LoadSceneAsync(0);

@@ -1,31 +1,90 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FixedViews : MonoBehaviour
 {
-    [SerializeField] int setWidth = 1920;//¿øÇÏ´Â ¼³Á¤ ³Êºñ
-    [SerializeField] int setHeight = 1080;//¿øÇÏ´Â ¼³Á¤ ³ôÀÌ
-    int deviceWidth = Screen.width; // ±â±â³Êºñ
-    int deviceHeight = Screen.height;//±â±â ³ôÀÌ
+    
+    [Header("í™”ë©´ë¹„")]
+    [SerializeField] bool istargetRatio;
+    [SerializeField] int[] targetRatio = new int[2];
+    [SerializeField] bool ishasHz;
+    [SerializeField] Toggle fullscreenToggle;
+    [SerializeField] TMP_Dropdown resolutiondropdown;
+    List<Resolution> resolutions;
+    public int ResolutionIndex { get { return PlayerPrefs.GetInt("ResolutionIndex", 0); } set { PlayerPrefs.SetInt("ResolutionIndex", value); } }
+    public bool isFullscreen { get { return PlayerPrefs.GetInt("isFull", 1) == 1; } set { PlayerPrefs.SetInt("isFull", value ? 1 : 0); } }
 
-    void Start()
+    public void Start()
     {
-      //  SetReasolution1();
+        resolutiondropdown.onValueChanged.AddListener(DropDownOptionChange);
+        fullscreenToggle.onValueChanged.AddListener(FullscreenToggleChange);
+
+#if !UNITY_EDITOR
+       Invoke(nameof(SetReasolution), 0.1f);
+#endif
     }
-    public void SetReasolution1()
+    public void SetReasolution()
     {
-        //Screen.SetResolution(setWidth, (int)(((float)deviceHeight / deviceWidth) * setWidth), true);//SetResolution
-        Screen.SetResolution((int)(((float)deviceWidth / deviceHeight) * setHeight), setHeight, true);//SetResolution ³ôÀÌÁßÁ¡
-        if ((float)setWidth / setHeight < (float)deviceWidth / deviceHeight)//±â±âÀÇ ÇØ»óµµºñ°¡ ´õÅ«°æ¿ì
+        resolutions = new List<Resolution>(Screen.resolutions);
+        resolutions.Reverse();
+
+        if (istargetRatio)
         {
-            float newWidth = ((float)setWidth / setWidth) / ((float)deviceWidth / deviceHeight);//»õ·Î¿î³Êºñ
-            Camera.main.rect = new Rect((1f - newWidth) / 2f, 0f, newWidth, 1f);// »õ·Î¿î RectÀû¿ë
+            resolutions = resolutions.FindAll(x => (float)x.width / x.height == (float)targetRatio[0] / targetRatio[1]);
         }
-        else // °ÔÀÓÀÇ ÇØ»óµµ ºñ°¡ ´õÅ«°æ¿ì
+
+        if (ishasHz && resolutions.Count > 0)
         {
-            float newHeight = ((float)deviceWidth / deviceHeight) / ((float)setWidth / setHeight); // »õ·Î¿î³ôÀÌ
-            Camera.main.rect = new Rect(0f, (1f - newHeight) / 2f, 1f, newHeight);// »õ·Î¿î RectÀû¿ë
+            List<Resolution> tempresolutions = new List<Resolution>();
+            int curWidth = resolutions[0].width;
+            int curHeight = resolutions[0].height;
+            tempresolutions.Add(resolutions[0]);
+
+            foreach (Resolution resolution in resolutions)
+            {
+                if (curWidth != resolution.width || curHeight != resolution.height)
+                {
+                    tempresolutions.Add(resolution);
+                    curWidth = resolution.width;
+                    curHeight = resolution.height;
+                }
+            }
+            resolutions = tempresolutions;
         }
+
+        List<string> options = new List<string>();
+        foreach (Resolution resolution in resolutions)
+        {
+            string option = $"{resolution.width} x {resolution.height}";
+            if (ishasHz)
+            {
+                option += $"{resolution.refreshRateRatio} Hz";
+            }
+            options.Add(option);
+        }
+        resolutiondropdown.ClearOptions();
+        resolutiondropdown.AddOptions(options);
+
+        resolutiondropdown.value = ResolutionIndex;
+        fullscreenToggle.isOn = isFullscreen;
+
+
     }
+
+    public void DropDownOptionChange(int resolutionIndex)
+    {
+        ResolutionIndex = resolutionIndex;
+        Resolution resolution = resolutions[resolutionIndex];
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreenMode, resolution.refreshRateRatio);
+
+    }
+    public void FullscreenToggleChange(bool isfull)
+    {
+        isFullscreen = isfull;
+        Screen.fullScreen = isfull;
+    }
+
 }

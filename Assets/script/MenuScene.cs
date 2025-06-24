@@ -22,11 +22,11 @@ public class MenuScene : MonoBehaviour
     void Start()
     {
         startBt.onClick.AddListener(nextScecnbool);
-        MenuOpenBt.onClick.AddListener(OpenMenu);
-        MenuCloseBt.onClick.AddListener(CloseMenu);
+        MenuOpenBt.onClick.AddListener(OpenCloseMenu);
+        MenuCloseBt.onClick.AddListener(OpenCloseMenu);
         QuitBt.onClick.AddListener(QuitGmae);
-        RankOpenBt.onClick.AddListener(onRankPanel);
-        RankCloseBt.onClick.AddListener(offRankPanel);
+        RankOpenBt.onClick.AddListener(onoffRankPanel);
+        RankCloseBt.onClick.AddListener(onoffRankPanel);
 
         SoundManager.instance.PlayBgm(SoundManager.Bgm.start);
     }
@@ -50,24 +50,18 @@ public class MenuScene : MonoBehaviour
         isstart = true;
     }
 
-    private void OpenMenu()
+    private void OpenCloseMenu()
     {
-        MenuPanel.SetActive(true);
+        MenuPanel.SetActive(!MenuPanel.activeSelf);
     }
-    private void CloseMenu()
-    {
-        MenuPanel.SetActive(false);
-    }
+   
     private void QuitGmae()
     {
         Application.Quit();
     }
-   private void onRankPanel()
+   
+    private void onoffRankPanel()
     {
-        RankPanel.SetActive(true);
-    }
-    private void offRankPanel()
-    {
-        RankPanel.SetActive(false);
+        RankPanel.SetActive(!RankPanel.activeSelf);
     }
 }
