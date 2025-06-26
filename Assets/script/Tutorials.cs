@@ -11,9 +11,8 @@ public class Tutorials : MonoBehaviour
     [SerializeField] TMP_Text maintext;
     int next =0;
     float timer;
-    bool wallbuttonCheck =false;
-    bool ismissingmessage =false;
     [SerializeField] Transform missingwallch;
+    [SerializeField] WallmakeSc wallsc;
     void Start()
     {
 
@@ -81,32 +80,20 @@ public class Tutorials : MonoBehaviour
     }
     void wallButtonch()
     {
-        if(missingwallch.transform.Find("MissingWall(Clone)") == null)
-        {
-            wallbuttonCheck = !wallbuttonCheck;
-        }
-        else
-        {
-            ismissingmessage = true;
-            maintext.text = "미완성된 벽이 있습니다.";
-        }
     }
     void root2()
     {
         wallBt.enabled = true;
         maintext.text = " Wall 버튼을 눌러 보세요.";
-        if (wallbuttonCheck == true)
+        if (wallsc.wallsuccess== 1)
         {
+            maintext.text = "make버튼을 눌러 모드를 바꿀수 있습니다. make모드는 벽을 생성하고 erase모드는 벽을 지웁니다. \n 미로를 완성하셨다면 Wall버튼을 눌러주세요.";
             next++; 
         }
     }
     void root3()
     {
-        if(ismissingmessage ==false)
-        {
-            maintext.text = "make버튼을 눌러 모드를 바꿀수 있습니다. make모드는 벽을 생성하고 erase모드는 벽을 지웁니다. \n 미로를 완성하셨다면 Wall버튼을 눌러주세요.";
-        }
-        if (wallbuttonCheck == false)
+        if (wallsc.wallsuccess == 2)
         {
             wallBt.onClick.RemoveListener(wallButtonch);
             next++;

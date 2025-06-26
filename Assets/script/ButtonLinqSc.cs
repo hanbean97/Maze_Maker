@@ -15,6 +15,10 @@ public class ButtonLinqSc : MonoBehaviour
     [SerializeField] Button wallBt;
     [SerializeField] GameObject wallModeBt;
     [SerializeField] Animation invneanim;
+    [SerializeField] RectTransform Inventory;
+    [SerializeField] RectTransform openinvents;
+    [SerializeField] RectTransform closeinvents;
+    [SerializeField] float invenRectTime;
     AnimationState anistate;
     WallmakeSc wallch;
     [SerializeField] Button menuopen;
@@ -23,7 +27,10 @@ public class ButtonLinqSc : MonoBehaviour
     [SerializeField] Button MainMengo;
     [SerializeField] GameObject MenuPanel;
     [SerializeField] TMP_InputField nametextfield;
+    private Vector2 velocity = Vector2.zero;
+    
     bool isend= false;
+    bool isinvening = false;
     
     void Awake()
     {
@@ -44,6 +51,24 @@ public class ButtonLinqSc : MonoBehaviour
         {
             OpenInventory();
         }
+
+        if(isinvening== true&& isinvenBt == true)
+        {
+            Inventory.localPosition = Vector2.SmoothDamp(Inventory.localPosition, openinvents.localPosition, ref velocity,invenRectTime);
+            if(Mathf.Abs(Inventory.localPosition.x - openinvents.localPosition.x) <10f)
+            {
+                isinvening = false;
+            }
+        }
+        else if(isinvening == true && isinvenBt == false)
+        {
+            Inventory.localPosition = Vector2.SmoothDamp(Inventory.localPosition, closeinvents.localPosition, ref velocity, invenRectTime);
+            if(Mathf.Abs(Inventory.localPosition.x - closeinvents.localPosition.x) <10f)
+            {
+               isinvening = false;
+            }
+        }
+
     }
     void OpenInventory()
     {
@@ -52,17 +77,19 @@ public class ButtonLinqSc : MonoBehaviour
                 wallBt.enabled = false; 
                isinvenBt = true;
                 startBt.SetActive(false);
-                invneanim.Play("inventoryanim");
-                anistate.speed = 1;
+                isinvening = true;
+                //invneanim.Play("inventoryanim");
+                //anistate.speed = 1;
             }
             else if(isinvenBt == true && wallch.wallModeOn == false && gamestart == false)
             {
             wallBt.enabled = true;
             isinvenBt = false;
+            isinvening = true;
                 startBt.SetActive(true);
-                invneanim.Play("inventoryanim");
-                anistate.speed = -1;
-                anistate.time = anistate.length;
+                //invneanim.Play("inventoryanim");
+                //anistate.speed = -1;
+                //anistate.time = anistate.length;
             }
     }
     void GameStartCh()
@@ -107,6 +134,7 @@ public class ButtonLinqSc : MonoBehaviour
     
     void backmainmenu()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadSceneAsync(0);
     }
     void Finishgame()

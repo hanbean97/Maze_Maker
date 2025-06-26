@@ -28,6 +28,8 @@ public class WallmakeSc : MonoBehaviour
     [SerializeField] SpriteRenderer selectMark;
     Color selectColor = new Color(1,1,1,0.2f);
     bool isCatch = false;
+    [SerializeField] TMP_Text checkWallMessage;
+    public byte wallsuccess = 0;
     void Start()
     {
 
@@ -49,17 +51,19 @@ public class WallmakeSc : MonoBehaviour
     {
         if (walltile.transform.Find("MissingWall(Clone)") != null)
         {
-            Debug.Log("???????? ????");
+            checkWallMessage.text = "미완성된 벽이 있습니다.";
             return;
         }
         if(waycheck.check() == false)
         {
-            Debug.Log("???? ????????");
+            checkWallMessage.text = "모든길이 막혀 있습니다.";
             return;
         }
         wallcCounString.gameObject.SetActive(!wallcCounString.gameObject.activeSelf);
         wallmakemode =!wallmakemode ;
         NowWall(wallmakemode);
+
+       if(wallsuccess<2)wallsuccess++;
     }
     void WallMakeModeOn()
     {

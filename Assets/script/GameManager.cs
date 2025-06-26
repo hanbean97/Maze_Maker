@@ -139,6 +139,7 @@ public class GameManager : MonoBehaviour
         if(waveLevel >-1)
         {
             randompattern = Random.Range(0, spawnE[waveLevel].SpwanNumber.Length);
+            Debug.Log($"{waveLevel} : {randompattern}");
             //문자형인 데이터를 정수형으로 형변환
             char[] EnemyChar = spawnE[waveLevel].SpwanNumber[randompattern].ToString().ToCharArray();
             int[] enemyarray = new int[EnemyChar.Length];
@@ -288,17 +289,17 @@ public class GameManager : MonoBehaviour
         {
             if (isgamestart == true && isWaveClear == true )
             {
-                if (waveLevel < 2)
+                if (waveLevel < 3)
                 {
                     switch (waveLevel)//스테이지가 끝날때 레벨에 따른 보
                     {
                         case 0:
-                           // waveLevel++;
+                            waveLevel++;
                             wall.GiveWallcountUp(10);
                             score += 100;
                             break;
                         case 1:
-                          //  waveLevel++;
+                            waveLevel++;
                             wall.GiveWallcountUp(20);
                             score += 200;
                             break;
