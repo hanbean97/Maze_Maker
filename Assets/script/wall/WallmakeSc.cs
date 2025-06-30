@@ -30,6 +30,9 @@ public class WallmakeSc : MonoBehaviour
     bool isCatch = false;
     [SerializeField] TMP_Text checkWallMessage;
     public byte wallsuccess = 0;
+    bool isMessage = false;
+    float messagetime = 3;
+    float messagetimer;
     void Start()
     {
 
@@ -46,17 +49,22 @@ public class WallmakeSc : MonoBehaviour
         wallmode();
         OnWallcountString();
         MonMoveMode();
+        WallmessageText();
     }
     void wallmakemodeOnOff()
     {
         if (walltile.transform.Find("MissingWall(Clone)") != null)
         {
+            isMessage = true;
             checkWallMessage.text = "미완성된 벽이 있습니다.";
+            checkWallMessage.gameObject.SetActive(true);
             return;
         }
         if(waycheck.check() == false)
         {
+            isMessage =true;
             checkWallMessage.text = "모든길이 막혀 있습니다.";
+            checkWallMessage.gameObject.SetActive(true);
             return;
         }
         wallcCounString.gameObject.SetActive(!wallcCounString.gameObject.activeSelf);
@@ -64,6 +72,20 @@ public class WallmakeSc : MonoBehaviour
         NowWall(wallmakemode);
 
        if(wallsuccess<2)wallsuccess++;
+    }
+    void WallmessageText()
+    { 
+        if(isMessage == true)
+        {
+            messagetimer += Time.deltaTime;
+            if(messagetimer > messagetime)
+            {
+                checkWallMessage.gameObject.SetActive(false);
+                isMessage =false;
+                messagetimer = 0;
+            }
+        }
+        
     }
     void WallMakeModeOn()
     {

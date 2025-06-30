@@ -13,15 +13,7 @@ public class Tutorials : MonoBehaviour
     float timer;
     [SerializeField] Transform missingwallch;
     [SerializeField] WallmakeSc wallsc;
-    void Start()
-    {
-
-        if(GameManager.instance.Firstgame == true)
-        {
-            wallBt.onClick.AddListener(wallButtonch);
-        }
-
-    }
+    
     void Update()
     {
         tutorialroot();
@@ -70,6 +62,8 @@ public class Tutorials : MonoBehaviour
     }
     void root1()
     {
+        maintext.gameObject.SetActive(true);
+        wallBt.enabled = false;
         maintext.text = "적들이 던전에 오래 있을수록 더 많은 점수를 얻습니다.";
         timer += Time.deltaTime;
         if (timer > 5)
@@ -78,11 +72,10 @@ public class Tutorials : MonoBehaviour
             timer = 0;
         }
     }
-    void wallButtonch()
-    {
-    }
+   
     void root2()
     {
+        maintext.gameObject.SetActive(true);
         wallBt.enabled = true;
         maintext.text = " Wall 버튼을 눌러 보세요.";
         if (wallsc.wallsuccess== 1)
@@ -93,14 +86,15 @@ public class Tutorials : MonoBehaviour
     }
     void root3()
     {
+        maintext.gameObject.SetActive(true);
         if (wallsc.wallsuccess == 2)
         {
-            wallBt.onClick.RemoveListener(wallButtonch);
             next++;
         }
     }
     void root4()
     {
+        maintext.gameObject.SetActive(true);
         maintext.text = "i 키를 눌러 인벤토리를 열어 보세요."; 
         if(Input.GetKeyDown(KeyCode.I))
         {
@@ -109,6 +103,7 @@ public class Tutorials : MonoBehaviour
     }
     void root5()
     {
+        maintext.gameObject.SetActive(true);
         maintext.text = "인벤토리 안의 몬스터를 드래그해 원하는 바닥에 몬스터를 소환하고 Start버튼을 눌러 게임을 시작하세요.";
         startBt.enabled = true;
         timer += Time.deltaTime;
