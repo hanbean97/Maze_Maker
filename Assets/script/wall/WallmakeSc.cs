@@ -140,7 +140,8 @@ public class WallmakeSc : MonoBehaviour
         {
             Vector2 mosPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D ray = Physics2D.Raycast(mosPos, Vector3.forward, 20);
-            if (ray && ray.transform.CompareTag("Ground") && wallposiblecount >0)
+            //&& AsrarAlgo.instance.WallPosuser
+            if (ray && ray.transform.CompareTag("Ground") && wallposiblecount >0)//벽의 정보를 가져올것 저장할것
             {
                 Vector3Int mousPostile = walltile.WorldToCell(mosPos);
                 walltile.SetTile(mousPostile, tilebase);
