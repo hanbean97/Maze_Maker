@@ -141,11 +141,14 @@ public class WallmakeSc : MonoBehaviour
             Vector2 mosPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D ray = Physics2D.Raycast(mosPos, Vector3.forward, 20);
             //&& AsrarAlgo.instance.WallPosuser
-            if (ray && ray.transform.CompareTag("Ground") && wallposiblecount >0)//벽의 정보를 가져올것 저장할것
-            {
+            
+            if (ray && ray.transform.CompareTag("Ground") && wallposiblecount >0
+                && AsrarAlgo.instance.NowWalls[Mathf.RoundToInt(mosPos.x), -Mathf.RoundToInt(mosPos.y)] == false )//벽의 정보를 가져올것 저장할것
+            {//마우스 포스를 int로 반올림하삼
                 Vector3Int mousPostile = walltile.WorldToCell(mosPos);
                 walltile.SetTile(mousPostile, tilebase);
                 wallposiblecount--;
+                AsrarAlgo.instance.NowWalls[Mathf.RoundToInt(mosPos.x), -Mathf.RoundToInt(mosPos.y)] = true;
             }
         }
     }
@@ -155,11 +158,13 @@ public class WallmakeSc : MonoBehaviour
         {
             Vector2 mosPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D ray = Physics2D.Raycast(mosPos, Vector3.forward, 20, LayerMask.GetMask("Wall"));
-            if (ray && ray.transform.CompareTag("Wall"))
+            Vector3Int mousPostile = walltile.WorldToCell(mosPos);
+            if (ray && ray.transform.CompareTag("Wall")&& AsrarAlgo.instance.NowWalls[Mathf.RoundToInt(mosPos.x), -Mathf.RoundToInt(mosPos.y)] == true)
             {
-                Vector3Int mousPostile = walltile.WorldToCell(mosPos);
+                
                 walltile.SetTile(mousPostile, null);
                 wallposiblecount++;
+                AsrarAlgo.instance.NowWalls[Mathf.RoundToInt(mosPos.x), -Mathf.RoundToInt(mosPos.y)] = false;
             }
         }
     }

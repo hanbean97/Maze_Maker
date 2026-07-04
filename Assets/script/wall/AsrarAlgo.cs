@@ -34,6 +34,10 @@ public class AsrarAlgo : MonoBehaviour
     public Node[,] NodeArray { get { return nodeArray; } }
     bool[,] wallPos;//사용자 벽 정보를 저장하기 위해 사용
     public bool[,] WallPosuser{ get { return wallPos; } }
+
+    private bool[,] nowwalls;
+    public bool[,] NowWalls { get { return nowwalls; } set { nowwalls = value; } }
+
     private void Awake()
     {
         if(instance == null)
@@ -46,6 +50,7 @@ public class AsrarAlgo : MonoBehaviour
         }
         nodeArray = new Node[size.x, size.y];
         wallPos = new bool[size.x, size.y];
+        nowwalls = new bool[size.x, size.y];
     }
     private void Start()
     {
