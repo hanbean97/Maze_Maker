@@ -16,12 +16,12 @@ public class move : PathFind
     {
         Hp = maxhp;
     }
-    private void Start()
+    protected virtual void Start()
     {
         anim = GetComponentInChildren<Animator>();
         ismoveway= true;
     }
-    protected void Moving()//±âº» ¿òÁ÷ÀÌ´Â ÇÔ¼ö
+    protected void Moving()//ê¸°ë³¸ ì›€ì§ì´ëŠ” í•¨ìˆ˜
     {
         if (ismoveway)
         {
@@ -49,7 +49,7 @@ public class move : PathFind
             anim.SetBool("Run", false);
         }
     }
-    protected void Moving(Vector2Int target)//µ¿ÀûÀ¸·Î ¿òÁ÷ÀÌ´Â ÇÔ¼ö
+    protected void Moving(Vector2Int target)//ë™ì ìœ¼ë¡œ ì›€ì§ì´ëŠ” í•¨ìˆ˜
     {
         if (ismoveway)
         {
@@ -85,7 +85,7 @@ public class move : PathFind
         Vector2Int nowPosition = new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(-transform.position.y));
         this.PathFinding(nowPosition, target);
     }
-    public void Heal(float _healvalue)//¸ó½ºÅÍ Ã¼·ÂÈ¸º¹
+    public void Heal(float _healvalue)//ëª¬ìŠ¤í„° ì²´ë ¥íšŒë³µ
     {
         Hp += _healvalue;
         if(Hp>maxhp)
@@ -93,7 +93,7 @@ public class move : PathFind
             Hp = maxhp;
         }
     }
-    public void Heal()//¸ó½ºÅÍ Ã¼·ÂÈ¸º¹
+    public void Heal()//ëª¬ìŠ¤í„° ì²´ë ¥íšŒë³µ
     {
           Hp = maxhp;
     }

@@ -5,7 +5,15 @@ using UnityEngine;
 
 public class Enemy : move
 {
-
+    enum EnemyState
+    {
+        none,
+        stop,
+        attak,
+        pathmove, // 길찾기 이동
+        attakmove // 공격자리 이동
+    }
+    EnemyState state;
     [SerializeField] float Searchrange = 3;
     [SerializeField] float attakrange;
     protected Transform targetEnemy;
@@ -21,6 +29,11 @@ public class Enemy : move
         this.PathFinding(AsrarAlgo.instance.StartPos, AsrarAlgo.instance.TargetPos);
 
     }
+   /* protected override void Start()
+    {
+        base.Start();
+
+    }*/
     protected virtual void Update()
     {
         if (endTileOn == false)//?????????????? ??????????????
