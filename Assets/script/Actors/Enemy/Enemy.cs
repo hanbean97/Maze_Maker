@@ -7,11 +7,11 @@ public class Enemy : move
 {
     enum EnemyState
     {
-        none,
         stop,
-        attak,
         pathmove, // 길찾기 이동
-        attakmove // 공격자리 이동
+        attakmove, // 공격자리 이동
+        attak,
+        none
     }
     EnemyState state;
     [SerializeField] float Searchrange = 3;
@@ -75,22 +75,22 @@ public class Enemy : move
         count = GameManager.instance.NowMonstertrs.Count;
         for (int i = 0; i < count; i++)
         {
-            if (i == 0)
+            if (i == 0)//몬스터가 없는걸 스스로 알기 위해서
             {
                 nullcheckcount = 0;
             }
             dir = GameManager.instance.NowMonstertrs[i].position - transform.position;
             RaycastHit2D rays = Physics2D.Raycast(transform.position, dir.normalized, Searchrange, LayerMask.GetMask("Wall", "Monster"));
-            if (rays && rays.transform.CompareTag("Monster"))
+            if (rays && rays.transform.CompareTag("Monster"))//몬스터에게 레이를 쏘고
             {
-                if (targetEnemy != null)
+                if (targetEnemy != null)//지정된 타깃과 다른 타깃의 거리를 계산하고 가장 가까운 타깃을 지정
                 {
                     if (Vector2.Distance(transform.position, targetEnemy.position) > Vector2.Distance(transform.position, rays.transform.position))
                     {
                         targetEnemy = rays.transform;
                     }
                 }
-                else if (targetEnemy == null)
+                else if (targetEnemy == null)//지금 지정된 타깃이 없다면
                 {
                     targetEnemy = rays.transform;
                 }
@@ -105,18 +105,33 @@ public class Enemy : move
             }
         }
     }
-    void FindingEnemy()
-    {
-        if (startTileOn == false) return;
+    void FindingEnemy()//적공격
+    {//이 부분에서 타깃 지정 슬롯 적용 타깃 주변에서
+        if (startTileOn == false) return;//시작지점에서는 액션금지
 
-        if (targetEnemy != null && Vector3.Distance(transform.position, targetEnemy.position) < attakrange)
+        switch (state)
+        {
+            case EnemyState.stop:
+
+                break;
+            case EnemyState.pathmove:
+                break;
+            case EnemyState.attakmove:
+                break;
+            case EnemyState.attak:
+                break;
+
+        }
+
+
+        if (targetEnemy != null && Vector3.Distance(transform.position, targetEnemy.position) < attakrange)//타깃이 사거리 안에 들어올 때 움직임을 멈추고 공격
         {
             ismoveway = false;
             attackGo();
         }
-        else if(targetEnemy == null || Vector3.Distance(transform.position, targetEnemy.position) > attakrange)
+        else if(targetEnemy == null || Vector3.Distance(transform.position, targetEnemy.position) > attakrange)//타깃지정됐지만 사거리 밖일 때 움직이고 
         {
-            ismoveway = true;
+            ismoveway = true; // A*알고리즘 이동 ON
             attackStop();
         }
     }

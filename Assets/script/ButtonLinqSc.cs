@@ -27,6 +27,9 @@ public class ButtonLinqSc : MonoBehaviour
     [SerializeField] Button MainMengo;
     [SerializeField] GameObject MenuPanel;
     [SerializeField] TMP_InputField nametextfield;
+    [SerializeField] Scrollbar gameSpeedbar;
+    [SerializeField] TMP_Text NowSpeedView;
+    float[] nowSpeed = new float[2] { 1, 1 };
     private Vector2 velocity = Vector2.zero;
     
     bool isend= false;
@@ -34,7 +37,6 @@ public class ButtonLinqSc : MonoBehaviour
     
     void Awake()
     {
-        
         anistate = invneanim["inventoryanim"];
         wallch = GetComponent<WallmakeSc>();
         menuopen.onClick.AddListener(OpenMenu);
@@ -45,6 +47,7 @@ public class ButtonLinqSc : MonoBehaviour
     }
     void Update()
     {
+        GameSpeedsetting();
         OnWall();
         GameStartCh();
         if (Input.GetKeyDown(KeyCode.I))
@@ -129,7 +132,7 @@ public class ButtonLinqSc : MonoBehaviour
     void OpenMenu()
     {
         MenuPanel.SetActive(!MenuPanel.activeSelf);
-        Time.timeScale = MenuPanel.activeSelf ? 0:1;
+        Time.timeScale = MenuPanel.activeSelf ? 0:nowSpeed[1];
     }
     
     void backmainmenu()
@@ -154,5 +157,17 @@ public class ButtonLinqSc : MonoBehaviour
         }
       
         backmainmenu();
+    }
+
+    void GameSpeedsetting()
+    {
+        nowSpeed[1] = gameSpeedbar.value * 3;
+        if (nowSpeed[0] != nowSpeed[1])
+        {
+           
+            NowSpeedView.text = nowSpeed.ToString();
+            Time.timeScale = nowSpeed[1];
+            nowSpeed[0] = nowSpeed[1];
+        }
     }
 }
