@@ -37,6 +37,7 @@ public class ButtonLinqSc : MonoBehaviour
     
     void Awake()
     {
+        gameSpeedbar.value = 0.25f;
         anistate = invneanim["inventoryanim"];
         wallch = GetComponent<WallmakeSc>();
         menuopen.onClick.AddListener(OpenMenu);
@@ -132,7 +133,7 @@ public class ButtonLinqSc : MonoBehaviour
     void OpenMenu()
     {
         MenuPanel.SetActive(!MenuPanel.activeSelf);
-        Time.timeScale = MenuPanel.activeSelf ? 0:nowSpeed[1];
+        Time.timeScale = MenuPanel.activeSelf ? 0:(nowSpeed[1]*4);
     }
     
     void backmainmenu()
@@ -161,13 +162,13 @@ public class ButtonLinqSc : MonoBehaviour
 
     void GameSpeedsetting()
     {
-        nowSpeed[1] = gameSpeedbar.value * 3;
+
+        nowSpeed[1] = gameSpeedbar.value;
         if (nowSpeed[0] != nowSpeed[1])
         {
-           
-            NowSpeedView.text = nowSpeed.ToString();
-            Time.timeScale = nowSpeed[1];
+            Time.timeScale = nowSpeed[1]*4;
             nowSpeed[0] = nowSpeed[1];
+            NowSpeedView.text = (nowSpeed[0]*4).ToString("0.#");
         }
     }
 }

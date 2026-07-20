@@ -5,17 +5,21 @@ using UnityEngine;
 
 public class Enemy : move
 {
-    enum EnemyState
+    enum EnemyTypelist
     {
-        stop,
-        pathmove, // 길찾기 이동
-        attakmove, // 공격자리 이동
-        attak,
-        none
+        meleeE,
+        RangedE
     }
-    EnemyState state;
+    [SerializeField]EnemyTypelist enemytype;
+    enum Movestate
+    {
+        pathmove,
+        attackReady,
+        attack
+    }
+    Movestate nowmove = Movestate.pathmove;
     [SerializeField] float Searchrange = 3;
-    [SerializeField] float attakrange;
+    [SerializeField] float attackrange;
     protected Transform targetEnemy;
     public Transform Target { get { return targetEnemy; } set{ targetEnemy = value; } }
     Vector2Int targetPos;
@@ -24,6 +28,7 @@ public class Enemy : move
     Vector3 dir;
     bool startTileOn = false;
     bool endTileOn = false;
+
     private void OnEnable()
     {
         this.PathFinding(AsrarAlgo.instance.StartPos, AsrarAlgo.instance.TargetPos);
@@ -109,30 +114,44 @@ public class Enemy : move
     {//이 부분에서 타깃 지정 슬롯 적용 타깃 주변에서
         if (startTileOn == false) return;//시작지점에서는 액션금지
 
-        switch (state)
-        {
-            case EnemyState.stop:
 
-                break;
-            case EnemyState.pathmove:
-                break;
-            case EnemyState.attakmove:
-                break;
-            case EnemyState.attak:
-                break;
-
-        }
-
-
-        if (targetEnemy != null && Vector3.Distance(transform.position, targetEnemy.position) < attakrange)//타깃이 사거리 안에 들어올 때 움직임을 멈추고 공격
+        if (targetEnemy != null && Vector3.Distance(transform.position, targetEnemy.position) < attackrange)//타깃이 있고 사거리 안에 들어 올때 움직임을 멈투고 공격한
         {
             ismoveway = false;
             attackGo();
         }
-        else if(targetEnemy == null || Vector3.Distance(transform.position, targetEnemy.position) > attakrange)//타깃지정됐지만 사거리 밖일 때 움직이고 
+        else if(targetEnemy != null && Vector3.Distance(transform.position, targetEnemy.position) >=attackrange)//서치 사거리에 들었고 공격 위치를 잡을 땟
+        {
+
+
+        }
+        else if(targetEnemy == null || Vector3.Distance(transform.position, targetEnemy.position) > Searchrange)//타깃이 널이거나 사거리 밖일 때
         {
             ismoveway = true; // A*알고리즘 이동 ON
             attackStop();
+            nowmove = Movestate.pathmove;
+        }
+
+        NowStateMode();
+
+    }
+
+    void NowStateMode()
+    {
+        switch(nowmove)
+        {
+            case Movestate.pathmove:
+                ismoveway = true;
+                attackStop();
+                break;
+            case Movestate.attackReady://레이를 쏴서 몬스터의 슬롯을 정하고 자리이동
+                ismoveway = false;
+                
+                break;
+            case Movestate.attack:
+                ismoveway = false;
+                attackGo();
+                break;
         }
     }
 
