@@ -162,7 +162,12 @@ public class Enemy : move
                 break;
             case Movestate.attackReady://레이를 쏴서 몬스터의 슬롯을 정하고 자리이동
                 ismoveway = false;
-                
+                int a = 0;
+                for (int i = 0; i < 8; i++)
+                {
+                    a = a + (i * (i % 2 == 1 ? -1 : 1));
+                    
+                }
                 break;
             case Movestate.attack:
                 ismoveway = false;

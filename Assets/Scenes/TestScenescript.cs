@@ -17,15 +17,14 @@ public class TestScenescript : MonoBehaviour
         int slot = Mathf.RoundToInt(angle / 45f) % 8;
 
         int a= 0;
-        int b= -1;
         GameObject[] gamsob = new GameObject[8];
         for (int i = 0; i < 8; i++)
         {
-            a= a+(i*b);
-            b= -b;
+            a= a+(i*(i%2 == 1?-1:1));
             gamsob[i] = new GameObject();
             gamsob[i].AddComponent<SpriteRenderer>().sprite = sprt;
-            gamsob[i].transform.position =new Vector3(i,i,0);
+            gamsob[i].transform.position =new Vector3(a,a,0);
+
             Debug.Log(a);
         }
     }
