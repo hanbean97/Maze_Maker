@@ -115,14 +115,30 @@ public class Enemy : move
         if (startTileOn == false) return;//시작지점에서는 액션금지
 
 
-        if (targetEnemy != null && Vector3.Distance(transform.position, targetEnemy.position) < attackrange)//타깃이 있고 사거리 안에 들어 올때 움직임을 멈투고 공격한
+        if(targetEnemy != null && Vector3.Distance(transform.position, targetEnemy.position) <= Searchrange)//서치 사거리에 들었고 공격 위치를 잡을 땟
         {
-            ismoveway = false;
-            attackGo();
-        }
-        else if(targetEnemy != null && Vector3.Distance(transform.position, targetEnemy.position) >=attackrange)//서치 사거리에 들었고 공격 위치를 잡을 땟
-        {
+            nowmove = Movestate.attackReady;
+            Vector2 dir = targetEnemy.transform.position - transform.position;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
+            angle = (angle + 360f) % 360f;
+
+            int slot = Mathf.RoundToInt(angle / 45f) % 8; // 0~45: 0 , 45~90: 1, 90~180:2 ...
+
+            for (int i = 0; i < 8; i++)
+            {
+                
+                if(slot==i)
+                {
+                     
+                }
+            }
+
+            if (Vector3.Distance(transform.position, targetEnemy.position) < attackrange)
+            {
+                 nowmove = Movestate.attack;
+                
+            }
 
         }
         else if(targetEnemy == null || Vector3.Distance(transform.position, targetEnemy.position) > Searchrange)//타깃이 널이거나 사거리 밖일 때
