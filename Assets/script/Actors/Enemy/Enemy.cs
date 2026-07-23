@@ -127,11 +127,9 @@ public class Enemy : move
 
             for (int i = 0; i < 8; i++)
             {
+                new Vector2();
+                           
                 
-                if(slot==i)
-                {
-                     
-                }
             }
 
             if (Vector3.Distance(transform.position, targetEnemy.position) < attackrange)
