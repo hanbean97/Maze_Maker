@@ -11,13 +11,7 @@ public class Enemy : move
         RangedE
     }
     [SerializeField]EnemyTypelist enemytype;
-    enum Movestate
-    {
-        pathmove,
-        attackReady,
-        attack
-    }
-    Movestate nowmove = Movestate.pathmove;
+    
     [SerializeField] float Searchrange = 3;
     [SerializeField] float attackrange;
     protected Transform targetEnemy;
@@ -55,6 +49,7 @@ public class Enemy : move
             }
             else if (startTileOn == true && targetEnemy != null)
             {
+
                 targetPos = new Vector2Int(Mathf.RoundToInt(targetEnemy.position.x),Mathf.RoundToInt(-targetEnemy.position.y));//????????????
                 Moving(targetPos);
             }
@@ -114,65 +109,101 @@ public class Enemy : move
     {//이 부분에서 타깃 지정 슬롯 적용 타깃 주변에서
         if (startTileOn == false) return;//시작지점에서는 액션금지
 
-
-        if(targetEnemy != null && Vector3.Distance(transform.position, targetEnemy.position) <= Searchrange)//서치 사거리에 들었고 공격 위치를 잡을 땟
+        if(targetEnemy != null)//서치범위에서 모이는 현상 발생 수정바람 객체적으로 앞에 일정거리 이너미가 있으면 멈춤
         {
-            nowmove = Movestate.attackReady;
-            Vector2 dir = targetEnemy.transform.position - transform.position;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-
-            angle = (angle + 360f) % 360f;
-
-            int slot = Mathf.RoundToInt(angle / 45f) % 8; // 0~45: 0 , 45~90: 1, 90~180:2 ...
-
-            for (int i = 0; i < 8; i++)
+            ismoveway = true;
+            RaycastHit2D ray = Physics2D.Raycast(transform.position, targetEnemy.position);
+            if (ray.transform.CompareTag("Enemy"))
             {
-                new Vector2();
-                           
-                
+                ismoveway = false;
             }
-
-            if (Vector3.Distance(transform.position, targetEnemy.position) < attackrange)
-            {
-                 nowmove = Movestate.attack;
-                
-            }
-
         }
-        else if(targetEnemy == null || Vector3.Distance(transform.position, targetEnemy.position) > Searchrange)//타깃이 널이거나 사거리 밖일 때
+        
+        
+        if(targetEnemy != null && Vector3.Distance(transform.position, targetEnemy.position) < attackrange)//공격
         {
-            ismoveway = true; // A*알고리즘 이동 ON
+            ismoveway = false;
+            attackGo();
+        }
+        else if(targetEnemy == null || Vector3.Distance(transform.position, targetEnemy.position)>= attackrange)//타깃이 널이거나 사거리 밖일 때
+        {
+            ismoveway = true;
             attackStop();
-            nowmove = Movestate.pathmove;
+            
         }
 
-        NowStateMode();
+        
 
     }
 
-    void NowStateMode()
+   /* void NowStateMode()
     {
         switch(nowmove)
         {
+            case Movestate.stop:
+
+                break;
             case Movestate.pathmove:
                 ismoveway = true;
                 attackStop();
                 break;
             case Movestate.attackReady://레이를 쏴서 몬스터의 슬롯을 정하고 자리이동
                 ismoveway = false;
+               
+
+                Vector2 dir = targetEnemy.transform.position - transform.position;
+                float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+                angle = (angle + 360f) % 360f;
+
+                int slot = Mathf.RoundToInt(angle / 45f) % 8; // 0~45: 0 , 45~90: 1, 90~180:2 ...
                 int a = 0;
-                for (int i = 0; i < 8; i++)
+                bool gostop;
+                for (int i = 0; i < 3; i++)// 앞의 3방향만 탐새
                 {
+
+                    Vector2 attackpointer = targetEnemy.position;
+
                     a = a + (i * (i % 2 == 1 ? -1 : 1));
-                    
+                    int nowslot = (a + slot + 8) % 8;
+
+                    if (nowslot < 2 || nowslot> 6)
+                    {
+                        attackpointer.x += 1*attackrange;
+                    }
+                    else if(nowslot >2 && nowslot <6)
+                    {
+                        attackpointer.x += -1 * attackrange;
+                    }
+
+                    if (nowslot > 4)
+                    {
+                        attackpointer.y += -1 * attackrange;
+                    }
+                    else if(nowslot >0 && nowslot < 4)
+                    {
+                        attackpointer.y += 1*attackrange;
+                    }
+                    Vector2 attackslot = attackpointer - new Vector2(transform.position.x, transform.position.y);
+                    float pointdis = Vector2.Distance(attackpointer,transform.position);
+                    RaycastHit2D ray = Physics2D.Raycast(transform.position,attackslot.normalized,pointdis);
+
+                    if(!ray)
+                    {
+                       
+                    }
+
                 }
+               
+                
                 break;
             case Movestate.attack:
                 ismoveway = false;
                 attackGo();
                 break;
+           
         }
-    }
+    }*/
 
     protected virtual void attackGo()
     {

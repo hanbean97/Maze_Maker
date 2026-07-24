@@ -9,7 +9,7 @@ public class move : PathFind
     int nextPoscount;
     protected Vector3 nextdir;
     [SerializeField] float speed;
-    protected bool ismoveway;
+    [SerializeField]protected bool ismoveway;
     protected Animator anim;
     protected bool isdeth=false;
     private void Awake()

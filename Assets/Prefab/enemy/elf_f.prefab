@@ -325,8 +325,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxhp: 7
   speed: 2
+  ismoveway: 0
+  enemytype: 0
   Searchrange: 4
-  attakrange: 4
+  attackrange: 4
   bow: {fileID: 7195581512973178168}
   attackspeed: 2
   chargeMotiontime: 1
