@@ -109,18 +109,14 @@ public class Enemy : move
     {//이 부분에서 타깃 지정 슬롯 적용 타깃 주변에서
         if (startTileOn == false) return;//시작지점에서는 액션금지
 
-        if(targetEnemy != null)//서치범위에서 모이는 현상 발생 수정바람 객체적으로 앞에 일정거리 이너미가 있으면 멈춤
+        /* if(targetEnemy != null)//서치범위에서 모이는 현상 발생 수정바람 객체적으로 앞에 일정거리 이너미가 있으면 멈춤
         {
             ismoveway = true;
-            RaycastHit2D ray = Physics2D.Raycast(transform.position, targetEnemy.position);
-            if (ray.transform.CompareTag("Enemy"))
-            {
-                ismoveway = false;
-            }
-        }
-        
-        
-        if(targetEnemy != null && Vector3.Distance(transform.position, targetEnemy.position) < attackrange)//공격
+            
+        }*/
+       
+
+        if (targetEnemy != null && Vector3.Distance(transform.position, targetEnemy.position) < attackrange)//공격
         {
             ismoveway = false;
             attackGo();
@@ -132,7 +128,12 @@ public class Enemy : move
             
         }
 
-        
+        RaycastHit2D ray = Physics2D.CircleCast(transform.position, 0.7f, Vector2.zero);
+
+        if (ray.transform.CompareTag("Enemy"))//몬스터끼리 곂쳐서 문제 게임메니저에서 전투bool만들고 조절 가장앞놈이 싸우고 있으면 멈추고 
+        {
+            ismoveway = false;
+        }
 
     }
 
