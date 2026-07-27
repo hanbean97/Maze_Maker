@@ -400,6 +400,29 @@ public class GameManager : MonoBehaviour
         }
     }
 
-   
+   /*
+    public bool MeetingTarget()// 다른 아군이 전투중임을 알리는 함수 true=근거리 false=원거
+    {
+        for (int i = 0; i < Nowenemytrs.Count; i++)
+        {
+           if( nowenemytrs[i].GetComponent<Enemy>().Target !=  null)
+            {
+                return true;
+            }
+        }
+        return false;
+    }*/
+        
+    public Transform MeetingTarget()//타겟을 넘겨서 해당 타겟에 레이
+    {
+        for (int i = 0; i < Nowenemytrs.Count; i++)
+        {
+            if (nowenemytrs[i].GetComponent<Enemy>().Target != null)
+            {
+                return nowenemytrs[i].GetComponent<Enemy>().Target;
+            }
+        }
+        return null;
 
+    }
 }

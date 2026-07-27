@@ -11,7 +11,7 @@ public class Enemy : move
         RangedE
     }
     [SerializeField]EnemyTypelist enemytype;
-    
+    public int Enermytypes { get { return (int)enemytype; } }
     [SerializeField] float Searchrange = 3;
     [SerializeField] float attackrange;
     protected Transform targetEnemy;
@@ -22,7 +22,7 @@ public class Enemy : move
     Vector3 dir;
     bool startTileOn = false;
     bool endTileOn = false;
-
+    
     private void OnEnable()
     {
         this.PathFinding(AsrarAlgo.instance.StartPos, AsrarAlgo.instance.TargetPos);
@@ -128,12 +128,19 @@ public class Enemy : move
             
         }
 
-        RaycastHit2D ray = Physics2D.CircleCast(transform.position, 0.7f, Vector2.zero);
+        RaycastHit2D ray = Physics2D.CircleCast(transform.position, 0.5f, Vector2.zero);//적을 발견하면 맨 앞줄이 멈춘다 원형으로 했기에 뒤에 닿는거같다
 
-        if (ray.transform.CompareTag("Enemy"))//몬스터끼리 곂쳐서 문제 게임메니저에서 전투bool만들고 조절 가장앞놈이 싸우고 있으면 멈추고 
+        for (int i = 0; i < count; i++)
         {
-            ismoveway = false;
+            Vector2 targetdir = GameManager.instance.NowMonstertrs[i].position - transform.position;
+            RaycastHit2D rays = Physics2D.Raycast(transform.position, targetdir,attackrange);
+            /*
+            if (GameManager.instance.MeetingTarget() == true && ray.transform.CompareTag("Enemy") && ray.transform.GetComponent<Enemy>().Enermytypes == (int)enemytype)
+            {
+                ismoveway = false;
+            }*/
         }
+         
 
     }
 
