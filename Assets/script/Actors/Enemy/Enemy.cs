@@ -73,11 +73,11 @@ public class Enemy : move
     {
         if (startTileOn == false) return;
 
-        targetEnemy = GameManager.instance.NowTargetMon;// 게임메니저에서 타겟을 가져와 노
+        targetEnemy = GameManager.instance.NowTargetMon;// 게임메니저에서 타겟을 가져와 
         count = GameManager.instance.NowMonstertrs.Count;
         for (int i = 0; i < count; i++)
         {
-            /*
+            
             if (i == 0)//몬스터가 없는걸 스스로 알기 위해서
             {
                 nullcheckcount = 0;
@@ -116,7 +116,8 @@ public class Enemy : move
             if (nullcheckcount == count)
             {
                 targetEnemy = null;
-            }*/
+            }
+            /*
             dir = GameManager.instance.NowMonstertrs[i].position - transform.position;
             RaycastHit2D rays = Physics2D.Raycast(transform.position, dir.normalized, Searchrange, LayerMask.GetMask("Wall", "Monster"));
             if (rays && rays.transform.CompareTag("Monster"))//몬스터에게 레이를 쏘고
@@ -126,7 +127,7 @@ public class Enemy : move
                     targetEnemy = rays.transform;
                     GameManager.instance.NowTargetMon = rays.transform;
                 }
-            }
+            }*/
         }
     }
     void FindingEnemy()//적공격
