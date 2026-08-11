@@ -70,6 +70,8 @@ public class GameManager : MonoBehaviour
     [Header("레벨마다 나올 몬스터")]
     [SerializeField] List<SpawnEnemy> spawnE;
 
+    Transform nowTargetMonster;
+    public Transform NowTargetMon { get { return nowTargetMonster; } set { nowTargetMonster = value; } }
     
     private void Awake()
     {
@@ -425,4 +427,6 @@ public class GameManager : MonoBehaviour
         return null;
 
     }
+
+    
 }

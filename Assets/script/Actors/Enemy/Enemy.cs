@@ -72,9 +72,12 @@ public class Enemy : move
     void SearchEnemy()
     {
         if (startTileOn == false) return;
+
+        targetEnemy = GameManager.instance.NowTargetMon;// 게임메니저에서 타겟을 가져와 노
         count = GameManager.instance.NowMonstertrs.Count;
         for (int i = 0; i < count; i++)
         {
+            /*
             if (i == 0)//몬스터가 없는걸 스스로 알기 위해서
             {
                 nullcheckcount = 0;
@@ -83,16 +86,27 @@ public class Enemy : move
             RaycastHit2D rays = Physics2D.Raycast(transform.position, dir.normalized, Searchrange, LayerMask.GetMask("Wall", "Monster"));
             if (rays && rays.transform.CompareTag("Monster"))//몬스터에게 레이를 쏘고
             {
+                
                 if (targetEnemy != null)//지정된 타깃과 다른 타깃의 거리를 계산하고 가장 가까운 타깃을 지정
                 {
                     if (Vector2.Distance(transform.position, targetEnemy.position) > Vector2.Distance(transform.position, rays.transform.position))
                     {
-                        targetEnemy = rays.transform;
+
+                        if (GameManager.instance.NowTargetMon != null)//타겟 이너미가 비었으면 셋트
+                        {
+                            targetEnemy = rays.transform;
+                            GameManager.instance.NowTargetMon = rays.transform;
+                        }
                     }
                 }
                 else if (targetEnemy == null)//지금 지정된 타깃이 없다면
                 {
-                    targetEnemy = rays.transform;
+
+                    if (GameManager.instance.NowTargetMon != null)//타겟 이너미가 비었으면 셋트
+                    {
+                        targetEnemy = rays.transform;
+                        GameManager.instance.NowTargetMon = rays.transform;
+                    }
                 }
             }
             else if (!rays || rays.transform.CompareTag("Wall"))
@@ -102,6 +116,16 @@ public class Enemy : move
             if (nullcheckcount == count)
             {
                 targetEnemy = null;
+            }*/
+            dir = GameManager.instance.NowMonstertrs[i].position - transform.position;
+            RaycastHit2D rays = Physics2D.Raycast(transform.position, dir.normalized, Searchrange, LayerMask.GetMask("Wall", "Monster"));
+            if (rays && rays.transform.CompareTag("Monster"))//몬스터에게 레이를 쏘고
+            {
+                if (GameManager.instance.NowTargetMon != null)//타겟 이너미가 비었으면 셋트
+                {
+                    targetEnemy = rays.transform;
+                    GameManager.instance.NowTargetMon = rays.transform;
+                }
             }
         }
     }
