@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     public List<Transform> NowMonstertrs { get { return nowMonstertrs; } }
     Dictionary<string, string> InvenInMonster = new Dictionary<string, string>();//<인벤토리 위치,몬스터이름> 인벤토리안에있는 아군 정보 
     public Dictionary<string, string> InventoryMon { get { return InvenInMonster; } }
-    [SerializeField, Header("몬스터 최대 소환갯수")] int maxMonster; 
+    [SerializeField, Header("?????? ?????? ????????????")] int maxMonster; 
     [SerializeField, Header("인벤토리 최대갯수 ")] int maxinvetory;
     public int MaxInventory { get { return maxinvetory; } }
     [SerializeField] List<List<byte>> goEnemyList;
@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
     bool spawntiming = false;
     [Range(-1, 2)] int waveLevel = 0;//?????? 3??????????
     int randompattern = 0;
-    [SerializeField, Header("스폰시간")] float spawnTimer;
+    [SerializeField, Header("??????????????")] float spawnTimer;
     float timer;
     int nextspawnEnemy = 0;
     int[] spawnarrEnemy;
@@ -418,7 +418,7 @@ public class GameManager : MonoBehaviour
     public Transform MeetingTarget()//타겟을 넘겨서 해당 타겟에 레이
     {
         for (int i = 0; i < Nowenemytrs.Count; i++)
-        { 
+        {
             if (nowenemytrs[i].GetComponent<Enemy>().Target != null)
             {
                 return nowenemytrs[i].GetComponent<Enemy>().Target;
