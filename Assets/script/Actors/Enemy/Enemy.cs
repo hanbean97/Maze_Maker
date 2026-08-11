@@ -153,19 +153,16 @@ public class Enemy : move
             
         }
 
-        RaycastHit2D ray = Physics2D.CircleCast(transform.position, 0.5f, Vector2.zero);//적을 발견하면 맨 앞줄이 멈춘다 원형으로 했기에 뒤에 닿는거같다
-
-        for (int i = 0; i < count; i++)
+        if(GameManager.instance.MeetingTarget() != null) // 싸우고 있는 적이 있다면
         {
-            Vector2 targetdir = GameManager.instance.NowMonstertrs[i].position - transform.position;
-            RaycastHit2D rays = Physics2D.Raycast(transform.position, targetdir,attackrange);
-            /*
-            if (GameManager.instance.MeetingTarget() == true && ray.transform.CompareTag("Enemy") && ray.transform.GetComponent<Enemy>().Enermytypes == (int)enemytype)
+            Vector2 targetdir = GameManager.instance.MeetingTarget().position - transform.position;
+            RaycastHit2D rays = Physics2D.Raycast(transform.position, targetdir, 0.5f);
+            if(rays.transform.CompareTag("Enemy"))
             {
                 ismoveway = false;
-            }*/
+            }
+            
         }
-         
 
     }
 
