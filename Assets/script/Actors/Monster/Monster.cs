@@ -12,9 +12,11 @@ public class Monster : move
     [SerializeField] float attakrange;
     [SerializeField]MonsterType monstertype;
     public MonsterType MonT { get { return monstertype; } }
+   
     int count =0;
     int nullcheckcount = 0;
     Vector3 dir;
+
     protected Transform targetEnemy;
     Vector2Int targetPos;
     Vector3Int mysponPos;
@@ -128,6 +130,14 @@ public class Monster : move
             Death();
         }
     }
+
+    protected override void GetDamage(float Damage)
+    {
+        Hp -= Damage;
+        ishit = true;
+        Death();
+    }
+
     void Death()
     {
         if (Hp <= 0 && isdeth == false)

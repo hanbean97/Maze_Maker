@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5977727566530152259}
   - component: {fileID: 663963118727099351}
   - component: {fileID: 3495625000922173478}
+  - component: {fileID: 9101904740246393424}
   m_Layer: 8
   m_Name: Image
   m_TagString: Monster
@@ -120,6 +121,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Attackcoll: {fileID: 8415337409689395278}
+--- !u!114 &9101904740246393424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299116481031183852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c720016407b072747b81bb743f1604a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxhp: 20
+  speed: 2
+  ismoveway: 0
+  size: {x: 2, y: 2}
+  Searchrange: 5
+  attakrange: 1
+  monstertype: 0
+  hitmotionTime: 0.5
+  hitcolor: {r: 1, g: 1, b: 1, a: 0.5019608}
+  AttackBox: {fileID: 5804667639043767675}
 --- !u!1 &4876546578012998620
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,7 +152,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7645216486059476518}
-  - component: {fileID: 7581988954462165983}
   - component: {fileID: 2547587484267070250}
   - component: {fileID: 4691081022223482102}
   m_Layer: 8
@@ -152,31 +174,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 26408463194595433}
   - {fileID: 4606667539579583875}
+  - {fileID: 26408463194595433}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7581988954462165983
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4876546578012998620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c720016407b072747b81bb743f1604a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxhp: 20
-  speed: 2
-  size: {x: 2, y: 2}
-  Searchrange: 5
-  attakrange: 1
-  monstertype: 0
-  hitmotionTime: 0.5
-  hitcolor: {r: 1, g: 1, b: 1, a: 0.5019608}
-  AttackBox: {fileID: 5804667639043767675}
 --- !u!70 &2547587484267070250
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

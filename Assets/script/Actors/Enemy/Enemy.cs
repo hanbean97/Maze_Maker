@@ -5,6 +5,16 @@ using UnityEngine;
 
 public class Enemy : move
 {
+
+    enum MoveMods
+    {
+        pathmove,
+        attackready,
+        attack,
+        none,
+
+    }
+    [SerializeField] MoveMods nowMoveMod;
     enum EnemyTypelist
     {
         meleeE,
@@ -22,12 +32,15 @@ public class Enemy : move
     Vector3 dir;
     bool startTileOn = false;
     bool endTileOn = false;
-    
+    bool ishit = false;
     private void OnEnable()
     {
         this.PathFinding(AsrarAlgo.instance.StartPos, AsrarAlgo.instance.TargetPos);
 
     }
+
+
+
    /* protected override void Start()
     {
         base.Start();
@@ -257,7 +270,8 @@ public class Enemy : move
             GameManager.instance.EnemyFinshDungeon(transform);
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    private void OnTriggerEnter2D(Collider2D collision)//이거 일단 지우고 다른 데지미 받는 형식으로 간/
     {
         if (collision.CompareTag("AttackBox") && collision.gameObject.layer !=gameObject.layer)//???? ???? ?????? ???????????????? ????
         {
@@ -269,6 +283,15 @@ public class Enemy : move
             HitMotion();
             Death();
         }
+    }
+
+
+    protected override void GetDamage(float Damage)
+    {
+        Hp -= Damage;
+        ishit = true;
+        HitMotion();
+        Death();
     }
     void Death()
     {
