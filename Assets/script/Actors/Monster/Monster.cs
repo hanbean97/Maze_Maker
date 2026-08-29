@@ -31,7 +31,7 @@ public class Monster : move
     private void OnEnable()
     {
         //mysponPos = new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y));
-        spriteRenderer =GetComponentInChildren<SpriteRenderer>();
+        spriteRenderer =GetComponent<SpriteRenderer>();
         baseColors = spriteRenderer.color;
     }
     void Update()
