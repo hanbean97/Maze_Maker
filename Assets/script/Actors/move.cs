@@ -98,15 +98,6 @@ public class move : PathFind
           Hp = maxhp;
     }
 
-    protected virtual void GetDamage(float Damage)
-    {
-       
-
-    }
-
-    public virtual void HitGiveDamage(float Damages)
-    {
-       
-    }
+    
 }
 

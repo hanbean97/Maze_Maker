@@ -25,7 +25,7 @@ public class Monster : move
     public SpriteRenderer MySprR { get { return spriteRenderer; } }
     protected bool ishit;
     [SerializeField] float hitmotionTime;
-    [SerializeField] Color hitcolor;
+    [SerializeField] Color hitcolor = new Color(0,0,0,128) ;
     Color baseColors;
     float hitTimer=0;
     private void OnEnable()
@@ -131,7 +131,7 @@ public class Monster : move
         }
     }
 
-    protected override void GetDamage(float Damage)
+    public void GetDamage(float Damage)
     {
         Hp -= Damage;
         ishit = true;

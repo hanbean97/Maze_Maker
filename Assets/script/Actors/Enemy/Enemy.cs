@@ -6,22 +6,23 @@ using UnityEngine;
 public class Enemy : move
 {
 
-    enum MoveMods
+    enum Movestate
     {
+        stop,
         pathmove,
-        attackready,
+        attackReady, 
         attack,
         none,
-
     }
-    [SerializeField] MoveMods nowMoveMod;
-    enum EnemyTypelist
+    [SerializeField] Movestate nowmove;
+    enum EnemyTypelist //어택 위치선정을 위한 이넘
     {
         meleeE,
         RangedE
     }
     [SerializeField]EnemyTypelist enemytype;
     public int Enermytypes { get { return (int)enemytype; } }
+    [SerializeField] protected int attackDamage;
     [SerializeField] float Searchrange = 3;
     [SerializeField] float attackrange;
     protected Transform targetEnemy;
@@ -48,26 +49,26 @@ public class Enemy : move
     }*/
     protected virtual void Update()
     {
-        if (endTileOn == false)//?????????????? ??????????????
+        if (endTileOn == false)//마지막 라인에 도착하기 전까지
         {
             if ((transform.position.x > AsrarAlgo.instance.TargetPos.x - 1 && transform.position.x < AsrarAlgo.instance.TargetPos.x + 1) &&
                                (-transform.position.y > AsrarAlgo.instance.TargetPos.y - 1 && -transform.position.y < AsrarAlgo.instance.TargetPos.y + 1))
-            {
+            {//마지막라인 도착
                 endTileOn = true;
             }
             if (startTileOn == true && targetEnemy == null)
-            {
-                
+            {//스타트 라인이 아니고 적도 없을 때 
+
                 Moving(AsrarAlgo.instance.TargetPos);
             }
             else if (startTileOn == true && targetEnemy != null)
-            {
+            {// 적을 발견했고 그 자신이 스타트 라인이 아닐때 
 
-                targetPos = new Vector2Int(Mathf.RoundToInt(targetEnemy.position.x),Mathf.RoundToInt(-targetEnemy.position.y));//????????????
+                targetPos = new Vector2Int(Mathf.RoundToInt(targetEnemy.position.x),Mathf.RoundToInt(-targetEnemy.position.y));
                 Moving(targetPos);
             }
             else if (startTileOn == false)
-            {
+            {// 자신이 스타트라인일 때 스타트라인까지 이동 
                 Moving();
                 if (transform.position.y < 0 || (transform.position.x > 9 || transform.position.x< 6 ))
                 {
@@ -146,12 +147,6 @@ public class Enemy : move
     void FindingEnemy()//적공격
     {//이 부분에서 타깃 지정 슬롯 적용 타깃 주변에서
         if (startTileOn == false) return;//시작지점에서는 액션금지
-
-        /* if(targetEnemy != null)//서치범위에서 모이는 현상 발생 수정바람 객체적으로 앞에 일정거리 이너미가 있으면 멈춤
-        {
-            ismoveway = true;
-            
-        }*/
        
 
         if (targetEnemy != null && Vector3.Distance(transform.position, targetEnemy.position) < attackrange)//공격
@@ -181,19 +176,28 @@ public class Enemy : move
          
 
     }
+    void delaystartgo()
+    {
+        nowmove = Movestate.pathmove;
+    }
 
-   /* void NowStateMode()
+
+   void NowStateMode()
     {
         switch(nowmove)
         {
             case Movestate.stop:
+                ismoveway = false;
+                break;
+
+            case Movestate.pathmove:// 미궁 길찾기 정보에 따라 이동
+                ismoveway = true;
+                Moving(AsrarAlgo.instance.TargetPos);
+                attackStop();
 
                 break;
-            case Movestate.pathmove:
-                ismoveway = true;
-                attackStop();
-                break;
-            case Movestate.attackReady://레이를 쏴서 몬스터의 슬롯을 정하고 자리이동
+
+            case Movestate.attackReady://레이를 쏴서 몬스터의 슬롯을 정하고 자리이동 이동 불가시 정지 ,해야할거 게임 매니저에서 전투시 정지 관리
                 ismoveway = false;
                
 
@@ -236,7 +240,7 @@ public class Enemy : move
 
                     if(!ray)
                     {
-                       
+                        nowmove = Movestate.attack;
                     }
 
                 }
@@ -246,10 +250,25 @@ public class Enemy : move
             case Movestate.attack:
                 ismoveway = false;
                 attackGo();
+
+                if (targetEnemy == null)//타겟이 사라졌으면 이동 
+                {
+                    nowmove = Movestate.stop;
+
+                    int count = GameManager.instance.Nowenemytrs.Count;
+                    for (int i = 0; i < count; i++)
+                    {
+                        if (GameManager.instance.Nowenemytrs[i] == this)//이 유닛의 소환 순서 탐색후 그에 따라 출발 
+                        {
+                            Invoke(nameof(delaystartgo), i * 0.5f);
+                        }
+                    }
+                }
+
                 break;
            
         }
-    }*/
+    }
 
     protected virtual void attackGo()
     {
@@ -286,7 +305,7 @@ public class Enemy : move
     }
 
 
-    protected override void GetDamage(float Damage)
+    public void GetDamage(float Damage)
     {
         Hp -= Damage;
         ishit = true;

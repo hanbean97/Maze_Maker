@@ -51,12 +51,12 @@ MonoBehaviour:
   maxhp: 10
   speed: 0
   ismoveway: 0
-  size: {x: 0, y: 0}
+  size: {x: 1, y: 1}
   Searchrange: 3
   attakrange: 3
   monstertype: 0
   hitmotionTime: 0.2
-  hitcolor: {r: 0, g: 0, b: 0, a: 0}
+  hitcolor: {r: 1, g: 0.9858491, b: 0.9858491, a: 0}
   AttakPreFab: {fileID: 3703783624388386531, guid: f2891feb0b0674239bc7ae529cd910b7, type: 3}
   ShootPointer: {fileID: 6295842990787830263, guid: f2891feb0b0674239bc7ae529cd910b7, type: 3}
   ShootTime: 0.5
