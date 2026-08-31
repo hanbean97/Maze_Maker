@@ -415,7 +415,7 @@ public class GameManager : MonoBehaviour
         return false;
     }*/
         
-    public Transform MeetingTarget()//타겟을 넘겨서 해당 타겟에 레이
+    public Transform MeetingTarget()//현 타깃이 전투중이라면 넘겨서 레이
     {
         for (int i = 0; i < Nowenemytrs.Count; i++)
         {

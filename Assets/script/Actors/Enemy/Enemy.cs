@@ -77,6 +77,7 @@ public class Enemy : move
             }
             SearchEnemy();
             FindingEnemy();
+            NowStateMode();
         }
         else if (endTileOn == true)
         {
@@ -269,6 +270,7 @@ public class Enemy : move
            
         }
     }
+
 
     protected virtual void attackGo()
     {
