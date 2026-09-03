@@ -60,6 +60,6 @@ public class Dragable : MonoBehaviour,IBeginDragHandler,IDragHandler,IEndDragHan
     public void SetMonster(GameObject _monster)
     {
             havemonster = _monster;
-            img.sprite = _monster.GetComponentInChildren<SpriteRenderer>().sprite;
+            img.sprite = _monster.GetComponent<SpriteRenderer>().sprite;
     }
 }

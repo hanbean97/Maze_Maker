@@ -28,7 +28,7 @@ public class GiftChoice : MonoBehaviour
         choicearry = new int[] { Random.Range(0, GameManager.instance.MonsterLists.Count), Random.Range(0, GameManager.instance.MonsterLists.Count), Random.Range(0, GameManager.instance.MonsterLists.Count) };
         for (int i = 0; i < slotcount; i++)
         {
-            slotImage[i].sprite = GameManager.instance.MonsterLists[choicearry[i]].GetComponentInChildren<SpriteRenderer>().sprite;
+            slotImage[i].sprite = GameManager.instance.MonsterLists[choicearry[i]].GetComponent<SpriteRenderer>().sprite;
             MonsterName[i].text = $"{GameManager.instance.MonsterLists[choicearry[i]].name}";
         }
     }
