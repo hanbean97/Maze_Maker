@@ -71,7 +71,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] List<SpawnEnemy> spawnE;
 
     Transform nowTargetMonster;
-    public Transform NowTargetMon { get { return nowTargetMonster; } set { nowTargetMonster = value; } }
     
     private void Awake()
     {

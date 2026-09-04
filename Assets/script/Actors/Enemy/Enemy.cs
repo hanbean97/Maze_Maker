@@ -29,11 +29,12 @@ public class Enemy : move
     public Transform Target { get { return targetEnemy; } set{ targetEnemy = value; } }
     Vector2Int targetPos;
     int count;
-    int nullcheckcount;
+   
     Vector3 dir;
     bool startTileOn = false;
     bool endTileOn = false;
     bool ishit = false;
+    bool fightend = false;
     private void OnEnable()
     {
         this.PathFinding(AsrarAlgo.instance.StartPos, AsrarAlgo.instance.TargetPos);
@@ -49,6 +50,10 @@ public class Enemy : move
     }*/
     protected virtual void Update()
     {
+        SearchEnemy();
+        FindingEnemy();
+        NowStateMode();
+
         if (endTileOn == false)//마지막 라인에 도착하기 전까지
         {
             if ((transform.position.x > AsrarAlgo.instance.TargetPos.x - 1 && transform.position.x < AsrarAlgo.instance.TargetPos.x + 1) &&
@@ -75,106 +80,98 @@ public class Enemy : move
                     startTileOn = true;
                 }
             }
-            SearchEnemy();
-            FindingEnemy();
-            NowStateMode();
+           
         }
         else if (endTileOn == true)
         {
             EndAction();
         }
     }
+
+    
     void SearchEnemy()
     {
         if (startTileOn == false) return;
 
-        targetEnemy = GameManager.instance.NowTargetMon;// 게임메니저에서 타겟을 가져와 
+            
         count = GameManager.instance.NowMonstertrs.Count;
         for (int i = 0; i < count; i++)
         {
-            
-            if (i == 0)//몬스터가 없는걸 스스로 알기 위해서
-            {
-                nullcheckcount = 0;
-            }
-            dir = GameManager.instance.NowMonstertrs[i].position - transform.position;
-            RaycastHit2D rays = Physics2D.Raycast(transform.position, dir.normalized, Searchrange, LayerMask.GetMask("Wall", "Monster"));
-            if (rays && rays.transform.CompareTag("Monster"))//몬스터에게 레이를 쏘고
-            {
-                
-                if (targetEnemy != null)//지정된 타깃과 다른 타깃의 거리를 계산하고 가장 가까운 타깃을 지정
-                {
-                    if (Vector2.Distance(transform.position, targetEnemy.position) > Vector2.Distance(transform.position, rays.transform.position))
-                    {
+        dir = GameManager.instance.NowMonstertrs[i].position - transform.position;
+        RaycastHit2D Searchrays = Physics2D.Raycast(transform.position, dir.normalized, Searchrange, LayerMask.GetMask("Wall", "Monster"));
+        if (Searchrays && Searchrays.transform.CompareTag("Monster"))//몬스터에게 레이를 쏘고
+        {
 
-                        if (GameManager.instance.NowTargetMon != null)//타겟 이너미가 비었으면 셋트
-                        {
-                            targetEnemy = rays.transform;
-                            GameManager.instance.NowTargetMon = rays.transform;
-                        }
-                    }
-                }
-                else if (targetEnemy == null)//지금 지정된 타깃이 없다면
-                {
+            if (targetEnemy != null)//지정된 타깃과 다른 타깃의 거리를 계산하고 가장 가까운 타깃을 지정
+            {
+                if (Vector2.Distance(transform.position, targetEnemy.position) > Vector2.Distance(transform.position, Searchrays.transform.position))
+                {//기존 타겟이 있으면 더 가까운 타겟을 넣는다
 
-                    if (GameManager.instance.NowTargetMon != null)//타겟 이너미가 비었으면 셋트
-                    {
-                        targetEnemy = rays.transform;
-                        GameManager.instance.NowTargetMon = rays.transform;
-                    }
+                   targetEnemy = Searchrays.transform;
                 }
             }
-            else if (!rays || rays.transform.CompareTag("Wall"))
+            else
             {
-                nullcheckcount++;
+                    targetEnemy = Searchrays.transform;
             }
-            if (nullcheckcount == count)
+           
+        }
+
+            Transform meetTarget = GameManager.instance.MeetingTarget();
+            if (targetEnemy == null && meetTarget != null)
             {
-                targetEnemy = null;
+                targetEnemy = meetTarget;
+                nowmove = Movestate.attackReady;
             }
-            /*
-            dir = GameManager.instance.NowMonstertrs[i].position - transform.position;
-            RaycastHit2D rays = Physics2D.Raycast(transform.position, dir.normalized, Searchrange, LayerMask.GetMask("Wall", "Monster"));
-            if (rays && rays.transform.CompareTag("Monster"))//몬스터에게 레이를 쏘고
-            {
-                if (GameManager.instance.NowTargetMon != null)//타겟 이너미가 비었으면 셋트
-                {
-                    targetEnemy = rays.transform;
-                    GameManager.instance.NowTargetMon = rays.transform;
-                }
-            }*/
         }
     }
     void FindingEnemy()//적공격
     {//이 부분에서 타깃 지정 슬롯 적용 타깃 주변에서
         if (startTileOn == false) return;//시작지점에서는 액션금지
-       
 
-        if (targetEnemy != null && Vector3.Distance(transform.position, targetEnemy.position) < attackrange)//공격
-        {
-            ismoveway = false;
-            attackGo();
-        }
-        else if(targetEnemy == null || Vector3.Distance(transform.position, targetEnemy.position)>= attackrange)//타깃이 널이거나 사거리 밖일 때
-        {
-            ismoveway = true;
-            attackStop();
-            
-        }
 
-        RaycastHit2D ray = Physics2D.CircleCast(transform.position, 0.5f, Vector2.zero);//적을 발견하면 맨 앞줄이 멈춘다 원형으로 했기에 뒤에 닿는거같다
-
-        for (int i = 0; i < count; i++)
+        if (targetEnemy != null)
         {
-            Vector2 targetdir = GameManager.instance.NowMonstertrs[i].position - transform.position;
-            RaycastHit2D rays = Physics2D.Raycast(transform.position, targetdir,attackrange);
-            /*
-            if (GameManager.instance.MeetingTarget() == true && ray.transform.CompareTag("Enemy") && ray.transform.GetComponent<Enemy>().Enermytypes == (int)enemytype)
+
+
+            switch (enemytype)
             {
-                ismoveway = false;
-            }*/
+                case EnemyTypelist.meleeE://근접 사거리 안에 다가가기만 해도 공격 자리를 잡기위해 움직인다 
+                    meleeEAttackReady();
+
+                    if (Vector3.Distance(transform.position, targetEnemy.position) < attackrange)
+                    {
+                        attackGo();
+                        fightend = true;
+                    }
+
+                    break;
+                case EnemyTypelist.RangedE://원거리 목표사이에 벽이 없으면 공격 자리를 잡기위해 움직이지 않는다 
+
+                    Vector3 targetdir = targetEnemy.position - transform.position;
+                    RaycastHit2D Searchrays = Physics2D.Raycast(transform.position, targetdir.normalized, attackrange, LayerMask.GetMask("Wall", "Monster"));
+                    if (Searchrays && Searchrays.transform.CompareTag("Monster"))
+                    {
+                        attackGo();
+                        fightend = true;
+                    }
+
+                    break;
+            }
         }
-         
+
+        if(targetEnemy == null && fightend == true)//전투가 끝날 때
+        {
+            fightend = false;
+            int count = GameManager.instance.Nowenemytrs.Count;
+            for (int i = 0; i < count; i++)
+            {
+                if (GameManager.instance.Nowenemytrs[i] == this)//이 유닛의 소환 순서 탐색후 그에 따라 출발 
+                {
+                    Invoke(nameof(delaystartgo), i * 0.5f);
+                }
+            }
+        }
 
     }
     void delaystartgo()
@@ -182,10 +179,78 @@ public class Enemy : move
         nowmove = Movestate.pathmove;
     }
 
+    /// <summary>
+    /// 근접 어택레디 타겟에 다가간다 
+    /// </summary>
+    void meleeEAttackReady()
+    {
+        Vector2 dir = targetEnemy.transform.position - transform.position;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+        angle = (angle + 360f) % 360f;
+
+        int slot = Mathf.RoundToInt(angle / 45f) % 8; // 0~45: 0 , 45~90: 1, 90~180:2 ...
+        int a = 0;
+        
+        for (int i = 0; i < 3; i++)// 앞의 3방향만 탐새
+        {
+
+            Vector2 attackpointer = targetEnemy.position;
+
+            a = a + (i * (i % 2 == 1 ? -1 : 1));//다음 탐색할 슬.
+            int nowslot = (a + slot + 8) % 8;
+
+            if (nowslot < 2 || nowslot > 6)
+            {
+                attackpointer.x += 1 * attackrange;
+            }
+            else if (nowslot > 2 && nowslot < 6)
+            {
+                attackpointer.x += -1 * attackrange;
+            }
+
+            if (nowslot > 4)
+            {
+                attackpointer.y += -1 * attackrange;
+            }
+            else if (nowslot > 0 && nowslot < 4)
+            {
+                attackpointer.y += 1 * attackrange;
+            }
+            Vector3 attackslot = attackpointer - new Vector2(transform.position.x, transform.position.y);
+            float pointdis = Vector2.Distance(attackpointer, transform.position);
+            RaycastHit2D ray = Physics2D.Raycast(transform.position, attackslot.normalized, pointdis, LayerMask.GetMask("Wall", "Monster"));
+
+            if (!ray.transform.CompareTag("wall"))
+            {
+
+                anim.SetBool("Run", true);
+
+                transform.position += attackslot.normalized * speed * Time.deltaTime;
+                if (attackslot.normalized.x > 0)
+                {
+                    transform.rotation = Quaternion.Euler(0, 0, 0);
+                }
+                else
+                {
+                    transform.rotation = Quaternion.Euler(0, 180, 0);
+                }
+
+            }
+           
+        }
+        if (Vector2.Distance(transform.position, targetEnemy.position) <= attackrange + 0.2f)
+        {
+            attackGo();
+        }
+    }
+
 
    void NowStateMode()
     {
-        switch(nowmove)
+        if (startTileOn == false) return;
+
+        switch (nowmove)
         {
             case Movestate.stop:
                 ismoveway = false;
@@ -200,55 +265,31 @@ public class Enemy : move
 
             case Movestate.attackReady://레이를 쏴서 몬스터의 슬롯을 정하고 자리이동 이동 불가시 정지 ,해야할거 게임 매니저에서 전투시 정지 관리
                 ismoveway = false;
-               
-
-                Vector2 dir = targetEnemy.transform.position - transform.position;
-                float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-
-                angle = (angle + 360f) % 360f;
-
-                int slot = Mathf.RoundToInt(angle / 45f) % 8; // 0~45: 0 , 45~90: 1, 90~180:2 ...
-                int a = 0;
-                bool gostop;
-                for (int i = 0; i < 3; i++)// 앞의 3방향만 탐새
+                switch (enemytype)
                 {
+                    case EnemyTypelist.meleeE://근접 사거리 안에 다가가기만 해도 공격 자리를 잡기위해 움직인다 
+                        meleeEAttackReady();
 
-                    Vector2 attackpointer = targetEnemy.position;
+                    break;
+                    case EnemyTypelist.RangedE://원거리 목표사이에 벽이 없으면 공격 자리를 잡기위해 움직이지 않는다
 
-                    a = a + (i * (i % 2 == 1 ? -1 : 1));
-                    int nowslot = (a + slot + 8) % 8;
+                        Vector3 targetdir = targetEnemy.position - transform.position;
+                        RaycastHit2D Searchrays = Physics2D.Raycast(transform.position, targetdir.normalized, attackrange, LayerMask.GetMask("Wall", "Monster"));
+                        if (Searchrays && Searchrays.transform.CompareTag("Monster"))
+                        {
+                            nowmove = Movestate.attack;
+                        }
 
-                    if (nowslot < 2 || nowslot> 6)
-                    {
-                        attackpointer.x += 1*attackrange;
-                    }
-                    else if(nowslot >2 && nowslot <6)
-                    {
-                        attackpointer.x += -1 * attackrange;
-                    }
-
-                    if (nowslot > 4)
-                    {
-                        attackpointer.y += -1 * attackrange;
-                    }
-                    else if(nowslot >0 && nowslot < 4)
-                    {
-                        attackpointer.y += 1*attackrange;
-                    }
-                    Vector2 attackslot = attackpointer - new Vector2(transform.position.x, transform.position.y);
-                    float pointdis = Vector2.Distance(attackpointer,transform.position);
-                    RaycastHit2D ray = Physics2D.Raycast(transform.position,attackslot.normalized,pointdis);
-
-                    if(!ray)
-                    {
-                        nowmove = Movestate.attack;
-                    }
-
+                    break;
                 }
-               
+
+                if(targetEnemy == null)
+                {
+                    nowmove = Movestate.pathmove;
+                }
                 
                 break;
-            case Movestate.attack:
+            case Movestate.attack://지금 순서가 엉망진창 ->타겟 변경 되면 ? 이걸 스테이트로 조절하는게 아니라 공격따로 이동 따로 조절 전체 해당 함수 삭제하고 수정요/
                 ismoveway = false;
                 attackGo();
 

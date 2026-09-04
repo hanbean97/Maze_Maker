@@ -8,7 +8,7 @@ public class move : PathFind
     [SerializeField] float maxhp;
     int nextPoscount;
     protected Vector3 nextdir;
-    [SerializeField] float speed;
+    [SerializeField]protected float speed;
     [SerializeField]protected bool ismoveway;
     protected Animator anim;
     protected bool isdeth=false;
