@@ -167,8 +167,9 @@ MonoBehaviour:
   maxhp: 10
   speed: 2
   ismoveway: 0
-  nowMoveMod: 0
+  nowmove: 0
   enemytype: 0
+  attackDamage: 0
   Searchrange: 3
   attackrange: 1
   ani: {fileID: 3634392678335898664}
