@@ -28,7 +28,7 @@ public class KnightSc : Enemy
     {
         if (targetEnemy != null)
         {
-            targetEnemy.GetComponent<Monster>().GetDamage(attackDamage);//겟데미지 몬스터 용사 따로 만들
+            targetEnemy.GetComponent<Monster>().GetDamage(attackDamage);//겟데미지 몬스터 용사 따로 만들
         }
        
     }

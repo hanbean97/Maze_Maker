@@ -5,10 +5,6 @@ using UnityEngine;
 public class SoldierSc : Enemy
 {
 
-    protected override void Update()
-    {
-        base.Update();
-    }
     protected override void attackGo()
     {
     }
