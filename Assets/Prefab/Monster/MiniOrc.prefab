@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1505402202212958874}
+  - component: {fileID: 1126220178845284007}
   - component: {fileID: 6515164072559660026}
   - component: {fileID: 3496621506453753955}
   m_Layer: 8
@@ -33,6 +34,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1126220178845284007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5270402448180243240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cddc14158c347c439d2db8d9fb50909, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxhp: 20
+  attackDamage: 2
+  speed: 1
+  ismoveway: 0
+  size: {x: 1, y: 1}
+  Searchrange: 4
+  attakrange: 0
+  monstertype: 0
+  hitmotionTime: 0.2
+  hitcolor: {r: 1, g: 1, b: 1, a: 0.5019608}
+  attackRange: {x: 0, y: 0}
 --- !u!212 &6515164072559660026
 SpriteRenderer:
   m_ObjectHideFlags: 0

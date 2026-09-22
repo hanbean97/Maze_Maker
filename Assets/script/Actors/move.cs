@@ -6,11 +6,13 @@ public class move : PathFind
 {
     protected float Hp;
     [SerializeField] float maxhp;
+    [SerializeField] protected int attackDamage;
     int nextPoscount;
     protected Vector3 nextdir;
     [SerializeField]protected float speed;
     [SerializeField]protected bool ismoveway;
     protected Animator anim;
+
     protected bool isdeth=false;
     private void Awake()
     {

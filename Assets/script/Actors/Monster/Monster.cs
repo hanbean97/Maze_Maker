@@ -10,9 +10,7 @@ public class Monster : move
     [SerializeField] Vector2 size;
     [SerializeField] float Searchrange;
     [SerializeField] float attakrange;
-    [SerializeField]MonsterType monstertype;
-    public MonsterType MonT { get { return monstertype; } }
-   
+    
     int count =0;
     int nullcheckcount = 0;
     Vector3 dir;

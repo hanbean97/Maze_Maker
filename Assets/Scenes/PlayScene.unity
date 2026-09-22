@@ -703,11 +703,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyList:
-  - {fileID: 5033455146845759392, guid: 04a399f8aa65ce04b82acec2791d3a04, type: 3}
-  - {fileID: 3612499008401831629, guid: 40fd10120193f414fb4905bc35b9e9fc, type: 3}
+  - {fileID: 6418561315011154241, guid: fc0e8cb5a929fbf4581bf216d8a5ecf5, type: 3}
+  - {fileID: 8785554028612623878, guid: 6903357679a004c40881747a665b4144, type: 3}
   MonsterList:
   - {fileID: 907706245905836698, guid: 424374f292e8c7d489efd436f9cd3094, type: 3}
   - {fileID: 4287715113670136865, guid: 05b684101e3ce4c80aeca286389cf581, type: 3}
+  - {fileID: 4899275073699958999, guid: 7e236baecba25bb48baaa5e350c5f5e7, type: 3}
+  - {fileID: 5270402448180243240, guid: 03cd3c87a9ede604f9aa8daf1b7bab85, type: 3}
   maxMonster: 3
   maxinvetory: 15
   spawnTimer: 2

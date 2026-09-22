@@ -22,7 +22,6 @@ public class Enemy : move
     }
     [SerializeField]EnemyTypelist enemytype;
     public int Enermytypes { get { return (int)enemytype; } }
-    [SerializeField] protected int attackDamage;
     [SerializeField] float Searchrange = 3;
     [SerializeField] float attackrange;
     protected Transform targetEnemy;
