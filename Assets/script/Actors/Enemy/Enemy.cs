@@ -10,7 +10,8 @@ public class Enemy : move
     {
         stop,
         pathmove,
-        attackReady, 
+        attackReady,
+        attack,
         Ready,
         none,
     }
@@ -40,21 +41,23 @@ public class Enemy : move
 
     }
 
+ 
 
+    /* protected override void Start()
+     {
+         base.Start();
 
-   /* protected override void Start()
-    {
-        base.Start();
-
-    }*/
+     }*/
     protected virtual void Update()
     {
         if (startTileOn == false)
         {// 자신이 스타트라인일 때 스타트라인까지 이동 
+            
             Moving();
             if (transform.position.y < 0 || (transform.position.x > 9 || transform.position.x < 6))
             {
                 startTileOn = true;
+                nowmove = Movestate.pathmove;
             }
         }
         if (endTileOn ==false&&(transform.position.x > AsrarAlgo.instance.TargetPos.x - 1 && transform.position.x < AsrarAlgo.instance.TargetPos.x + 1) &&
@@ -69,9 +72,10 @@ public class Enemy : move
             EndAction();
         }
 
-        if (startTileOn == false || endTileOn == true) return;//시작 부분과 끝 부분에서는 액션 금+
+        if (startTileOn == false || endTileOn == true) return;//시작 부분과 끝 부분에서는 액션 금지
+
         SearchEnemy();
-        FindAttackEnemy();
+       
         NowStateMode();
 
     }
@@ -107,32 +111,33 @@ public class Enemy : move
 
             
         }
-
-        Transform meetTarget = GameManager.instance.MeetingTarget();
-        if (targetEnemy == null && meetTarget != null)//다른 아군이 싸우고 있으면 그걸 타깃으로 벗 대기 상태도 여기
+        if (targetEnemy == null)
         {
-            Vector3 meetdir = meetTarget.position - transform.position;
-            RaycastHit2D meetrays = Physics2D.Raycast(transform.position, meetdir.normalized, LayerMask.GetMask("Wall", "Monster"));
-            if(meetrays && meetrays.transform.CompareTag("Monster"))
+            Transform meetTarget = GameManager.instance.MeetingTarget();
+            if (targetEnemy == null && meetTarget != null)//다른 아군이 싸우고 있으면 그걸 타깃으로 벗 대기 상태도 여기
             {
-                targetEnemy = meetTarget;
-                nowmove = Movestate.attackReady;
+                Vector3 meetdir = meetTarget.position - transform.position;
+                RaycastHit2D meetrays = Physics2D.Raycast(transform.position, meetdir.normalized, LayerMask.GetMask("Wall", "Monster"));
+                if (meetrays && meetrays.transform.CompareTag("Monster"))
+                {
+                    targetEnemy = meetTarget;
+                    nowmove = Movestate.attackReady;
+                }
+                else
+                {
+                    nowmove = Movestate.stop;//대기 전투중이지만 다가갈 방법이 없을 때 
+                }
             }
-            else
+            else if (targetEnemy == null && meetTarget == null)
             {
-                nowmove = Movestate.stop;//대기 전투중이지만 다가갈 방법이 없을 때 
+                nowmove = Movestate.pathmove;
             }
         }
-        else if(targetEnemy == null && meetTarget == null)
-        {
-            nowmove = Movestate.pathmove;
-        }
-
     }
     void FindAttackEnemy()//적공격
     {//이 부분에서 타깃 지정 슬롯 적용 타깃 주변에서
 
-        if (targetEnemy != null)
+        if (targetEnemy != null && nowmove == Movestate.attack)
         {
 
 
@@ -145,6 +150,11 @@ public class Enemy : move
                         attackGo();
                         fightend = true;
                     }
+                    else
+                    {
+                        attackStop();
+                        
+                    }
 
                     break;
                 case EnemyTypelist.RangedE://원거리 목표사이에 벽이 없으면 공격 자리를 잡기위해 움직이지 않는다 
@@ -156,8 +166,12 @@ public class Enemy : move
                         attackGo();
                         fightend = true;
                     }
+                    else
+                    {
+                        attackStop();
+                    }
 
-                    break;
+                        break;
             }
         }
 
@@ -289,6 +303,12 @@ public class Enemy : move
 
                 }
                 break;
+            case Movestate.attack:
+                ismoveway = false;
+                FindAttackEnemy();
+                
+                break;
+
           
         }
     }
@@ -296,11 +316,11 @@ public class Enemy : move
 
     protected virtual void attackGo()
     {
-
+        anim.SetBool("Attack",true);
     }
     protected virtual void attackStop()
     {
-
+        anim.SetBool("Attack",false);
     }
     void EndAction()
     {
