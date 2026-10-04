@@ -16,6 +16,7 @@ public class Enemy : move
         none,
     }
     [SerializeField] Movestate nowmove;
+
     enum EnemyTypelist //어택 위치선정을 위한 이넘
     {
         meleeE,
@@ -29,7 +30,7 @@ public class Enemy : move
     public Transform Target { get { return targetEnemy; } set{ targetEnemy = value; } }
     Vector2Int targetPos;
     int count;
-   
+    bool attackR = false;
     Vector3 dir;
     bool startTileOn = false;
     bool endTileOn = false;
@@ -272,8 +273,16 @@ public class Enemy : move
 
         }
 
+        if (Vector2.Distance(targetEnemy.position, transform.position) <attackrange )
+        {
+            nowmove = Movestate.attack;
+        }
     }
 
+    void RangedEAttackReady()//
+    {
+
+    }
 
    void NowStateMode()
     {
@@ -282,45 +291,55 @@ public class Enemy : move
         {
             case Movestate.stop:
                 ismoveway = false;
+                anim.SetBool("Run", false);
+                anim.SetBool("Attack", false);
                 break;
 
             case Movestate.pathmove:// 미궁 길찾기 정보에 따라 이동
                 ismoveway = true;
                 Moving(AsrarAlgo.instance.TargetPos);
-                
 
+                anim.SetBool("Run", false);
+                anim.SetBool("Attack", false);
                 break;
 
             case Movestate.attackReady://레이를 쏴서 몬스터의 슬롯을 정하고 자리이동 이동 불가시 정지 ,해야할거 게임 매니저에서 전투시 정지 관리
                 ismoveway = false;
+                anim.SetBool("Run", true);
+                anim.SetBool("Attack", false);
 
-                if(enemytype == EnemyTypelist.meleeE)
+                if (enemytype == EnemyTypelist.meleeE)
                 {
                     meleeEAttackReady();//근접으로 이동 
                 }
                 else
                 {
-
+                    RangedEAttackReady();
                 }
+
+                
                 break;
             case Movestate.attack:
+                anim.SetBool("Run", false);
+                anim.SetBool("Attack", true);
+
                 ismoveway = false;
                 FindAttackEnemy();
                 
                 break;
-
-          
         }
+
+        
     }
 
 
     protected virtual void attackGo()
     {
-        anim.SetBool("Attack",true);
+     
     }
     protected virtual void attackStop()
     {
-        anim.SetBool("Attack",false);
+     
     }
     void EndAction()
     {
