@@ -40,6 +40,9 @@ public class Enemy : move
     {
         this.PathFinding(AsrarAlgo.instance.StartPos, AsrarAlgo.instance.TargetPos);
 
+        nowmove = Movestate.pathmove;
+        
+
     }
 
  
@@ -194,7 +197,15 @@ public class Enemy : move
     }
     void delaystartgo()
     {
-        nowmove = Movestate.pathmove;
+        if(targetEnemy == null && GameManager.instance.MeetingTarget() == null)
+        {
+            nowmove = Movestate.pathmove;
+        }
+        else
+        {
+            delaystartgo();
+        }
+        
     }
 
     /// <summary>
@@ -249,7 +260,7 @@ public class Enemy : move
             float pointdis = Vector2.Distance(attackpointer, transform.position);
             RaycastHit2D ray = Physics2D.Raycast(transform.position, attackslot.normalized, pointdis, LayerMask.GetMask("Wall", "Monster"));
 
-            if (!ray || !ray.transform.CompareTag("wall"))
+            if (!ray || !ray.transform.CompareTag("Wall"))
             {
                 fightpossible = true;
                 break;
@@ -281,6 +292,10 @@ public class Enemy : move
 
     void RangedEAttackReady()//
     {
+        if(Vector2.Distance(targetEnemy.position, transform.position) <= attackrange)
+        {
+            nowmove = Movestate.attack;
+        }
 
     }
 
@@ -372,7 +387,7 @@ public class Enemy : move
     {
         Hp -= Damage;
         ishit = true;
-        HitMotion();
+        //HitMotion();
         Death();
     }
     void Death()
@@ -381,6 +396,7 @@ public class Enemy : move
         {
             isdeth = true;
             gameObject.SetActive(false);
+            targetEnemy = null;
             GameManager.instance.DeathEnemy(transform);
         }
     }
