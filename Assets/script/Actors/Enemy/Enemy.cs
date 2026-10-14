@@ -284,19 +284,43 @@ public class Enemy : move
 
         }
 
-        if (Vector2.Distance(targetEnemy.position, transform.position) <attackrange )
+        if (Vector2.Distance(attackslot, transform.position) < 0.4f)
         {
             nowmove = Movestate.attack;
         }
     }
 
-    void RangedEAttackReady()//
+    void RangedEAttackReady()//레이를 쏘고 공격이 가능하면 고 다른 동료가 싸우고 있으면 
     {
-        if(Vector2.Distance(targetEnemy.position, transform.position) <= attackrange)
+
+
+        if(targetEnemy != null)
         {
-            nowmove = Movestate.attack;
+            anim.SetBool("Run", true);
+
+            Vector3 readypos = targetEnemy.position - transform.position;
+            transform.position += readypos.normalized * speed * Time.deltaTime;
+            if (readypos.normalized.x > 0)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+
+            if (Vector2.Distance(targetEnemy.position, transform.position) <= attackrange)
+            {
+                nowmove = Movestate.attack;
+            }
+        }
+        else if (targetEnemy == null && GameManager.instance.MeetingTarget() == null)
+        {
+            nowmove = Movestate.pathmove;
         }
 
+       
+        
     }
 
    void NowStateMode()
